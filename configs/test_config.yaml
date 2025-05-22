@@ -1,0 +1,21 @@
+data:
+  batch_size: 4
+  num_workers: 8
+  train_ann: multimodal-data/Breast/train_annotation.CSV
+  train_dir: multimodal-data/Breast/images/train
+  val_ann: multimodal-data/Breast/test_annotation.CSV
+  val_dir: multimodal-data/Breast/images/test
+model:
+  config_path: groundingdino/config/GroundingDINO_SwinT_OGC.py
+  # lora_weights: weights/20250514_2356/checkpoint_epoch_30.pth
+  lora_weights: weights/Sentence/freez_3/best_model.pth
+  # lora_weights: weights/groundingdino_swint_ogc.pth
+  weights_path: weights/groundingdino_swint_ogc.pth
+training:
+  learning_rate: 0.0001
+  num_epochs: 200
+  save_dir: weights
+  save_frequency: 5
+  use_lora: true
+  visualization_frequency: 5
+  warmup_epochs: 5

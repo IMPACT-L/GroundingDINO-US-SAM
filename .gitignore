@@ -1,0 +1,17 @@
+**weights
+**.egg-info
+groundingdino.egg-info/
+**build
+**__pycache__
+**.ipynb_checkpoints/
+**.so
+**.pth
+git_commit_push.sh
+gitconfig.sh 
+.vscode/
+
+**/multimodal-data/
+vis_Dataset/
+visualizations/
+
+*.swp

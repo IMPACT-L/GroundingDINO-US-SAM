@@ -1,4 +1,4 @@
-# Grounding DINO 
+# Grounding DINO Fine-tuning 🦖
 
 
 We have expanded on the original DINO  repository 

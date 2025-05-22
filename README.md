@@ -42,8 +42,7 @@ pip install -e .
 
 
 ## Dataset
-
-Dataset is a subset of fashion dataset availbale in hugging face with categories bag, shirt and pant e.t.c. A random subset of 200 images are selected for training containing three categoreis, also random 50 images containing these three categories are choosen for test images, you can get the sample dataset from here [GoogleDrive](https://drive.google.com/file/d/1D2qphEE98Dloo3fUURRnsxaIRw076ZXX/view?usp=drive_link) and put it inside multimodal-data to use data as it is.
+### BUSI
 
 ## Train: 
 
@@ -72,37 +71,5 @@ For Input text "shirt. pants. bag" and input validation images (see above like f
 **After Fine-tuning**: Model correctly detects all required categories image one along with the correct concept.
 
 
-
-<div align="center">
- <p float="left" align="middle">
-   <img src="vis_results/before_train_0.jpg" width="300" height="400"/>
-   <img src="vis_results/after_train_0.jpg" width="300" height="400"/>
- </p>
-</div>
-
-<div align="center">
- <p float="left" align="middle">
-   <img src="vis_results/before_train_1.jpg" width="300" height="300"/>
-   <img src="vis_results/after_train_1.jpg" width="300" height="300"/>
- </p>
-</div>
-
-<div align="center">
- <p float="left" align="middle">
-   <img src="vis_results/before_train_2.jpg" width="300" height="300"/>
-   <img src="vis_results/after_train_2.jpg" width="300" height="300"/>
- </p>
-</div>
-
-
-
-
-## Contributing
-Feel free to open issues, suggest improvements, or submit pull requests. If you found this repository useful, consider giving it a star to make it more visible to others!
-
 TO DO:
 
-1. Add model evaluation
-2. ~~Add LORA for finetuning y~~✅
-3. We did not added auxilary losses as mentioned in the original paper, as we feel we are just finetuning an already trained model but feel free to add auxillary losses and compare results
-4. Add methods to avoid catastropihic forgetting of original model while fine tuning

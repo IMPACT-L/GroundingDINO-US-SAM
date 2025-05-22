@@ -26,17 +26,6 @@ def readTextPrompt(prompt_dir):
 benign_prompts = readTextPrompt(f'{desDir}/benign.csv')
 malignant_prompts = readTextPrompt(f'{desDir}/malignant.csv')
 
-#%%
-# def copy_files(number_list, dest_dir,type):
-#     for i in number_list:
-#         src = f'{srcDir}/{type}/{type} ({i}).png'
-#         dst = f'{dest_dir}/{type}/{type} ({i}).png'
-        
-#         if not os.path.exists(src):
-#             print(f"File not found: {src}")
-#         else:
-#             shutil.copy2(src, dst)
-        
 
 def create_dataset(type, number_list, output_type, firstRow=False):
 

@@ -79,3 +79,15 @@ def create_dataset(prompts_in, output_type, firstRow=False):
 # create_dataset(valid_prompts, 'val', firstRow=False)
 # create_dataset(test_prompts, 'test', firstRow=True)
 # %%
+def copyImages(prompts_in, output_type):
+    for prompt in prompts_in:
+        image_name = f'{prompt[0]}.png'
+        img_path = f'{srcDir}/original/{image_name}'
+        dst = f'{desDir}/images/{output_type}/{image_name}'
+        shutil.copy2(img_path, dst)
+
+# %%
+copyImages(train_prompts, 'train')
+copyImages(valid_prompts, 'val')
+copyImages(test_prompts, 'test')
+# %%

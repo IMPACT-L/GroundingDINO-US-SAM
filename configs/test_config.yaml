@@ -7,8 +7,8 @@ data:
   val_dir: multimodal-data/Breast/images/test
 model:
   config_path: groundingdino/config/GroundingDINO_SwinT_OGC.py
-  # lora_weights: weights/20250514_2356/checkpoint_epoch_30.pth
-  lora_weights: weights/Sentence/freez_3/best_model.pth
+  lora_weights: weights/ObjectName/freez_1/best_model.pth
+  # lora_weights: weights/20250522_1604/best_model.pth
   # lora_weights: weights/groundingdino_swint_ogc.pth
   weights_path: weights/groundingdino_swint_ogc.pth
 training:

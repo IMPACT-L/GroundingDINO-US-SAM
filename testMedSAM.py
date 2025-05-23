@@ -147,10 +147,11 @@ def medsam_inference(medsam_model, img_embed, box_1024, H, W):
 
 
 #%% load model and image
-box_threshold=0.03
-text_threshold=0.03
-prompt_type = 5
-save_path = f"visualizations/Sentences/freeze_config3/medsam_{prompt_type}_{box_threshold}_{text_threshold}"
+box_threshold=0.1
+text_threshold=0.1
+prompt_type = 6
+top_k=2
+save_path = f"visualizations/Pre/medsam_{prompt_type}_{box_threshold}_{text_threshold}"
 # shutil.rmtree ("visualizations/inference")
 os.makedirs(save_path, exist_ok=True)
 
@@ -186,7 +187,20 @@ elif prompt_type ==5:
                     Find the malignant tumor in this breast.
                     A breast showing a malignant tumor with irregular shape.
                     An image showing a benign lesion with smooth contour.'''
-
+elif prompt_type ==6:
+    text_prompt='''a breast with a benign lesion.
+                    Find the malignant tumor in this breast.
+                    A breast showing a malignant tumor with irregular shape.
+                    An image showing a benign lesion with smooth contour.
+                    benign cyst. 
+                    malignant ductal carcinoma in situ.
+                    malignant invasive ductal carcinoma.
+                    malignant invasive lobular carcinoma.
+                    malignant invasive lobular carcinoma with irregular shape.
+                    malignant invasive lobular carcinoma with smooth contour.
+                    malignant invasive lobular carcinoma with irregular shape.
+                    malignant invasive lobular carcinoma with smooth contour.'''
+    
 # text_prompt="shirt .bag .pants"
 data_config, model_config, training_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,training_config.use_lora)
@@ -212,7 +226,7 @@ for img in os.listdir(data_config.val_dir):
         caption=text_prompt,
         box_threshold=box_threshold,
         text_threshold=text_threshold,
-        remove_combined=True
+        remove_combined=False
     )
     print(f"Original boxes size {boxes.shape}")
     if boxes.shape[0]>0:
@@ -221,7 +235,6 @@ for img in os.listdir(data_config.val_dir):
     else:
         continue
 
-    top_k=3
     _, top2_indices = torch.topk(logits, top_k if boxes.shape[0]>=top_k else boxes.shape[0])
 
     boxes = boxes[top2_indices,:] * torch.Tensor([w, h, w, h])

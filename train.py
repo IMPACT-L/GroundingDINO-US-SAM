@@ -314,7 +314,7 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
     }
     
 
-    freeze_config = freeze_config3
+    freeze_config = freeze_config1
 
     if not training_config.use_lora:
         print("Freezing most of model except few layers!")

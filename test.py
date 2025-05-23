@@ -62,7 +62,8 @@ def process_images(
         data_config,
         box_threshold,
         text_threshold,
-        save_path=''
+        save_path='',
+        top_k=10
 ):
     # visualizer = GroundingDINOVisualizer(save_dir="visualizations")
 
@@ -77,14 +78,14 @@ def process_images(
            caption=text_prompt,
            box_threshold=box_threshold,
            text_threshold=text_threshold,
-           remove_combined=True
+           remove_combined=False
         )
         print(f"Original boxes size {boxes.shape}")
         if boxes.shape[0]>0:
            boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases)
            print(f"NMS boxes size {boxes.shape}")
         
-        top_k=10
+        
         _, top2_indices = torch.topk(logits, top_k if boxes.shape[0]>=top_k else boxes.shape[0])
 
         annotated_frame = annotate(image_source=image_source, 
@@ -99,8 +100,9 @@ def process_images(
 if __name__ == "__main__":
     box_threshold=0.1
     text_threshold=0.1
-    prompt_type = 4
-    save_path = f"visualizations/Sentences/BB/bb_{prompt_type}_{box_threshold}_{text_threshold}"
+    prompt_type = 6
+    top_k=2
+    save_path = f"visualizations/Pre/test_{prompt_type}_{box_threshold}_{text_threshold}"
     # shutil.rmtree ("visualizations/inference")
     os.makedirs(save_path, exist_ok=True)
 
@@ -127,6 +129,20 @@ if __name__ == "__main__":
                         A breast showing a malignant tumor with irregular shape.
                         An image showing a benign lesion with smooth contour.'''
     
+    elif prompt_type ==6:
+        text_prompt='''a breast with a benign lesion.
+                        Find the malignant tumor in this breast.
+                        A breast showing a malignant tumor with irregular shape.
+                        An image showing a benign lesion with smooth contour.
+                        benign cyst. 
+                        malignant ductal carcinoma in situ.
+                        malignant invasive ductal carcinoma.
+                        malignant invasive lobular carcinoma.
+                        malignant invasive lobular carcinoma with irregular shape.
+                        malignant invasive lobular carcinoma with smooth contour.
+                        malignant invasive lobular carcinoma with irregular shape.
+                        malignant invasive lobular carcinoma with smooth contour.'''
+        
 
     data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
     model = load_model(model_config,test_config.use_lora)
@@ -200,5 +216,5 @@ if __name__ == "__main__":
     process_images(model,text_prompt,data_config,
                    box_threshold=box_threshold,
                    text_threshold=text_threshold,
-                   save_path=save_path)
+                   save_path=save_path,top_k=top_k)
 #%%

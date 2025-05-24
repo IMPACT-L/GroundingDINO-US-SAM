@@ -17,11 +17,15 @@ from groundingdino.util.misc import nested_tensor_from_tensor_list
 import bisect
 from groundingdino.util.utils import get_phrases_from_posmap
 from matplotlib import pyplot as plt
+import matplotlib.patches as patches
+
 import torch.nn.functional as F
 from skimage import io, transform
 import numpy as np
 import torch
 from segment_anything import sam_model_registry
+from PIL import Image
+import argparse
 
 #%%
 @torch.no_grad()
@@ -76,21 +80,8 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
 
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
 
-def show_box(box, ax, label=None,isBottom=False):
-    x0, y0 = box[0], box[1]
-    w, h = box[2] - box[0], box[3] - box[1]
-    ax.add_patch(
-        plt.Rectangle((x0, y0), w, h, edgecolor="white", facecolor=(0, 0, 0, 0), lw=2)
-    )
-    if label is not None:
-        ax.text(x0, y0+ (h if isBottom else 0), label, color='white', fontsize=10, ha='center', va='center',
-                    bbox=dict(facecolor='black', alpha=0.9, edgecolor='none', pad=1))
-
-
-def show_mask(mask, ax, color_index=0):
-
     # Define a list of RGBA colors
-    color_palette = [
+color_palette = [
         [1.0, 0.0, 0.0, 0.6],  # Red
         [0.0, 1.0, 0.0, 0.6],  # Green
         [0.0, 0.0, 1.0, 0.6],  # Blue
@@ -99,6 +90,20 @@ def show_mask(mask, ax, color_index=0):
         [0.0, 1.0, 1.0, 0.6],  # Cyan
         [1.0, 0.5, 0.0, 0.6],  # Orange
     ]
+
+def show_box(box, ax, label=None,isBottom=False, color_index=0):
+    color = np.array(color_palette[color_index % len(color_palette)])
+    x0, y0 = box[0], box[1]
+    w, h = box[2] - box[0], box[3] - box[1]
+    ax.add_patch(
+        plt.Rectangle((x0, y0), w, h, edgecolor=color, facecolor=(0, 0, 0, 0), lw=2)
+    )
+    if label is not None:
+        ax.text(x0, y0+ (h if isBottom else 0), label, color='white', fontsize=12, ha='center', va='center',
+                    bbox=dict(facecolor='black', alpha=0.9, edgecolor='none', pad=1))
+
+
+def show_mask(mask, ax, color_index=0):
 
     color = np.array(color_palette[color_index % len(color_palette)])
 
@@ -116,10 +121,37 @@ def show_mask(mask, ax, color_index=0):
 
 #%%
 # if __name__ == "__main__":
+# 
+terminal = False
+# python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
 
-text_threshold=0.1
+if terminal:
+    parser = argparse.ArgumentParser("Grounding DINO example", add_help=True)
+    parser.add_argument("--path", "-p", type=str, required=False, help="path to iamge",default='/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif')
+    parser.add_argument("--text_prompt", "-t", type=str, required=False, help="text prompt",default='lumbar multifidus. benign cyst. benign. malignant. pants. text.')
+    parser.add_argument("--top_k", "-k", type=int, required=False, help="top_k",default=3)
+    parser.add_argument("--text_threshold", "-tt", type=float, required=False, help="text threshold",default=0.01)
+    parser.add_argument("--box_threshold", "-bt", type=float, required=False, help="box threshold",default=0.01)
+    args = parser.parse_args()
+
+if terminal and args.box_threshold:
+    box_threshold= args.box_threshold
+else:   
+    box_threshold=0.01
+
+if terminal and args.text_threshold:
+    text_threshold= args.text_threshold
+else:   
+    text_threshold=0.01
+
 prompt_type = 6
-top_k=2
+
+if terminal and args.top_k:
+    top_k= args.top_k
+else:   
+    top_k=3
+
+
 
 # Config file of the prediction, the model weights can be complete model weights but if use_lora is true then lora_wights should also be present see example
 ## config file
@@ -136,22 +168,38 @@ medsam_model = sam_model_registry["vit_b"](checkpoint="/home/hamze/Documents/Med
 medsam_model = medsam_model.to(device)
 medsam_model.eval()
 #%%
-image_path = 'multimodal-data/Breast/images/train/000002.png'
+# image_path = 'multimodal-data/Breast/images/train/000002.png'
+# image_path = '/home/hamze/Documents/Dataset/BULI_Malignant/112 Malignant Image.bmp'
+# image_path = '/home/hamze/Documents/Dataset/BUSBRA/Images/bus_0064-s.png'
+# image_path = '/home/hamze/Documents/Dataset/BUS-UCLM Breast ultrasound lesion segmentation dataset/images/ALWI_000.png'
+# image_path = 'samples_with_text.png'
+#** image_path = '/home/hamze/Documents/Dataset/fetal head circumference/training_set/001_HC.png'
+#** image_path = '/home/hamze/Documents/Dataset/BrEaST-Lesions_USG-images_and_masks-Dec-15-2023/BrEaST-Lesions_USG-images_and_masks/case001.png'
+# image_path = '/home/hamze/Documents/Dataset/kidneyUS_images_14_june_2022/kidneyUS_images_14_june_2022/1_IM-0001-0059_anon.png'
 
-image_path = '/home/hamze/Documents/Dataset/BULI_Malignant/112 Malignant Image.bmp'
+if terminal and args.path:
+    image_path =  args.path
+else:   
+    image_path = '/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif'
+
 image_source, image = load_image(image_path)
 
 image = image.to(device)
 # caption="benign cyst. benign. malignant. pants." #1
-text_prompt="benign cyst. benign. malignant. pants." #1
-
+if terminal and args.text_prompt:
+    text_prompt = args.text_prompt
+else:
+    text_prompt="lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
+text_prompt="lumbar multifidus. lumbar. multifidus."
+# text_prompt="text. annotation. handwriting." 
+# 
 with torch.no_grad():
     outputs = model(image[None], captions=[text_prompt])
 
 prediction_logits = outputs["pred_logits"].cpu().sigmoid()[0]  # prediction_logits.shape = (nq, 256)
 prediction_boxes = outputs["pred_boxes"].cpu()[0]  # prediction_boxes.shape = (nq, 4)
 
-box_threshold=0.1
+
 mask = prediction_logits.max(dim=1)[0] > box_threshold
 logits = prediction_logits[mask]  # logits.shape = (n, 256)
 boxes = prediction_boxes[mask]  # boxes.shape = (n, 4)
@@ -181,7 +229,6 @@ if boxes.shape[0]>0:
     boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases)
     print(f"NMS boxes size {boxes.shape}")
 
-top_k = 3
 _, top_indices = torch.topk(logits, top_k if boxes.shape[0]>=top_k else boxes.shape[0])
 
 annotated_frame = annotate(image_source=image_source, 
@@ -191,7 +238,6 @@ annotated_frame = annotate(image_source=image_source,
                             )
 
 print([phrases[i] for i in top_indices],logits[top_indices])
-# %%
 h, w, _ = image_source.shape
 boxes = boxes[top_indices,:] * torch.Tensor([w, h, w, h])
 
@@ -200,7 +246,7 @@ rec1 = xyxy
 
 phrases = [phrases[i] for i in top_indices]
 
-combined = list(zip(rec1, phrases))
+combined = list(zip(rec1, phrases,logits))
 combined_sorted = sorted(
     combined,
     key=lambda x: (x[0][2] - x[0][0]) * (x[0][3] - x[0][1]),  # width * height
@@ -208,16 +254,17 @@ combined_sorted = sorted(
 )
 
 # Unzip back into separate lists
-rec1_sorted, phrases_sorted = zip(*combined_sorted)
+rec1_sorted, phrases_sorted, logits_sorted = zip(*combined_sorted)
 rec1_sorted = list(rec1_sorted)
 phrases_sorted = list(phrases_sorted)
 
 
 img_np = io.imread(image_path)
 if len(img_np.shape) == 2:
-    img_3c = np.repeat(img_np[:, :, None], 3, axis=-1)
-else:
-    img_3c = img_np
+    img_np = np.repeat(img_np[:, :, None], 3, axis=-1)
+if img_np.shape[2] == 4:
+    img_np = img_np[:, :, :3]  # remove alpha channel
+img_3c = img_np
 H, W, _ = img_3c.shape
 
 img_1024 = transform.resize(
@@ -242,10 +289,11 @@ for rc in rec1_sorted:
     medsam_seg = medsam_inference(medsam_model, image_embedding, box_1024, H, W)
     medsam_segs.append(medsam_seg)
 
-fig, ax = plt.subplots(1, 2, figsize=(16, 6))  # Wider figure for 3 columns
+fig, ax = plt.subplots(1, 2, figsize=(12, 8))  # Wider figure for 3 columns
 
 ax[0].imshow(annotated_frame)
-ax[0].set_title([f'{phrases[i]}:{logits[i]:.3f}' for i in top_indices])
+ax[0].set_title('bboxes')
+# ax[0].set_title([f'{phrases_sorted[i]}:{logits_sorted[i]:.3f}' for i in range(len(logits_sorted))])
 ax[0].axis('off')
 # 1. Original image with masks and boxes
 ax[1].imshow(img_3c)
@@ -254,8 +302,9 @@ for color_index, medsam_seg in enumerate(medsam_segs):
     show_box(
         np.array([int(x) for x in rec1_sorted[color_index]]),
         ax[1],
-        label=f"{phrases_sorted[color_index]}",
+        label=f"{phrases_sorted[color_index]}:{logits_sorted[color_index]:.3f}",
         isBottom=(color_index % 2 == 0)
+        , color_index=color_index
     )
 ax[1].set_title(f"MedSAM Segs ({len(medsam_segs)})")
 ax[1].axis('off')

@@ -203,6 +203,8 @@ class GroundingDINOVisualizer:
                         detections=detections,
                         labels=phrases
                     )
+                else:
+                    print('NO BOX for' )
 
                 # Draw ground truth
                 if "boxes" in targets[0]:

@@ -147,10 +147,11 @@ def medsam_inference(medsam_model, img_embed, box_1024, H, W):
 
 
 #%% load model and image
-box_threshold=0.1
-text_threshold=0.1
-prompt_type = 6
-top_k=2
+box_threshold=0.01
+text_threshold=0.01
+prompt_type = 1
+prompt_type = 'lumbar_multifidus'
+top_k=1
 save_path = f"visualizations/Pre/medsam_{prompt_type}_{box_threshold}_{text_threshold}"
 # shutil.rmtree ("visualizations/inference")
 os.makedirs(save_path, exist_ok=True)
@@ -171,7 +172,7 @@ medsam_model.eval()
 config_path="configs/test_config.yaml"
 
 if prompt_type ==1:
-        text_prompt="benign. malignant. pants." #1
+        text_prompt="lumbar multifidus. benign. malignant. pants." #1
 elif prompt_type ==2:
     text_prompt="benign. malignant. pants. tumor." #2
 elif prompt_type ==3:
@@ -204,6 +205,8 @@ elif prompt_type ==6:
 # text_prompt="shirt .bag .pants"
 data_config, model_config, training_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,training_config.use_lora)
+
+text_prompt="lumbar multifidus." #1
 
 caption = preprocess_caption(caption=text_prompt)
 

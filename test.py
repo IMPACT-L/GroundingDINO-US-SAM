@@ -98,10 +98,11 @@ def process_images(
 
 #%%
 if __name__ == "__main__":
-    box_threshold=0.1
-    text_threshold=0.1
-    prompt_type = 6
-    top_k=2
+    box_threshold=0.01
+    text_threshold=0.01
+    prompt_type = 1
+    prompt_type = 'lumbar_multifidus'   
+    top_k=1
     save_path = f"visualizations/Pre/test_{prompt_type}_{box_threshold}_{text_threshold}"
     # shutil.rmtree ("visualizations/inference")
     os.makedirs(save_path, exist_ok=True)
@@ -112,7 +113,8 @@ if __name__ == "__main__":
     
     
     if prompt_type ==1:
-        text_prompt="benign. malignant. pants." #1
+        text_prompt="benign. malignant. pants. lumbar multifidus." #1
+        # text_prompt="benign. malignant. pants. lumbar multifidus." #1
     elif prompt_type ==2:
         text_prompt="benign. malignant. pants. tumor." #2
     elif prompt_type ==3:
@@ -213,6 +215,11 @@ if __name__ == "__main__":
         for line in results:
             f.write(str(line) + "\n")
 
+    if prompt_type ==1:
+        text_prompt="benign. malignant. pants. lumbar multifidus." #1
+
+    
+    text_prompt = 'lumbar_multifidus.' 
     process_images(model,text_prompt,data_config,
                    box_threshold=box_threshold,
                    text_threshold=text_threshold,

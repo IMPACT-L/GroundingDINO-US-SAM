@@ -285,7 +285,7 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
 
     steps_per_epoch = len(train_loader.dataset) // data_config.batch_size
     
-    visualizer = GroundingDINOVisualizer(save_dir=save_dir)
+    visualizer = GroundingDINOVisualizer(save_dir=save_dir, visualize_frequency=200)
     
     freeze_config1 = {
             'backbone': True,
@@ -314,7 +314,7 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
     }
     
 
-    freeze_config = freeze_config1
+    freeze_config = freeze_config3
 
     if not training_config.use_lora:
         print("Freezing most of model except few layers!")

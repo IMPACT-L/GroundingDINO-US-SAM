@@ -7,12 +7,12 @@ data:
   val_dir: multimodal-data/Breast/images/test
 model:
   config_path: groundingdino/config/GroundingDINO_SwinT_OGC.py
-  lora_weights: weights/ObjectName/freez_1/best_model.pth
-  # lora_weights: weights/20250522_1604/best_model.pth
+  # lora_weights: weights/ObjectName/freez_1/best_model.pth
+  lora_weights: weights/20250524_1631/best_model.pth
   # lora_weights: weights/groundingdino_swint_ogc.pth
   weights_path: weights/groundingdino_swint_ogc.pth
 training:
-  learning_rate: 0.0001
+  learning_rate: 0.01
   num_epochs: 200
   save_dir: weights
   save_frequency: 5

@@ -9,7 +9,7 @@ import random
 random.seed(42)
 #%%
 srcDir = '/home/hamze/Documents/Dataset/BreastBUSI_Images'
-desDir = '/home/hamze/Documents/Grounding-Dino-FineTuning/multimodal-data/Breast'
+desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET'
 #%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)
@@ -23,8 +23,8 @@ def readTextPrompt(prompt_dir):
         for columns in reader:
             prompts.append(columns[1])
     return prompts
-benign_prompts = readTextPrompt(f'{desDir}/benign.csv')
-malignant_prompts = readTextPrompt(f'{desDir}/malignant.csv')
+# benign_prompts = readTextPrompt(f'{desDir}/benign.csv')
+# malignant_prompts = readTextPrompt(f'{desDir}/malignant.csv')
 
 
 def create_dataset(type, number_list, output_type, firstRow=False):
@@ -36,14 +36,14 @@ def create_dataset(type, number_list, output_type, firstRow=False):
         if firstRow:
             writer.writerow(['label_name', 'bbox_x', 'bbox_y', 
                         'bbox_width', 'bbox_height', 
-                        'image_name', 'image_width', 'image_height'])
+                        'image_name', 'image_width', 'image_height','mask_path'])
         
         for index in number_list:
             try:
-                if type=='benign':
-                    prompt = benign_prompts[index-1]
-                else:
-                    prompt = malignant_prompts[index-1]
+                # if type=='benign':
+                #     prompt = benign_prompts[index-1]
+                # else:
+                #     prompt = malignant_prompts[index-1]
 
                 mask_path = f'{srcDir}/{type}/{type} ({index})_mask.png'
                 image_name = f'{type} ({index}).png'
@@ -57,12 +57,13 @@ def create_dataset(type, number_list, output_type, firstRow=False):
                 for i, contour in enumerate(contours):
                     x, y, w, h = cv2.boundingRect(contour)
                     writer.writerow([
-                        prompt,
-                        #type,
+                        # prompt,
+                        type,
                         x, y, w, h,
                         image_name,
                         mask.shape[1],
-                        mask.shape[0]
+                        mask.shape[0],
+                        mask_path
                     ])
             except Exception as e:
                 print(f"Error processing {index}: {str(e)}")

@@ -43,7 +43,7 @@ def create_dataset(prompts_in, output_type, firstRow=False):
         if firstRow:
             writer.writerow(['label_name', 'bbox_x', 'bbox_y', 
                     'bbox_width', 'bbox_height', 
-                    'image_name', 'image_width', 'image_height'])
+                    'image_name', 'image_width', 'image_height','mask_path'])
                 
         for prompt in prompts_in:
             image_name = prompt[0]
@@ -71,7 +71,8 @@ def create_dataset(prompts_in, output_type, firstRow=False):
                     x, y, w, h,
                     image_name,
                     mask.shape[1],
-                    mask.shape[0]
+                    mask.shape[0],
+                    mask_path
                 ])
 
 ##

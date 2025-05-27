@@ -313,8 +313,16 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
             'exclude_patterns': ['class_embed', 'bbox_embed']
     }
     
+    freeze_config4 = {
+            'backbone': False,
+            'text_encoder': False, 
+            'projections': False,
+            'encoder_layers': 0,
+            'decoder_layers': 0,
+            'exclude_patterns': ['class_embed', 'bbox_embed']
+    }
 
-    freeze_config = freeze_config3
+    freeze_config = freeze_config4
 
     if not training_config.use_lora:
         print("Freezing most of model except few layers!")

@@ -21,8 +21,41 @@ from sam2.build_sam import build_sam2
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+from sklearn.metrics import jaccard_score, f1_score
+import csv
 
 #%%
+desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/test_annotation.CSV'
+
+def getTextSample():
+    textCSV = {}
+    with open(desDir, 'r', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            textCSV[str(row['image_name'])] =\
+                    {
+                    'promt_text': row['label_name'],
+                    'bbox': [
+                        int(row['bbox_x']),
+                        int(row['bbox_y']),
+                        int(row['bbox_width']),
+                        int(row['bbox_height'])
+                    ],
+                    'image_size': [
+                        int(row['image_width']),
+                        int(row['image_height'])
+                    ],
+                    'mask_path': row['mask_path']
+                }
+    return textCSV
+
+textCSV = getTextSample()
+def sklearn_iou(pred_mask, true_mask):
+    return jaccard_score(true_mask.flatten(), pred_mask.flatten())
+
+def sklearn_dice(pred_mask, true_mask):
+    return f1_score(true_mask.flatten(), pred_mask.flatten())
+
 def preprocess_caption(caption: str) -> str:
     result = caption.lower().strip()
     if result.endswith("."):
@@ -43,23 +76,17 @@ model_cfg = SAM2_MODEL_CONFIG
 sam2_model = build_sam2(model_cfg, sam2_checkpoint, device='cuda')
 sam2_predictor = SAM2ImagePredictor(sam2_model)
 #%%
-
-# Config file of the prediction, the model weights can be complete model weights but if use_lora is true then lora_wights should also be present see example
-## config file
 config_path="configs/test_config.yaml"
-# text_prompt="shirt .bag .pants"
-text_prompt="a malignant . a benign ."
-# text_prompt="shirt .bag .pants"
-data_config, model_config, training_config = ConfigurationManager.load_config(config_path)
-model = load_model(model_config,training_config.use_lora)
+data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
+model = load_model(model_config,test_config.use_lora)
 #%%
-box_threshold=0.30
-text_threshold=0.20
-caption = preprocess_caption(caption=text_prompt)
-
+box_threshold=0.10
+text_threshold=0.10
+results = {}
 for img in os.listdir(data_config.val_dir):
+    caption = preprocess_caption(caption=textCSV[img]['promt_text'])
     image_path=os.path.join(data_config.val_dir,img)
-    #     image_source = Image.open(image_path).convert("RGB")
+    
     image_source, image = load_image(image_path)
     h, w, _ = image_source.shape
     pre = predict(model,
@@ -68,8 +95,10 @@ for img in os.listdir(data_config.val_dir):
             box_threshold,
             text_threshold,
             remove_combined= True)
-    print(img,pre)
 
+    iou = None
+    dic = None
+    detected = False
     if len(pre[0]>0):
         sam2_predictor.set_image(np.array(image_source))
         rec = pre[0] * torch.tensor([w, h, w, h])
@@ -79,7 +108,7 @@ for img in os.listdir(data_config.val_dir):
             point_coords=None,
             point_labels=None,
             box=rec1,
-            multimask_output=True,
+            multimask_output=False,
         )
 
         x1, y1, x2, y2 = rec1
@@ -87,21 +116,65 @@ for img in os.listdir(data_config.val_dir):
         box_h = y2 - y1
 
         # Plot image and rectangle
-        fig, ax = plt.subplots()
-        ax.imshow(image_source)
+        # Overlay the mask with transparency
+        mask_path = textCSV[img]['mask_path']
+        mask_source = Image.open(mask_path)
+        mask_source = np.asarray(mask_source)
+        iou = sklearn_iou(masks,mask_source)*100
+        dic = sklearn_dice(masks,mask_source)*100
+
+        fig, ax = plt.subplots(1, 3, figsize=(12, 8))
+
+
+        ax[0].set_title(f'Source: {img}')
+        ax[0].axis('off')
+        ax[0].imshow(image_source)
+
+
+        ax[1].set_title('Ground Truth')
+        ax[1].axis('off')
+        ax[1].imshow(mask_source)
+        
+
+        ax[2].imshow(image_source)
 
         # Draw the rectangle
         rect = patches.Rectangle((x1, y1), box_w, box_h,
                                 linewidth=2, edgecolor='red', facecolor='none')
-        ax.add_patch(rect)
+        ax[2].add_patch(rect)
 
-        # Overlay the mask with transparency
-        ax.imshow(masks[0], alpha=0.5)
+        
+        ax[2].imshow(masks[0], alpha=0.5)
 
         # ax.imshow(masks[0], alpha=0.5)
 
-        plt.title(img)
+        ax[2].set_title(f'Prediction: iou: {iou:.2f}, dice: {dic:.2f}')
         plt.text(x=x1, y=y1, s=pre[2], color='red', fontsize=10)
-        # plt.axis("off")
+        ax[2].axis('off')
         plt.show()
-#%%
+        detected = True
+    else:
+        print('NO BOX FOUNDED FOR ',img)  
+    results[img] ={
+        'iou':iou,
+        'dic':dic,
+        'detected':detected
+    }
+# %%
+undetected_results = {
+    img: metrics for img, metrics in results.items() if not metrics['detected']
+}
+
+# Collect IOU and DICE values only from detected results
+ious = [metrics['iou'] for metrics in results.values() if metrics['detected']]
+dices = [metrics['dic'] for metrics in results.values() if metrics['detected']]
+
+# Calculate average IOU and DICE, with zero fallback
+avg_iou = sum(ious) / len(ious) if ious else 0.0
+avg_dice = sum(dices) / len(dices) if dices else 0.0
+
+# Output
+print(f"Average IOU: {avg_iou:.4f}")
+print(f"Average DICE: {avg_dice:.4f}")
+print(f"Undetected Objects: {len(undetected_results)}")
+# %%

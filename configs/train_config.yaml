@@ -1,8 +1,8 @@
 data:
-  train_dir: multimodal-data/Breast/images/train
-  train_ann: multimodal-data/Breast/train_annotation.CSV
-  val_dir: multimodal-data/Breast/images/val
-  val_ann: multimodal-data/Breast/val_annotation.CSV
+  train_dir: multimodal-data/USDATASET/images/train
+  train_ann: multimodal-data/USDATASET/train_annotation.CSV
+  val_dir: multimodal-data/USDATASET/images/val
+  val_ann: multimodal-data/USDATASET/val_annotation.CSV
   batch_size: 4
   num_workers: 8
 

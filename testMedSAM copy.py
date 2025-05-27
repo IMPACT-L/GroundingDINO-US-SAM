@@ -7,8 +7,6 @@ print(torch.cuda.is_available())  # Should return True if GPU is properly config
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-from torchvision import transforms as T
-from typing import Tuple, List
 
 join = os.path.join
 import torch
@@ -37,8 +35,6 @@ from sam2.build_sam import build_sam2
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-from sklearn.metrics import jaccard_score, f1_score
-
 import csv
 
 #%%
@@ -66,11 +62,6 @@ def getTextSample():
                 }
     return textCSV
 textCSV = getTextSample()
-def sklearn_iou(pred_mask, true_mask):
-    return jaccard_score(true_mask.flatten(), pred_mask.flatten())
-
-def sklearn_dice(pred_mask, true_mask):
-    return f1_score(true_mask.flatten(), pred_mask.flatten())
 
 def preprocess_caption(caption: str) -> str:
     result = caption.lower().strip()
@@ -180,126 +171,184 @@ def medsam_inference(medsam_model, img_embed, box_1024, H, W):
     medsam_seg = (low_res_pred > 0.5).astype(np.uint8)
     return medsam_seg
 
-def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
-    transform = T.Compose(
-        [
-            T.Resize((1024, 1024)),
-            T.ToTensor(),
-            T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-        ]
-    )
-    image_source = Image.open(image_path).convert("RGB")
-    image = np.asarray(image_source)
-    image_transformed = transform(image_source)
-    return image, image_transformed
+
 #%% load model and image
-device = 'cuda'
-medsam_model = sam_model_registry["vit_b"](checkpoint="/home/hamze/Documents/MedSAM/work_dir/MedSAM/medsam_vit_b.pth")
+box_threshold=0.01
+text_threshold=0.01
+prompt_type = 1
+prompt_type = 'lumbar_multifidus'
+top_k=1
+save_path = f"visualizations/Pre/medsam_{prompt_type}_{box_threshold}_{text_threshold}"
+# shutil.rmtree ("visualizations/inference")
+os.makedirs(save_path, exist_ok=True)
+
+args={
+    "data_path":"/home/hamze/Documents/Dataset/BreastBUSI_Images/benign/benign (264).png",
+    "seg_path": "/home/hamze/Documents/MedSAM/assets/",
+    "box":[170, 37, 361, 163],
+    "device":"cuda",
+    "checkpoint":"/home/hamze/Documents/MedSAM/work_dir/MedSAM/medsam_vit_b.pth",
+
+}
+device = args["device"]
+medsam_model = sam_model_registry["vit_b"](checkpoint=args["checkpoint"])
 medsam_model = medsam_model.to(device)
 medsam_model.eval()
-#%%
+
 config_path="configs/test_config.yaml"
+
+if prompt_type ==1:
+        text_prompt="lumbar multifidus. benign. malignant. pants." #1
+elif prompt_type ==2:
+    text_prompt="benign. malignant. pants. tumor." #2
+elif prompt_type ==3:
+    text_prompt='''a breast ultrasound scan with a benign lesion.
+                    Find the malignant tumor in this breast ultrasound.'''
+elif prompt_type ==4:
+    text_prompt='''a breast ultrasound scan with a benign lesion.
+                    Find the malignant tumor in this breast ultrasound.
+                    A breast ultrasound scan showing a malignant tumor with irregular shape.
+                    An ultrasound image showing a benign lesion with smooth contour.'''
+elif prompt_type ==5:
+    text_prompt='''a breast with a benign lesion.
+                    Find the malignant tumor in this breast.
+                    A breast showing a malignant tumor with irregular shape.
+                    An image showing a benign lesion with smooth contour.'''
+elif prompt_type ==6:
+    text_prompt='''a breast with a benign lesion.
+                    Find the malignant tumor in this breast.
+                    A breast showing a malignant tumor with irregular shape.
+                    An image showing a benign lesion with smooth contour.
+                    benign cyst. 
+                    malignant ductal carcinoma in situ.
+                    malignant invasive ductal carcinoma.
+                    malignant invasive lobular carcinoma.
+                    malignant invasive lobular carcinoma with irregular shape.
+                    malignant invasive lobular carcinoma with smooth contour.
+                    malignant invasive lobular carcinoma with irregular shape.
+                    malignant invasive lobular carcinoma with smooth contour.'''
+    
+# text_prompt="shirt .bag .pants"
 data_config, model_config, training_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,training_config.use_lora)
-#%%
-box_threshold=0.10
-text_threshold=0.10
-results = {}
+
+text_prompt="lumbar multifidus." #1
+
+caption = preprocess_caption(caption=text_prompt)
+
 for img in os.listdir(data_config.val_dir):
-
-    caption = preprocess_caption(caption=textCSV[img]['promt_text'])
-
     image_path=os.path.join(data_config.val_dir,img)
-    
+    #     image_source = Image.open(image_path).convert("RGB")
     image_source, image = load_image(image_path)
     h, w, _ = image_source.shape
-    boxes, logits, phrases  = predict(model,
-            image,
-            caption,
-            box_threshold,
-            text_threshold,
-            remove_combined= True)
-    iou = None
-    dic = None
-    detected = False
-    if len(boxes>0):
+    # pre = predict(model,
+    #         image,
+    #         caption,
+    #         box_threshold,
+    #         text_threshold,
+    #         remove_combined= True)
+    # print(img,pre)
+
+    boxes, logits, phrases = predict(
+        model=model,
+        image=image,
+        caption=text_prompt,
+        box_threshold=box_threshold,
+        text_threshold=text_threshold,
+        remove_combined=False
+    )
+    print(f"Original boxes size {boxes.shape}")
+    if boxes.shape[0]>0:
         boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases)
-
-        with torch.no_grad():
-            image_embedding = medsam_model.image_encoder(image.float().permute(0, 2, 1).unsqueeze(0).to(device))
-        boxes = boxes* torch.Tensor([w, h, w, h])
-
-        xyxy = box_convert(boxes=boxes, in_fmt="cxcywh", out_fmt="xyxy").numpy()
-        box_np = np.array([[int(x) for x in xyxy[0]]]) 
-        box_1024 = box_np / np.array([w,h,w,h]) * 1024
-        masks = medsam_inference(medsam_model, image_embedding, box_1024, h,w)
-
-        x1, y1, x2, y2 = box_np[0]
-        box_w = x2 - x1
-        box_h = y2 - y1
-
-        # Plot image and rectangle
-        # Overlay the mask with transparency
-        mask_path = textCSV[img]['mask_path']
-        mask_source = Image.open(mask_path)
-        mask_source = np.asarray(mask_source)
-        iou = sklearn_iou(masks,mask_source)*100
-        dic = sklearn_dice(masks,mask_source)*100
-
-        fig, ax = plt.subplots(1, 3, figsize=(12, 8))
-
-
-        ax[0].set_title(f'Source: {img}')
-        ax[0].axis('off')
-        ax[0].imshow(image_source)
-
-
-        ax[1].set_title('Ground Truth')
-        ax[1].axis('off')
-        ax[1].imshow(mask_source)
-        
-
-        ax[2].imshow(image_source)
-
-        # Draw the rectangle
-        rect = patches.Rectangle((x1, y1), box_w, box_h,
-                                linewidth=2, edgecolor='red', facecolor='none')
-        ax[2].add_patch(rect)
-
-        
-        ax[2].imshow(masks, alpha=0.5)
-
-        ax[2].set_title(f'Prediction: iou: {iou:.2f}, dice: {dic:.2f}')
-        plt.text(x=x1, y=y1, s=phrases, color='red', fontsize=10)
-        ax[2].axis('off')
-        plt.show()
-        detected = True
+        print(f"NMS boxes size {boxes.shape}")
     else:
-        print('NO BOX FOUNDED FOR ',img)  
-         
+        continue
 
-    results[img] ={
-        'iou':iou,
-        'dic':dic,
-        'detected':detected
-    }
-    # break
-# %%
-undetected_results = {
-    img: metrics for img, metrics in results.items() if not metrics['detected']
-}
+    _, top2_indices = torch.topk(logits, top_k if boxes.shape[0]>=top_k else boxes.shape[0])
 
-# Collect IOU and DICE values only from detected results
-ious = [metrics['iou'] for metrics in results.values() if metrics['detected']]
-dices = [metrics['dic'] for metrics in results.values() if metrics['detected']]
+    boxes = boxes[top2_indices,:] * torch.Tensor([w, h, w, h])
 
-# Calculate average IOU and DICE, with zero fallback
-avg_iou = sum(ious) / len(ious) if ious else 0.0
-avg_dice = sum(dices) / len(dices) if dices else 0.0
+    xyxy = box_convert(boxes=boxes, in_fmt="cxcywh", out_fmt="xyxy").numpy()
+    rec1 = xyxy
 
-# Output
-print(f"Average IOU: {avg_iou:.4f}")
-print(f"Average DICE: {avg_dice:.4f}")
-print(f"Undetected Objects: {len(undetected_results)}")
+    phrases = [phrases[i] for i in top2_indices]
+    
+    combined = list(zip(rec1, phrases))
+    combined_sorted = sorted(
+        combined,
+        key=lambda x: (x[0][2] - x[0][0]) * (x[0][3] - x[0][1]),  # width * height
+        reverse=True 
+    )
 
-# %%
+    # Unzip back into separate lists
+    rec1_sorted, phrases_sorted = zip(*combined_sorted)
+    rec1_sorted = list(rec1_sorted)
+    phrases_sorted = list(phrases_sorted)
+
+    # detections = sv.Detections(xyxy=xyxy)
+
+    # labels = [
+    #     f"{phrase} {logit:.2f}"
+    #     for phrase, logit
+    #     in zip(phrases, logits)
+    # ]
+
+    # box_annotator = sv.BoxAnnotator()
+    # annotated_frame = cv2.cvtColor(image_source, cv2.COLOR_RGB2BGR)
+    # annotated_frame = box_annotator.annotate(scene=annotated_frame, detections=detections, labels=labels)
+    
+    # if len(boxes>0):
+    #     rec = pre[0] * torch.tensor([w, h, w, h])
+    #     rec = rec[0].cpu().numpy()
+    #     rec1 = box_cxcywh_to_xyxy(rec)
+    # else:
+    #     rec1 = [0,0,w,h]
+
+    img_np = io.imread(image_path)
+    if len(img_np.shape) == 2:
+        img_3c = np.repeat(img_np[:, :, None], 3, axis=-1)
+    else:
+        img_3c = img_np
+    H, W, _ = img_3c.shape
+
+    img_1024 = transform.resize(
+        img_3c, (1024, 1024), order=3, preserve_range=True, anti_aliasing=True
+    ).astype(np.uint8)
+    img_1024 = (img_1024 - img_1024.min()) / np.clip(
+        img_1024.max() - img_1024.min(), a_min=1e-8, a_max=None
+    )  # normalize to [0, 1], (H, W, 3)
+    # convert the shape to (3, H, W)
+    img_1024_tensor = (
+        torch.tensor(img_1024).float().permute(2, 0, 1).unsqueeze(0).to(device)
+    )
+
+
+    
+    medsam_segs=[]
+    for rc in rec1_sorted:
+        box_np = np.array([[int(x) for x in rc]]) 
+        # transfer box_np t0 1024x1024 scale
+        box_1024 = box_np / np.array([W, H, W, H]) * 1024
+        with torch.no_grad():
+            image_embedding = medsam_model.image_encoder(img_1024_tensor)  # (1, 256, 64, 64)
+
+        medsam_seg = medsam_inference(medsam_model, image_embedding, box_1024, H, W)
+        medsam_segs.append(medsam_seg)
+    
+    fig, ax = plt.subplots(1, 1, figsize=(8, 8))
+
+    # Show the input image
+    ax.imshow(img_3c)
+    
+    # Overlay all MedSAM masks on the same axis
+    for color_index, medsam_seg in enumerate(medsam_segs):
+        show_mask(medsam_seg, ax, color_index=color_index)
+        show_box(np.array([int(x) for x in rec1_sorted[color_index]]), ax, 
+                 label=f"{phrases_sorted[color_index]}",isBottom = color_index%2)
+
+    ax.set_title(f"MedSAM {img}-{len(medsam_segs)}")
+    ax.axis('off')
+    plt.savefig(f"{save_path}/{img}", dpi=300, bbox_inches='tight')
+    #plt.show()
+
+#%%

@@ -1,14 +1,15 @@
 data:
   batch_size: 4
   num_workers: 8
-  train_ann: multimodal-data/Breast/train_annotation.CSV
-  train_dir: multimodal-data/Breast/images/train
-  val_ann: multimodal-data/Breast/test_annotation.CSV
-  val_dir: multimodal-data/Breast/images/test
+  train_ann: multimodal-data/USDATASET/train_annotation.CSV
+  train_dir: multimodal-data/USDATASET/images/train
+  val_ann: multimodal-data/USDATASET/test_annotation.CSV
+  val_dir: multimodal-data/USDATASET/images/test
 model:
   config_path: groundingdino/config/GroundingDINO_SwinT_OGC.py
   # lora_weights: weights/ObjectName/freez_1/best_model.pth
-  lora_weights: weights/20250524_1631/best_model.pth
+  # lora_weights: weights/20250524_1846/checkpoint_epoch_75.pth
+  lora_weights: weights/ObjectName/freez_4/best_model.pth
   # lora_weights: weights/groundingdino_swint_ogc.pth
   weights_path: weights/groundingdino_swint_ogc.pth
 training:

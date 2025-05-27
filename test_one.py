@@ -26,7 +26,7 @@ import torch
 from segment_anything import sam_model_registry
 from PIL import Image
 import argparse
-
+import csv
 #%%
 @torch.no_grad()
 def medsam_inference(medsam_model, img_embed, box_1024, H, W):
@@ -176,11 +176,13 @@ medsam_model.eval()
 #** image_path = '/home/hamze/Documents/Dataset/fetal head circumference/training_set/001_HC.png'
 #** image_path = '/home/hamze/Documents/Dataset/BrEaST-Lesions_USG-images_and_masks-Dec-15-2023/BrEaST-Lesions_USG-images_and_masks/case001.png'
 # image_path = '/home/hamze/Documents/Dataset/kidneyUS_images_14_june_2022/kidneyUS_images_14_june_2022/1_IM-0001-0059_anon.png'
+# image_path = '/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif'
+# image_path = '/home/hamze/Documents/Dataset/Thyroid Dataset/DDTI dataset/DDTI/1_or_data/image/3.PNG'
+# image_path = '/home/hamze/Documents/Dataset/Thyroid Dataset/tg3k/thyroid-image/0000.jpg'
+text_prompt="thyroid. lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
 
 if terminal and args.path:
     image_path =  args.path
-else:   
-    image_path = '/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif'
 
 image_source, image = load_image(image_path)
 
@@ -188,9 +190,7 @@ image = image.to(device)
 # caption="benign cyst. benign. malignant. pants." #1
 if terminal and args.text_prompt:
     text_prompt = args.text_prompt
-else:
-    text_prompt="lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
-text_prompt="lumbar multifidus. lumbar. multifidus."
+# text_prompt="lumbar multifidus. lumbar. multifidus."
 # text_prompt="text. annotation. handwriting." 
 # 
 with torch.no_grad():

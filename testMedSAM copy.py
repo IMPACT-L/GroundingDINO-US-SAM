@@ -350,5 +350,6 @@ for img in os.listdir(data_config.val_dir):
     ax.axis('off')
     plt.savefig(f"{save_path}/{img}", dpi=300, bbox_inches='tight')
     #plt.show()
+    # break
 
 #%%

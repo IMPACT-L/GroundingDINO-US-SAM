@@ -203,7 +203,7 @@ data_config, model_config, training_config = ConfigurationManager.load_config(co
 model = load_model(model_config,training_config.use_lora)
 #%%
 box_threshold=0.10
-text_threshold=0.10
+text_threshold=0.30
 results = {}
 for img in os.listdir(data_config.val_dir):
 
@@ -223,7 +223,7 @@ for img in os.listdir(data_config.val_dir):
     dic = None
     detected = False
     if len(boxes>0):
-        boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases)
+        boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases,box_threshold)
 
         with torch.no_grad():
             image_embedding = medsam_model.image_encoder(image.float().permute(0, 2, 1).unsqueeze(0).to(device))

@@ -67,6 +67,26 @@ def box_cxcywh_to_xyxy(x):
     b = [(x_c - 0.5 * w), (y_c - 0.5 * h), (x_c + 0.5 * w), (y_c + 0.5 * h)]
     return b
 
+def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
+    h, w, _ = image_source.shape
+    scaled_boxes = boxes * torch.Tensor([w, h, w, h])
+    scaled_boxes = box_convert(boxes=scaled_boxes, in_fmt="cxcywh", out_fmt="xyxy")
+    nms_boxes_list, nms_logits_list, nms_phrases_list = [], [], []
+
+    print(f"The unique detected phrases are {set(phrases)}")
+
+    for unique_phrase in set(phrases):
+        indices = [i for i, phrase in enumerate(phrases) if phrase == unique_phrase]
+        phrase_scaled_boxes = scaled_boxes[indices]
+        phrase_boxes = boxes[indices]
+        phrase_logits = logits[indices]
+
+        keep_indices = ops.nms(phrase_scaled_boxes, phrase_logits, threshold)
+        nms_boxes_list.extend(phrase_boxes[keep_indices])
+        nms_logits_list.extend(phrase_logits[keep_indices])
+        nms_phrases_list.extend([unique_phrase] * len(keep_indices))
+
+    return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
 
 #%% build SAM2 image predictor
 SAM2_CHECKPOINT = '/home/hamze/Documents/Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
@@ -81,7 +101,7 @@ data_config, model_config, test_config = ConfigurationManager.load_config(config
 model = load_model(model_config,test_config.use_lora)
 #%%
 box_threshold=0.10
-text_threshold=0.10
+text_threshold=0.30
 results = {}
 for img in os.listdir(data_config.val_dir):
     caption = preprocess_caption(caption=textCSV[img]['promt_text'])
@@ -89,7 +109,7 @@ for img in os.listdir(data_config.val_dir):
     
     image_source, image = load_image(image_path)
     h, w, _ = image_source.shape
-    pre = predict(model,
+    boxes, logits, phrases = predict(model,
             image,
             caption,
             box_threshold,
@@ -99,9 +119,11 @@ for img in os.listdir(data_config.val_dir):
     iou = None
     dic = None
     detected = False
-    if len(pre[0]>0):
+    if len(boxes>0):
+        boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases, box_threshold)
+
         sam2_predictor.set_image(np.array(image_source))
-        rec = pre[0] * torch.tensor([w, h, w, h])
+        rec = boxes * torch.tensor([w, h, w, h])
         rec = rec[0].cpu().numpy()
         rec1 = box_cxcywh_to_xyxy(rec)
         masks, scores, logits = sam2_predictor.predict(
@@ -149,7 +171,7 @@ for img in os.listdir(data_config.val_dir):
         # ax.imshow(masks[0], alpha=0.5)
 
         ax[2].set_title(f'Prediction: iou: {iou:.2f}, dice: {dic:.2f}')
-        plt.text(x=x1, y=y1, s=pre[2], color='red', fontsize=10)
+        plt.text(x=x1, y=y1, s=phrases, color='red', fontsize=10)
         ax[2].axis('off')
         plt.show()
         detected = True
@@ -160,6 +182,7 @@ for img in os.listdir(data_config.val_dir):
         'dic':dic,
         'detected':detected
     }
+    # break
 # %%
 undetected_results = {
     img: metrics for img, metrics in results.items() if not metrics['detected']

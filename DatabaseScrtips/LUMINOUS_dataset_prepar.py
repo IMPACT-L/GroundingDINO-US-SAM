@@ -37,7 +37,7 @@ valid_prompts = prompts[train_size:train_size+valid_size]
 test_prompts = prompts[train_size+valid_size:]
 #%%
 def create_dataset(prompts_in, output_type, firstRow=False):
-    with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
+    with open( f'{desDir}/{output_type}_annotationtest.CSV', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
 
         if firstRow:
@@ -90,5 +90,5 @@ def copyImages(prompts_in, output_type):
 # %%
 copyImages(train_prompts, 'train')
 copyImages(valid_prompts, 'val')
-# copyImages(test_prompts, 'test')
+copyImages(test_prompts, 'test')
 # %%

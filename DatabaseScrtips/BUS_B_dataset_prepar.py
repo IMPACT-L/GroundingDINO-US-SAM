@@ -9,7 +9,7 @@ import random
 random.seed(42)
 #%%
 srcDir = '/home/hamze/Documents/Dataset/Breast_BUS_B_2024/BUS'
-desDir = '../multimodal-data/Breast'
+desDir = '../multimodal-data/USDATASET'
 #%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)
@@ -76,9 +76,9 @@ def create_dataset(prompts_in, output_type, firstRow=False):
                 ])
 
 ##
-# create_dataset(train_prompts, 'train', firstRow=False)
-# create_dataset(valid_prompts, 'val', firstRow=False)
-# create_dataset(test_prompts, 'test', firstRow=True)
+create_dataset(train_prompts, 'train', firstRow=False)
+create_dataset(valid_prompts, 'val', firstRow=False)
+create_dataset(test_prompts, 'test', firstRow=False)
 # %%
 def copyImages(prompts_in, output_type):
     for prompt in prompts_in:

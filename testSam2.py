@@ -23,6 +23,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from sklearn.metrics import jaccard_score, f1_score
 import csv
+from sklearn.metrics import jaccard_score, f1_score
 
 #%%
 desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/test_annotation.CSV'

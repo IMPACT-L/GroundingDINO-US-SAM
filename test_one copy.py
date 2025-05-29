@@ -120,41 +120,7 @@ def show_mask(mask, ax, color_index=0):
     ax.imshow(mask_image)
 
 #%%
-# if __name__ == "__main__":
-# 
-terminal = False
-# python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
 
-if terminal:
-    parser = argparse.ArgumentParser("Grounding DINO example", add_help=True)
-    parser.add_argument("--path", "-p", type=str, required=False, help="path to iamge",default='/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif')
-    parser.add_argument("--text_prompt", "-t", type=str, required=False, help="text prompt",default='lumbar multifidus. benign cyst. benign. malignant. pants. text.')
-    parser.add_argument("--top_k", "-k", type=int, required=False, help="top_k",default=3)
-    parser.add_argument("--text_threshold", "-tt", type=float, required=False, help="text threshold",default=0.01)
-    parser.add_argument("--box_threshold", "-bt", type=float, required=False, help="box threshold",default=0.01)
-    args = parser.parse_args()
-
-if terminal and args.box_threshold:
-    box_threshold= args.box_threshold
-else:   
-    box_threshold=0.01
-
-if terminal and args.text_threshold:
-    text_threshold= args.text_threshold
-else:   
-    text_threshold=0.01
-
-prompt_type = 6
-
-if terminal and args.top_k:
-    top_k= args.top_k
-else:   
-    top_k=3
-
-
-
-# Config file of the prediction, the model weights can be complete model weights but if use_lora is true then lora_wights should also be present see example
-## config file
 config_path="configs/test_config.yaml"
 
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
@@ -168,8 +134,32 @@ medsam_model = sam_model_registry["vit_b"](checkpoint="/home/hamze/Documents/Med
 medsam_model = medsam_model.to(device)
 medsam_model.eval()
 #%%
+terminal = False
+top_k=1
+box_threshold=0.1
+text_threshold=0.3
+# python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
+
+if terminal:
+    parser = argparse.ArgumentParser("Grounding DINO example", add_help=True)
+    parser.add_argument("--path", "-p", type=str, required=False, help="path to iamge",default='/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif')
+    parser.add_argument("--text_prompt", "-t", type=str, required=False, help="text prompt",default='lumbar multifidus. benign cyst. benign. malignant. pants. text.')
+    parser.add_argument("--top_k", "-k", type=int, required=False, help="top_k",default=3)
+    parser.add_argument("--text_threshold", "-tt", type=float, required=False, help="text threshold",default=0.01)
+    parser.add_argument("--box_threshold", "-bt", type=float, required=False, help="box threshold",default=0.01)
+    args = parser.parse_args()
+
+if terminal and args.box_threshold:
+    box_threshold= args.box_threshold
+    
+
+if terminal and args.text_threshold:
+    text_threshold= args.text_threshold
+
+if terminal and args.top_k:
+    top_k= args.top_k
 # image_path = 'multimodal-data/Breast/images/train/000002.png'
-# image_path = '/home/hamze/Documents/Dataset/BULI_Malignant/112 Malignant Image.bmp'
+image_path = '/home/hamze/Documents/Dataset/BULI_Malignant/112 Malignant Image.bmp'
 # image_path = '/home/hamze/Documents/Dataset/BUSBRA/Images/bus_0064-s.png'
 # image_path = '/home/hamze/Documents/Dataset/BUS-UCLM Breast ultrasound lesion segmentation dataset/images/ALWI_000.png'
 # image_path = 'samples_with_text.png'
@@ -179,7 +169,8 @@ medsam_model.eval()
 # image_path = '/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif'
 # image_path = '/home/hamze/Documents/Dataset/Thyroid Dataset/DDTI dataset/DDTI/1_or_data/image/3.PNG'
 # image_path = '/home/hamze/Documents/Dataset/Thyroid Dataset/tg3k/thyroid-image/0000.jpg'
-text_prompt="thyroid. lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
+# text_prompt="thyroid. lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
+text_prompt="find car." #1
 
 if terminal and args.path:
     image_path =  args.path

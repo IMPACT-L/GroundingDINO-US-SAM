@@ -18,4 +18,4 @@ training:
   warmup_epochs: 5
   use_lora: true
   visualization_frequency: 15
-  patient: 100
+  patient: 10

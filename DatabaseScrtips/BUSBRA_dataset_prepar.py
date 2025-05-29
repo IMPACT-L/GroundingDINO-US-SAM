@@ -48,14 +48,14 @@ def create_dataset(prompts_in, output_type, firstRow=False):
                     'image_name', 'image_width', 'image_height','mask_path','dataset'])
                 
         for prompt in prompts_in:
-            image_name = f'{prompt[0]}.png'.replace('bus','mask')
+            image_name = f'{prompt[0]}.png'
             type = prompt[1]
             bbox = list(map(int, prompt[4].strip('[]').split(',')))
             x, y, w, h = bbox
             # width = x_max - x_min
             # height = y_max - y_min
 
-            mask_path = f'{srcDir}/Masks/{image_name}'
+            mask_path = f"{srcDir}/Masks/{image_name.replace('bus','mask')}"
             print(mask_path)
             # img_path = f'{srcDir}/original/{image_name}'
             # mask = cv2.imread(mask_path)

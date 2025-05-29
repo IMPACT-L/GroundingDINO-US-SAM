@@ -55,7 +55,7 @@ pip install -e .
 | BUID                  | [qamebi](https://qamebi.com/breast-ultrasound-images-database/)                                                | No    |
 | BUS_UC                | [mendeley](https://data.mendeley.com/datasets/3ksd7w7jkx/1)                                                    | No    |
 | BUS_UCML              | [mendeley](https://data.mendeley.com/datasets/7fvgj4jsp7/1)                                                    | No    |
-| BUS-BRA               | [github](https://github.com/wgomezf/BUS-BRA)                                                                   | No    |
+| BUS-BRA               | [github](https://github.com/wgomezf/BUS-BRA)                                                                   | Yes   |
 | BUS (Dataset B)       | [mmu](http://www2.docm.mmu.ac.uk/STAFF/M.Yap/dataset.php)                                                      | Yes   |
 | BUSI                  | [HomePage](https://scholar.cu.edu.eg/?q=afahmy/pages/dataset)                                                  | Yes   |
 | CAMUS                 | [insa-lyon](https://humanheart-project.creatis.insa-lyon.fr/database/#collection/6373703d73e9f0047faa1bc8)     | No    |

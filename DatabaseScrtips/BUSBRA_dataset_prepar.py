@@ -6,9 +6,10 @@ import csv
 import shutil
 import matplotlib.pyplot as plt
 import random
+import matplotlib.patches as patches
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/Breast_BUS_B_2024/BUS'
+srcDir = '/home/hamze/Documents/Dataset/BUSBRA'
 desDir = '../multimodal-data/USDATASET'
 #%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
@@ -21,10 +22,11 @@ def readTextPrompt(prompt_dir):
         reader = csv.reader(csvfile)
         next(reader)  # Skip header row
         for columns in reader:
-            prompts.append((columns[0],columns[1]))
+            prompts.append((columns[0],columns[3],columns[6],columns[7],columns[9]))
     return prompts
-prompts = readTextPrompt(f'{srcDir}/DatasetB.csv')
+prompts = readTextPrompt(f'{srcDir}/bus_data.csv')
 print(prompts)
+#%%
 random.shuffle(prompts)
 print(prompts)
 total = len(prompts)
@@ -46,37 +48,52 @@ def create_dataset(prompts_in, output_type, firstRow=False):
                     'image_name', 'image_width', 'image_height','mask_path','dataset'])
                 
         for prompt in prompts_in:
-            image_name = f'{prompt[0]}.png'
-            mask_path = f'{srcDir}/GT/{image_name}'
-            img_path = f'{srcDir}/original/{image_name}'
-            mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)                
-            contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            image_name = f'{prompt[0]}.png'.replace('bus','mask')
+            type = prompt[1]
+            bbox = list(map(int, prompt[4].strip('[]').split(',')))
+            x, y, w, h = bbox
+            # width = x_max - x_min
+            # height = y_max - y_min
+
+            mask_path = f'{srcDir}/Masks/{image_name}'
+            print(mask_path)
+            # img_path = f'{srcDir}/original/{image_name}'
+            # mask = cv2.imread(mask_path)
+            # mask = cv2.cvtColor(mask, cv2.COLOR_BGR2RGB)
+
+            # contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             
-            for i, contour in enumerate(contours):
-                x, y, w, h = cv2.boundingRect(contour)
-                print(f'Contour {i}: x={x}, y={y}, w={w}, h={h}')
-                contour = contour.squeeze()  # shape becomes (N, 2)
+            # fig, ax = plt.subplots()
+            # ax.imshow(mask)
+            # rect = patches.Rectangle((x, y), w, h,
+            #                         linewidth=2, edgecolor='r', facecolor='none')
+            # ax.add_patch(rect)
 
-                contour = contour.reshape(-1, 2)
+            # plt.title("Bounding Box")
+            # # plt.axis('off')
+            # plt.show()
+                
+            # print([
+            #       type,
+            #     x, y, w, h,
+            #     image_name,
+            #     mask.shape[1],
+            #     mask.shape[0],
+            #     mask_path,
+            # ])
 
-                # plt.imshow(mask, cmap='gray')
-                # plt.plot(contour[:, 0], contour[:, 1], color='lime')  # plot x vs y
-                # plt.scatter([x, x+w, x+w, x], [y, y, y+h, y+h], color=['red', 'green', 'blue', 'yellow'])
-                # plt.title(f'{prompt[0]}')
-                # plt.show()
+            writer.writerow([
+                type,
+                x, y, w, h,
+                image_name,
+                prompt[2],
+                prompt[3],
+                mask_path,
+                'BUSBRA'
+            ])
+            # break
 
-                writer.writerow([
-                    prompt[1],
-                    #type,
-                    x, y, w, h,
-                    image_name,
-                    mask.shape[1],
-                    mask.shape[0],
-                    mask_path,
-                    'BUS_B'
-                ])
-
-##
+#%%
 create_dataset(train_prompts, 'train', firstRow=False)
 create_dataset(valid_prompts, 'val', firstRow=False)
 create_dataset(test_prompts, 'test', firstRow=False)
@@ -84,7 +101,7 @@ create_dataset(test_prompts, 'test', firstRow=False)
 def copyImages(prompts_in, output_type):
     for prompt in prompts_in:
         image_name = f'{prompt[0]}.png'
-        img_path = f'{srcDir}/original/{image_name}'
+        img_path = f'{srcDir}/Images/{image_name}'
         dst = f'{desDir}/images/{output_type}/{image_name}'
         shutil.copy2(img_path, dst)
 

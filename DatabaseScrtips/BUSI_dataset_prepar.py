@@ -36,7 +36,7 @@ def create_dataset(type, number_list, output_type, firstRow=False):
         if firstRow:
             writer.writerow(['label_name', 'bbox_x', 'bbox_y', 
                         'bbox_width', 'bbox_height', 
-                        'image_name', 'image_width', 'image_height','mask_path'])
+                        'image_name', 'image_width', 'image_height','mask_path','dataset'])
         
         for index in number_list:
             try:
@@ -63,7 +63,8 @@ def create_dataset(type, number_list, output_type, firstRow=False):
                         image_name,
                         mask.shape[1],
                         mask.shape[0],
-                        mask_path
+                        mask_path,
+                        'BUSI'
                     ])
             except Exception as e:
                 print(f"Error processing {index}: {str(e)}")

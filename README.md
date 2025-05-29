@@ -51,7 +51,7 @@ pip install -e .
 | ASUS                  | [onedrive](https://onedrive.live.com/?authkey=%21AMIrL6S1cSjlo1I&id=7230D4DEC6058018%2191725&cid=7230D4DEC6058018) | No    |
 | AUL                   | [zenodo](https://zenodo.org/records/7272660)                                                                   | No    |
 | brachial plexus       | [github](https://github.com/Regional-US/brachial_plexus)                                                       | No    |
-| BrEaST                | [cancer imaging archive](https://www.cancerimagingarchive.net/collection/breast-lesions-usg/)                  | No    |
+| BrEaST                | [cancer imaging archive](https://www.cancerimagingarchive.net/collection/breast-lesions-usg/)                  | Yes   |
 | BUID                  | [qamebi](https://qamebi.com/breast-ultrasound-images-database/)                                                | No    |
 | BUS_UC                | [mendeley](https://data.mendeley.com/datasets/3ksd7w7jkx/1)                                                    | No    |
 | BUS_UCML              | [mendeley](https://data.mendeley.com/datasets/7fvgj4jsp7/1)                                                    | Yes   |

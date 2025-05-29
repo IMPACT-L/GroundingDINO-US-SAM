@@ -241,7 +241,7 @@ for img in os.listdir(data_config.val_dir):
         # Plot image and rectangle
         # Overlay the mask with transparency
         mask_path = textCSV[img]['mask_path']
-        mask_source = Image.open(mask_path)
+        mask_source = Image.open(mask_path).convert('L')
         mask_source = np.asarray(mask_source).copy()
         mask_source[mask_source==255]=1
         iou = sklearn_iou(masks,mask_source)*100

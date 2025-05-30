@@ -11,7 +11,7 @@ Grounding-Sam-Ultrasound
 | AUL                   | [zenodo](https://zenodo.org/records/7272660)                                                                   | No    |
 | brachial plexus       | [github](https://github.com/Regional-US/brachial_plexus)                                                       | No    |
 | BrEaST                | [cancer imaging archive](https://www.cancerimagingarchive.net/collection/breast-lesions-usg/)                  | Yes   |
-| BUID                  | [qamebi](https://qamebi.com/breast-ultrasound-images-database/)                                                | No    |
+| BUID                  | [qamebi](https://qamebi.com/breast-ultrasound-images-database/)                                                | Yes   |
 | BUS_UC                | [mendeley](https://data.mendeley.com/datasets/3ksd7w7jkx/1)                                                    | Yes   |
 | BUS_UCML              | [mendeley](https://data.mendeley.com/datasets/7fvgj4jsp7/1)                                                    | Yes   |
 | BUS-BRA               | [github](https://github.com/wgomezf/BUS-BRA)                                                                   | Yes   |

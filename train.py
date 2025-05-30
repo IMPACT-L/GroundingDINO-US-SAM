@@ -422,6 +422,21 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
 
 #%%            
 if __name__ == "__main__":
+    folder_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/images'
+
+    dires = ['train','val','test']
+    for dir in dires:
+        print(dir)
+        folder_path_level = f'{folder_path}/{dir}'
+        for filename in os.listdir(folder_path_level):
+            lowercase_name = filename.lower()
+            src = os.path.join(folder_path_level, filename)
+            dst = os.path.join(folder_path_level, lowercase_name)
+        
+            # Rename only if different
+            # if src != dst:
+            os.rename(src, dst)
+
     train('configs/train_config.yaml')
 
 # %%

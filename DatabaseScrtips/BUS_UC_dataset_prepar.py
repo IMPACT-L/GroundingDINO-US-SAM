@@ -17,6 +17,22 @@ os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)
 os.makedirs(f'{desDir}/images/test', exist_ok=True)
 #%%
+paths = glob.glob(f'{srcDir}/Malignant/masks/*')
+for path in paths:
+    os.rename(path, path.replace('_bus_us','_malignant_bus_uc'))
+#%%
+paths = glob.glob(f'{srcDir}/Malignant/images/*')
+for path in paths:
+    os.rename(path, path.replace('_bus_us','_malignant_bus_uc'))
+#%%
+paths = glob.glob(f'{srcDir}/Benign/masks/*')
+for path in paths:
+    os.rename(path, path.replace('_bus_us','_benign_bus_uc'))
+#%%
+paths = glob.glob(f'{srcDir}/Benign/images/*')
+for path in paths:
+    os.rename(path, path.replace('_bus_us','_benign_bus_uc'))
+#%%
 mask_paths = glob.glob(f'{srcDir}/Malignant/masks/*')
 malignants = []
 for mask_path in mask_paths:
@@ -104,7 +120,7 @@ print(len(train_numbers),len(valid_numbers),len(test_numbers))
 
 create_dataset('Benign', train_numbers,'train',False)
 create_dataset('Benign', valid_numbers,'val',False)
-# create_dataset('Benign', test_numbers,'test',False)
+create_dataset('Benign', test_numbers,'test',False)
 
 #%%
 random.shuffle(malignants)

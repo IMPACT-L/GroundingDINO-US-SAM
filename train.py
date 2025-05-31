@@ -287,31 +287,31 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
     
     visualizer = GroundingDINOVisualizer(save_dir=save_dir, visualize_frequency=200)
     
-    freeze_config1 = {
-            'backbone': True,
-            'text_encoder': False, 
-            'projections': False,
-            'encoder_layers': 0,
-            'decoder_layers': 0,
-            'exclude_patterns': ['class_embed', 'bbox_embed']
-    }
-    freeze_config2 = {
-            'backbone': True,
-            'text_encoder': False, 
-            'projections': False,
-            'encoder_layers': 2,
-            'decoder_layers': 2,
-            'exclude_patterns': ['class_embed', 'bbox_embed']
-    }
+    # freeze_config1 = {
+    #         'backbone': True,
+    #         'text_encoder': False, 
+    #         'projections': False,
+    #         'encoder_layers': 0,
+    #         'decoder_layers': 0,
+    #         'exclude_patterns': ['class_embed', 'bbox_embed']
+    # }
+    # freeze_config2 = {
+    #         'backbone': True,
+    #         'text_encoder': False, 
+    #         'projections': False,
+    #         'encoder_layers': 2,
+    #         'decoder_layers': 2,
+    #         'exclude_patterns': ['class_embed', 'bbox_embed']
+    # }
 
-    freeze_config3 = {
-            'backbone': False,
-            'text_encoder': False, 
-            'projections': False,
-            'encoder_layers': 6,
-            'decoder_layers': 6,
-            'exclude_patterns': ['class_embed', 'bbox_embed']
-    }
+    # freeze_config3 = {
+    #         'backbone': False,
+    #         'text_encoder': False, 
+    #         'projections': False,
+    #         'encoder_layers': 6,
+    #         'decoder_layers': 6,
+    #         'exclude_patterns': ['class_embed', 'bbox_embed']
+    # }
     
     freeze_config4 = {
             'backbone': False,
@@ -322,34 +322,43 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
             'exclude_patterns': ['class_embed', 'bbox_embed']
     }
 
-    freeze_config5 = {
-            'backbone': False,
-            'text_encoder': False, 
-            'projections': True,
-            'encoder_layers': 0,
-            'decoder_layers': 0,
-            'exclude_patterns': ['class_embed', 'bbox_embed']
-    }
+    # freeze_config5 = {
+    #         'backbone': False,
+    #         'text_encoder': False, 
+    #         'projections': True,
+    #         'encoder_layers': 0,
+    #         'decoder_layers': 0,
+    #         'exclude_patterns': ['class_embed', 'bbox_embed']
+    # }
 
-    freeze_config6 = {
-            'backbone': False,
-            'text_encoder': False, 
-            'projections': True,
-            'encoder_layers': 2,
-            'decoder_layers': 2,
-            'exclude_patterns': ['class_embed', 'bbox_embed']
-    }
+    # freeze_config6 = {
+    #         'backbone': False,
+    #         'text_encoder': False, 
+    #         'projections': True,
+    #         'encoder_layers': 2,
+    #         'decoder_layers': 2,
+    #         'exclude_patterns': ['class_embed', 'bbox_embed']
+    # }
 
-    freeze_config7 = {
-            'backbone': True,
+    # freeze_config7 = {
+    #         'backbone': True,
+    #         'text_encoder': True, 
+    #         'projections': False,
+    #         'encoder_layers': 4,
+    #         'decoder_layers': 4,
+    #         'exclude_patterns': ['class_embed', 'bbox_embed']
+    # }
+
+    freeze_config8 = {
+            'backbone': False,
             'text_encoder': True, 
             'projections': False,
-            'encoder_layers': 4,
-            'decoder_layers': 4,
+            'encoder_layers': 6,
+            'decoder_layers': 6,
             'exclude_patterns': ['class_embed', 'bbox_embed']
     }
 
-    freeze_config = freeze_config7
+    freeze_config = freeze_config8
 
     if not training_config.use_lora:
         print("Freezing most of model except few layers!")
@@ -420,10 +429,9 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
                 use_lora=training_config.use_lora
             )
 
-#%%            
-if __name__ == "__main__":
+#%% 
+def lower_file_names():
     folder_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/images'
-
     dires = ['train','val','test']
     for dir in dires:
         print(dir)
@@ -432,11 +440,10 @@ if __name__ == "__main__":
             lowercase_name = filename.lower()
             src = os.path.join(folder_path_level, filename)
             dst = os.path.join(folder_path_level, lowercase_name)
-        
-            # Rename only if different
-            # if src != dst:
             os.rename(src, dst)
-
+#%%
+if __name__ == "__main__":
+    # lower_file_names()
     train('configs/train_config.yaml')
 
 # %%

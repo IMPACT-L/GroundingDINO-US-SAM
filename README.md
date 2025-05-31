@@ -4,7 +4,7 @@ Grounding-Sam-Ultrasound
 
 | Dataset               | Link                                                                                                            | Added |
 |-----------------------|----------------------------------------------------------------------------------------------------------------|-------|
-| 105US                 | [researchgate](https://www.researchgate.net/publication/329586355_100_2D_US_Images_and_Tumor_Segmentation_Masks) | No    |
+| 105US                 | [researchgate](https://www.researchgate.net/publication/329586355_100_2D_US_Images_and_Tumor_Segmentation_Masks) | Yes   |
 | AbdomenUS             | [kaggle](https://www.kaggle.com/datasets/ignaciorlando/ussimandsegm)                                           | No    |
 | ACOUSLIC              | [grand-challenge](https://acouslic-ai.grand-challenge.org/overview-and-goals/)                                 | No    |
 | ASUS                  | [onedrive](https://onedrive.live.com/?authkey=%21AMIrL6S1cSjlo1I&id=7230D4DEC6058018%2191725&cid=7230D4DEC6058018) | No    |

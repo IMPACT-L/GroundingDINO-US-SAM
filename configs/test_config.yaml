@@ -8,10 +8,13 @@ data:
 model:
   config_path: groundingdino/config/GroundingDINO_SwinT_OGC.py
   # lora_weights: weights/ObjectName/freez_1/best_model.pth
-  # lora_weights: weights/20250524_1846/checkpoint_epoch_75.pth
-  lora_weights: weights/ObjectName/freez_7/best_model.pth
+  lora_weights: weights/20250530_2033/best_model.pth
+  # lora_weights: weights/ObjectName/freez_7/best_model.pth
+  # lora_weights: weights/ObjectName/freez_7/checkpoint_epoch_15.pth
   # lora_weights: weights/groundingdino_swint_ogc.pth
   weights_path: weights/groundingdino_swint_ogc.pth
+  # weights_path: weights/20250530_1648/best_model.pth
+  
 training:
   learning_rate: 0.01
   num_epochs: 200

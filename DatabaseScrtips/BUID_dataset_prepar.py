@@ -12,6 +12,7 @@ random.seed(42)
 #%%
 srcDir = '/home/hamze/Documents/Dataset/BUID'
 desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET'
+dataset = 'buid'
 #%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)
@@ -29,11 +30,11 @@ for mask_path in mask_paths:
         row =[
             'malignant',
             x, y, w, h,
-            file_name.replace('Mask.tif','Image.bmp'),
+            f"{dataset}_{file_name.replace('Mask.tif','Image.bmp')}",
             mask.shape[1],
             mask.shape[0],
             mask_path,
-            'BUID'
+            dataset
         ]
        
         malignants.append(row)
@@ -54,11 +55,11 @@ for mask_path in mask_paths:
         row =[
             'benigin',
             x, y, w, h,
-            file_name.replace('Mask.tif','Image.bmp'),
+            f"{dataset}_{file_name.replace('Mask.tif','Image.bmp')}",
             mask.shape[1],
             mask.shape[0],
             mask_path,
-            'BUID'
+            dataset
         ]
        
         benigins.append(row)
@@ -66,21 +67,17 @@ for mask_path in mask_paths:
     # break
 print(benigins)
 #%%
-def create_dataset(type, number_list, output_type, firstRow=False):
+def create_dataset(type, number_list, output_type):
     with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
 
-        if firstRow:
-            writer.writerow(['label_name', 'bbox_x', 'bbox_y', 
-                        'bbox_width', 'bbox_height', 
-                        'image_name', 'image_width', 'image_height','mask_path','dataset'])
-        
         for row in number_list:
             try:
                 writer.writerow(row)
-                image_name = row[5].replace('Mask.tif','Image.bmp')
+                image_name = row[5].replace('Mask.tif','Image.bmp').replace(dataset+'_','')
                 img_path = f"{srcDir}/{type}/{image_name}"
-                dst = f'{desDir}/images/{output_type}/{image_name}'
+                print(img_path)
+                dst = f'{desDir}/images/{output_type}/{dataset}_{image_name}'
                 
                 shutil.copy2(img_path, dst)
                 print('saved')
@@ -102,9 +99,9 @@ valid_numbers = benigins[train_size:train_size+valid_size]
 test_numbers = benigins[train_size+valid_size:]
 print(len(train_numbers),len(valid_numbers),len(test_numbers))
 
-create_dataset('Benign', train_numbers,'train',False)
-create_dataset('Benign', valid_numbers,'val',False)
-create_dataset('Benign', test_numbers,'test',False)
+create_dataset('Benign', train_numbers,'train')
+create_dataset('Benign', valid_numbers,'val')
+create_dataset('Benign', test_numbers,'test')
 
 #%%
 random.shuffle(malignants)
@@ -119,7 +116,7 @@ train_numbers = malignants[:train_size]
 valid_numbers = malignants[train_size:train_size+valid_size]
 test_numbers = malignants[train_size+valid_size:]
 print(len(train_numbers),len(valid_numbers),len(test_numbers))
-create_dataset('Malignant', train_numbers,'train',False)
-create_dataset('Malignant', valid_numbers,'val',False)
-create_dataset('Malignant', test_numbers,'test',False)
+create_dataset('Malignant', train_numbers,'train')
+create_dataset('Malignant', valid_numbers,'val')
+create_dataset('Malignant', test_numbers,'test')
 # %%

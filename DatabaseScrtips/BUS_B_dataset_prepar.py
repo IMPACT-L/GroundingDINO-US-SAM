@@ -14,6 +14,7 @@ desDir = '../multimodal-data/USDATASET'
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)
 os.makedirs(f'{desDir}/images/test', exist_ok=True)
+dataset = 'busb'
 #%%
 def readTextPrompt(prompt_dir):
     prompts = []
@@ -36,14 +37,9 @@ train_prompts = prompts[:train_size]
 valid_prompts = prompts[train_size:train_size+valid_size]
 test_prompts = prompts[train_size+valid_size:]
 #%%
-def create_dataset(prompts_in, output_type, firstRow=False):
+def create_dataset(prompts_in, output_type):
     with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
-
-        if firstRow:
-            writer.writerow(['label_name', 'bbox_x', 'bbox_y', 
-                    'bbox_width', 'bbox_height', 
-                    'image_name', 'image_width', 'image_height','mask_path','dataset'])
                 
         for prompt in prompts_in:
             image_name = f'{prompt[0]}.png'
@@ -66,26 +62,25 @@ def create_dataset(prompts_in, output_type, firstRow=False):
                 # plt.show()
 
                 writer.writerow([
-                    prompt[1],
-                    #type,
+                    prompt[1].lower(),
                     x, y, w, h,
-                    image_name,
+                    f'{dataset}_{image_name}',
                     mask.shape[1],
                     mask.shape[0],
                     mask_path,
-                    'BUS_B'
+                    dataset
                 ])
 
 ##
-create_dataset(train_prompts, 'train', firstRow=False)
-create_dataset(valid_prompts, 'val', firstRow=False)
-create_dataset(test_prompts, 'test', firstRow=False)
+create_dataset(train_prompts, 'train')
+create_dataset(valid_prompts, 'val')
+create_dataset(test_prompts, 'test')
 # %%
 def copyImages(prompts_in, output_type):
     for prompt in prompts_in:
         image_name = f'{prompt[0]}.png'
         img_path = f'{srcDir}/original/{image_name}'
-        dst = f'{desDir}/images/{output_type}/{image_name}'
+        dst = f'{desDir}/images/{output_type}/{dataset}_{image_name}'
         shutil.copy2(img_path, dst)
 
 # %%

@@ -25,30 +25,20 @@ def readTextPrompt(prompt_dir):
     return prompts
 # benign_prompts = readTextPrompt(f'{desDir}/benign.csv')
 # malignant_prompts = readTextPrompt(f'{desDir}/malignant.csv')
-
-
-def create_dataset(type, number_list, output_type, firstRow=False):
+    
+dataset = 'busi'
+def create_dataset(type, number_list, output_type):
 
 
     with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
 
-        if firstRow:
-            writer.writerow(['label_name', 'bbox_x', 'bbox_y', 
-                        'bbox_width', 'bbox_height', 
-                        'image_name', 'image_width', 'image_height','mask_path','dataset'])
-        
         for index in number_list:
             try:
-                # if type=='benign':
-                #     prompt = benign_prompts[index-1]
-                # else:
-                #     prompt = malignant_prompts[index-1]
-
                 mask_path = f'{srcDir}/{type}/{type} ({index})_mask.png'
                 image_name = f'{type} ({index}).png'
                 img_path = f'{srcDir}/{type}/{image_name}'
-                dst = f'{desDir}/images/{output_type}/{image_name}'
+                dst = f'{desDir}/images/{output_type}/{dataset}_{image_name}'
                 shutil.copy2(img_path, dst)
 
                 mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)                
@@ -57,14 +47,13 @@ def create_dataset(type, number_list, output_type, firstRow=False):
                 for i, contour in enumerate(contours):
                     x, y, w, h = cv2.boundingRect(contour)
                     writer.writerow([
-                        # prompt,
-                        type,
+                        type.lower(),
                         x, y, w, h,
-                        image_name,
+                        f'{dataset}_{image_name}',
                         mask.shape[1],
                         mask.shape[0],
                         mask_path,
-                        'BUSI'
+                        dataset
                     ])
             except Exception as e:
                 print(f"Error processing {index}: {str(e)}")
@@ -83,9 +72,9 @@ train_numbers = numbers[:train_size]
 valid_numbers = numbers[train_size:train_size+valid_size]
 test_numbers = numbers[train_size+valid_size:]
 
-create_dataset('malignant', train_numbers,'train',True)
-create_dataset('malignant', valid_numbers,'val',True)
-create_dataset('malignant', test_numbers,'test',True)
+create_dataset('malignant', train_numbers,'train')
+create_dataset('malignant', valid_numbers,'val')
+create_dataset('malignant', test_numbers,'test')
 #%%
 numbers = list(range(1, 438))
 random.shuffle(numbers)

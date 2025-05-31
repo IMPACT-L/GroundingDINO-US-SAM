@@ -12,6 +12,7 @@ random.seed(42)
 srcDir = '/home/hamze/Documents/Dataset/BrEaST-Lesions_USG-images_and_masks-Dec-15-2023'
 # '/home/hamze/Documents/Dataset/BrEaST-Lesions_USG-images_and_masks-Dec-15-2023/BrEaST-Lesions_USG-images_and_masks'
 desDir = '../multimodal-data/USDATASET'
+dataset = 'breast'
 #%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)
@@ -42,18 +43,13 @@ train_prompts = prompts[:train_size]
 valid_prompts = prompts[train_size:train_size+valid_size]
 test_prompts = prompts[train_size+valid_size:]
 #%%
-def create_dataset(prompts_in, output_type, firstRow=False):
+def create_dataset(prompts_in, output_type):
     with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
-
-        if firstRow:
-            writer.writerow(['label_name', 'bbox_x', 'bbox_y', 
-                    'bbox_width', 'bbox_height', 
-                    'image_name', 'image_width', 'image_height','mask_path','dataset'])
                 
         for prompt in prompts_in:
             image_name = prompt[0]
-            type = prompt[1]
+            type = prompt[1].lower()
 
             mask_path = f"{srcDir}/BrEaST-Lesions_USG-images_and_masks/{image_name.replace('.png','_tumor.png')}"
             # dst = f'{desDir}/images/{output_type}/{image_name}'
@@ -66,39 +62,38 @@ def create_dataset(prompts_in, output_type, firstRow=False):
             for i, contour in enumerate(contours):
                 x, y, w, h = cv2.boundingRect(contour)
                 writer.writerow([
-                    # prompt,
                     type,
                     x, y, w, h,
-                    image_name,
+                    f'{dataset}_{image_name}',
                     mask.shape[1],
                     mask.shape[0],
                     mask_path,
-                    'BrEaST'
+                    dataset
                 ])
 
-                fig, ax = plt.subplots()
-                ax.imshow(mask)
-                rect = patches.Rectangle((x, y), w, h,
-                                        linewidth=2, edgecolor='r', facecolor='none')
-                ax.add_patch(rect)
+                # fig, ax = plt.subplots()
+                # ax.imshow(mask)
+                # rect = patches.Rectangle((x, y), w, h,
+                #                         linewidth=2, edgecolor='r', facecolor='none')
+                # ax.add_patch(rect)
 
-                plt.title("Bounding Box")
-                # plt.axis('off')
-                plt.show()
+                # plt.title("Bounding Box")
+                # # plt.axis('off')
+                # plt.show()
                     
                
             # break
 
 #%%
-create_dataset(train_prompts, 'train', firstRow=False)
-create_dataset(valid_prompts, 'val', firstRow=False)
-create_dataset(test_prompts, 'test', firstRow=False)
+create_dataset(train_prompts, 'train')
+create_dataset(valid_prompts, 'val')
+create_dataset(test_prompts, 'test')
 # %%
 def copyImages(prompts_in, output_type):
     for prompt in prompts_in:
         image_name = prompt[0]
         img_path = f'{srcDir}/BrEaST-Lesions_USG-images_and_masks/{image_name}'
-        dst = f'{desDir}/images/{output_type}/{image_name}'
+        dst = f'{desDir}/images/{output_type}/{dataset}_{image_name}'
         shutil.copy2(img_path, dst)
 
 # %%

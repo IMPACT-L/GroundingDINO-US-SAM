@@ -162,8 +162,8 @@ medsam_model = medsam_model.to(device)
 medsam_model.eval()
 #%%
 terminal = False
-top_k=1
-box_threshold=0.1
+top_k=3
+box_threshold=0.2
 text_threshold=0.3
 # python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
 
@@ -188,6 +188,8 @@ if terminal and args.top_k:
 # image_path = 'multimodal-data/Breast/images/train/000002.png'
 image_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/benign/benign (109).png'
 mask_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/benign/benign (109)_mask.png'
+# image_path = 'sample_tests/two_dogs.png'
+# mask_path = 'sample_tests/two_dogs.png'
 # image_path = '/home/hamze/Documents/Dataset/BUSBRA/Images/bus_0064-s.png'
 # image_path = '/home/hamze/Documents/Dataset/BUS-UCLM Breast ultrasound lesion segmentation dataset/images/ALWI_000.png'
 # image_path = 'samples_with_text.png'
@@ -198,8 +200,9 @@ mask_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/benign/benign (109)
 # image_path = '/home/hamze/Documents/Dataset/Thyroid Dataset/DDTI dataset/DDTI/1_or_data/image/3.PNG'
 # image_path = '/home/hamze/Documents/Dataset/Thyroid Dataset/tg3k/thyroid-image/0000.jpg'
 # text_prompt="thyroid. lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
-text_prompt="find malignant on the center of the image." #1
-
+# text_prompt="find malignant on the center of the image." #1
+# text_prompt= "chair . person . dog ."
+text_prompt="benign . malignant . chair . person . dog ." #1
 if terminal and args.path:
     image_path =  args.path
 
@@ -221,49 +224,53 @@ iou = None
 dic = None
 
 if len(boxes>0):
+
     boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases,box_threshold)
+    # _, top_indices = torch.topk(logits, top_k if boxes.shape[0]>=top_k else boxes.shape[0])
 
     with torch.no_grad():
         image_embedding = medsam_model.image_encoder(image.float().permute(0, 2, 1).unsqueeze(0).to(device))
         boxes = boxes* torch.Tensor([w, h, w, h])
 
         xyxy = box_convert(boxes=boxes, in_fmt="cxcywh", out_fmt="xyxy").numpy()
-        box_np = np.array([[int(x) for x in xyxy[0]]]) 
-        box_1024 = box_np / np.array([w,h,w,h]) * 1024
-        masks = medsam_inference(medsam_model, image_embedding, box_1024, h,w)
-
-        x1, y1, x2, y2 = box_np[0]
-        box_w = x2 - x1
-        box_h = y2 - y1
-
-        mask_source = Image.open(mask_path)
-        mask_source = np.asarray(mask_source)
-        iou = sklearn_iou(masks,mask_source)*100
-        dic = sklearn_dice(masks,mask_source)*100
-
         fig, ax = plt.subplots(1, 3, figsize=(12, 8))
-
-
         ax[0].set_title(f'Source Image')
         ax[0].axis('off')
         ax[0].imshow(image_source)
 
+        mask_source = Image.open(mask_path).convert('L')
+        mask_source = np.asarray(mask_source).copy()
+        mask_source[mask_source>0]=1
 
-        ax[1].set_title(f'Ground Truth: {phrases}')
+        ax[1].set_title(f'Ground Truth')
         ax[1].axis('off')
         ax[1].imshow(mask_source)
-
-        ax[2].imshow(image_source)
-        rect = patches.Rectangle((x1, y1), box_w, box_h,
-                                linewidth=2, edgecolor='red', facecolor='none')
-        ax[2].add_patch(rect)
-        ax[2].imshow(masks, alpha=0.5)
-
-        ax[2].set_title(f'Prediction: iou: {iou:.2f}, dice: {dic:.2f}')
-        plt.text(x=x1, y=y1, s=phrases, color='red', fontsize=10)
+        
+        # ax[2].imshow(image_source)
         ax[2].axis('off')
+        overlay_mask = image_source.copy()
+        # overlay_mask[:]=0
+        ax[2].set_title('Prediction')
+        for i , xyxy_ in enumerate(xyxy):
+            box_np = np.array([[int(x) for x in xyxy_]]) 
+            box_1024 = box_np / np.array([w,h,w,h]) * 1024
+            masks = medsam_inference(medsam_model, image_embedding, box_1024, h,w)
+            iou = sklearn_iou(masks,mask_source)*100
+            dic = sklearn_dice(masks,mask_source)*100
+            if iou>10:
+                overlay_mask[:,:,2][masks>0]=255
+                x1, y1, x2, y2 = box_np[0]
+                box_w = x2 - x1
+                box_h = y2 - y1
+            
+                rect = patches.Rectangle((x1, y1), box_w, box_h,
+                                        linewidth=2, edgecolor='red', facecolor='none')
+                ax[2].add_patch(rect)
+            
+            print(f'{iou:.2f}, dice: {dic:.2f}, phrase:{phrases[i]}, score:{logits[i]:.2f}')
+            detected = True
+        ax[2].imshow(overlay_mask, cmap='gray')
         plt.show()
-        detected = True
 else:
     print('NO BOX FOUNDED')  
 # %%

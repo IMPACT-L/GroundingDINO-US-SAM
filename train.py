@@ -363,7 +363,6 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
     if not training_config.use_lora:
         print("Freezing most of model except few layers!")
         freeze_model_layers(model,freeze_config)
-    
     else:
          print( f"Is only Lora trainable?  {verify_only_lora_trainable(model)} ")
 
@@ -400,7 +399,7 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
 
         avg_losses = {k: sum(v)/len(v) for k, v in epoch_losses.items()}
         print(f"Epoch {epoch+1} complete. Average losses:",
-              ", ".join(f"{k}: {v:.4f}" for k, v in avg_losses.items()))
+              ", ".join(f"{k}: {v:.4f}" for k, v in avg_losses.items()),f"Er:{early_stop}")
         
         # Save Best Model
         if avg_losses['total_loss'] < best_val_loss:

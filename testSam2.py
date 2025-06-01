@@ -28,29 +28,6 @@ from sklearn.metrics import jaccard_score, f1_score
 #%%
 desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/test_annotation.CSV'
 
-def getTextSample():
-    textCSV = {}
-    with open(desDir, 'r', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            textCSV[str(row['image_name'])] =\
-                    {
-                    'promt_text': row['label_name'],
-                    'bbox': [
-                        int(row['bbox_x']),
-                        int(row['bbox_y']),
-                        int(row['bbox_width']),
-                        int(row['bbox_height'])
-                    ],
-                    'image_size': [
-                        int(row['image_width']),
-                        int(row['image_height'])
-                    ],
-                    'mask_path': row['mask_path']
-                }
-    return textCSV
-
-textCSV = getTextSample()
 def sklearn_iou(pred_mask, true_mask):
     return jaccard_score(true_mask.flatten(), pred_mask.flatten())
 
@@ -88,7 +65,32 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
         nms_phrases_list.extend([unique_phrase] * len(keep_indices))
 
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
-
+#%%
+selectedDataset = None
+selectedDataset = 'busi'
+def getTextSample(dataset=None):
+    textCSV = {}
+    with open(desDir, 'r', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            if dataset == None or row['dataset'] == dataset:
+                textCSV[str(row['image_name'])] =\
+                        {
+                        'promt_text': row['label_name'],
+                        'bbox': [
+                            int(row['bbox_x']),
+                            int(row['bbox_y']),
+                            int(row['bbox_width']),
+                            int(row['bbox_height'])
+                        ],
+                        'image_size': [
+                            int(row['image_width']),
+                            int(row['image_height'])
+                        ],
+                        'mask_path': row['mask_path']
+                    }
+    return textCSV
+textCSV = getTextSample(selectedDataset)
 #%% build SAM2 image predictor
 SAM2_CHECKPOINT = '/home/hamze/Documents/Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
 SAM2_MODEL_CONFIG = 'configs/sam2.1/sam2.1_hiera_l.yaml'
@@ -101,105 +103,144 @@ config_path="configs/test_config.yaml"
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,test_config.use_lora)
 #%%
+show_plots = True
+margin = 10
+
 box_threshold=0.10
 text_threshold=0.30
-results = {}
+
+ious_before = []
+dices_before = []
+ious_after = []
+dices_after = []
+not_detected_count = 0
 for img in os.listdir(data_config.val_dir):
-    caption = preprocess_caption(caption=textCSV[img]['promt_text'])
-    image_path=os.path.join(data_config.val_dir,img)
-    
-    image_source, image = load_image(image_path)
-    h, w, _ = image_source.shape
-    boxes, logits, phrases = predict(model,
-            image,
-            caption,
-            box_threshold,
-            text_threshold,
-            remove_combined= True)
-
-    iou = None
-    dic = None
-    detected = False
-    if len(boxes>0):
-        boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases, box_threshold)
-
-        sam2_predictor.set_image(np.array(image_source))
-        rec = boxes * torch.tensor([w, h, w, h])
-        rec = rec[0].cpu().numpy()
-        rec1 = box_cxcywh_to_xyxy(rec)
-        masks, scores, logits = sam2_predictor.predict(
-            point_coords=None,
-            point_labels=None,
-            box=rec1,
-            multimask_output=False,
-        )
-
-        x1, y1, x2, y2 = rec1
-        box_w = x2 - x1
-        box_h = y2 - y1
-
-        # Plot image and rectangle
-        # Overlay the mask with transparency
-        mask_path = textCSV[img]['mask_path']
-        mask_source = Image.open(mask_path).convert('L')
-        mask_source = np.asarray(mask_source).copy()
-        mask_source[mask_source>0]=1
-        iou = sklearn_iou(masks,mask_source)*100
-        dic = sklearn_dice(masks,mask_source)*100
-
-        fig, ax = plt.subplots(1, 3, figsize=(12, 8))
-
-
-        ax[0].set_title(f'Source: {img}')
-        ax[0].axis('off')
-        ax[0].imshow(image_source)
-
-
-        ax[1].set_title('Ground Truth')
-        ax[1].axis('off')
-        ax[1].imshow(mask_source)
+    if(selectedDataset == None or selectedDataset in img):
+        caption = preprocess_caption(caption=textCSV[img]['promt_text'])
+        image_path=os.path.join(data_config.val_dir,img)
         
+        image_source, image = load_image(image_path)
+        h, w, _ = image_source.shape
+        boxes, logits, phrases = predict(model,
+                image,
+                caption,
+                box_threshold,
+                text_threshold,
+                remove_combined= True)
 
-        ax[2].imshow(image_source)
 
-        # Draw the rectangle
-        rect = patches.Rectangle((x1, y1), box_w, box_h,
-                                linewidth=2, edgecolor='red', facecolor='none')
-        ax[2].add_patch(rect)
+        iou_before = None
+        dic_before = None
+        iou_after = None
+        dic_after = None
+        detected = False
+        if len(boxes>0):
+            boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases, box_threshold)
 
-        
-        ax[2].imshow(masks[0], alpha=0.5)
+            sam2_predictor.set_image(np.array(image_source))
+            rec = boxes * torch.tensor([w, h, w, h])
+            rec = rec[0].cpu().numpy()
+            rec1 = box_cxcywh_to_xyxy(rec)
+            masks, scores, logits = sam2_predictor.predict(
+                point_coords=None,
+                point_labels=None,
+                box=rec1,
+                multimask_output=False,
+            )
+            
+            masks=masks[0]
+            x1, y1, x2, y2 = rec1
+            
+            x1-=margin
+            y1-=margin
+            box_w = x2 - x1+2*margin
+            box_h = y2 - y1+2*margin
 
-        # ax.imshow(masks[0], alpha=0.5)
+            # Plot image and rectangle
+            # Overlay the mask with transparency
+            mask_path = textCSV[img]['mask_path']
+            mask_source = Image.open(mask_path).convert('L')
+            mask_source = np.asarray(mask_source).copy()
+            mask_source[mask_source>0]=1
 
-        ax[2].set_title(f'Prediction: iou: {iou:.2f}, dice: {dic:.2f}')
-        plt.text(x=x1, y=y1, s=phrases, color='red', fontsize=10)
-        ax[2].axis('off')
-        plt.show()
-        detected = True
-    else:
-        print('NO BOX FOUNDED FOR ',img)  
-    results[img] ={
-        'iou':iou,
-        'dic':dic,
-        'detected':detected
-    }
-    # break
-# %%
-undetected_results = {
-    img: metrics for img, metrics in results.items() if not metrics['detected']
-}
+            iou_before = sklearn_iou(masks,mask_source)*100
+            dic_before = sklearn_dice(masks,mask_source)*100
 
-# Collect IOU and DICE values only from detected results
-ious = [metrics['iou'] for metrics in results.values() if metrics['detected']]
-dices = [metrics['dic'] for metrics in results.values() if metrics['detected']]
+            mask_uint8 = (masks * 255).astype(np.uint8)
+            num_labels, labels_im = cv2.connectedComponents(mask_uint8)
 
-# Calculate average IOU and DICE, with zero fallback
-avg_iou = sum(ious) / len(ious) if ious else 0.0
-avg_dice = sum(dices) / len(dices) if dices else 0.0
+            binary_mask = (mask_uint8 > 0).astype(np.uint8)
 
-# Output
-print(f"Average IOU: {avg_iou:.4f}")
-print(f"Average DICE: {avg_dice:.4f}")
-print(f"Undetected Objects: {len(undetected_results)}")
+            # Fill holes
+            inverted = cv2.bitwise_not(binary_mask * 255)
+            h, w = inverted.shape
+            mask = np.zeros((h + 2, w + 2), np.uint8)
+            cv2.floodFill(inverted, mask, (0, 0), 255)
+            inverted_filled = cv2.bitwise_not(inverted)
+            filled_mask = binary_mask | (inverted_filled > 0).astype(np.uint8)
+
+            # Connect components
+            kernel = np.ones((35, 35), np.uint8)
+            connected_mask = cv2.morphologyEx(filled_mask, cv2.MORPH_CLOSE, kernel)
+            dilated = cv2.dilate(connected_mask, kernel, iterations=1)
+            iou_after = sklearn_iou(connected_mask,mask_source)*100
+            dic_after = sklearn_dice(connected_mask,mask_source)*100
+
+            if show_plots:
+                fig, ax = plt.subplots(1, 4, figsize=(20, 8))
+
+
+                ax[0].set_title(f'Source: {img}')
+                ax[0].axis('off')
+                ax[0].imshow(image_source)
+
+
+                ax[1].set_title('Ground Truth')
+                ax[1].axis('off')
+                ax[1].imshow(mask_source)
+                
+
+                ax[2].imshow(image_source)
+
+                # Draw the rectangle
+                rect = patches.Rectangle((x1, y1), box_w, box_h,
+                                        linewidth=2, edgecolor='red', facecolor='none')
+                ax[2].add_patch(rect)
+
+                
+                ax[2].imshow(masks, alpha=0.5)
+
+                ax[2].set_title(f'iou_before: {iou_before:.2f}, dice_before: {dic_before:.2f}')
+                plt.text(x=x1, y=y1, s=phrases, color='red', fontsize=10)
+                ax[2].axis('off')
+
+                ax[3].imshow(image_source)
+                ax[3].set_title(f'iou_after: {iou_after:.2f}, dice_after: {dic_after:.2f}')
+                ax[3].axis('off')
+                ax[3].imshow(connected_mask, alpha=0.5)
+
+                plt.show()
+            if iou_after>50:
+                detected = True
+            if detected:
+                ious_before.append(iou_before)
+                dices_before.append(dic_before)
+                ious_after.append(iou_after)
+                dices_after.append(dic_after)
+            else:
+                not_detected_count += 1
+        else:
+            print('NO BOX FOUNDED FOR ',img)  
+            
+        # break
+#%%
+ious_before = np.array(ious_before)
+dices_before = np.array(dices_before)
+ious_after = np.array(ious_after)
+dices_after = np.array(dices_after)
+
+print(f"Number of not detected: {not_detected_count}")
+print(f"Average IoU: {ious_before.mean():.2f}±{ious_before.std():.2f} -> {ious_after.mean():.2f}±{ious_after.std():.2f}")
+print(f"Average Dic: {dices_before.mean():.2f}±{dices_before.std():.2f}-> {dices_after.mean():.2f}±{dices_after.std():.2f}")
+
 # %%

@@ -8,7 +8,7 @@ data:
 model:
   config_path: groundingdino/config/GroundingDINO_SwinT_OGC.py
   # lora_weights: weights/ObjectName/freez_1/best_model.pth
-  lora_weights: weights/20250530_2033/best_model.pth
+  lora_weights: weights/20250530_2040/best_model.pth
   # lora_weights: weights/ObjectName/freez_7/best_model.pth
   # lora_weights: weights/ObjectName/freez_7/checkpoint_epoch_15.pth
   # lora_weights: weights/groundingdino_swint_ogc.pth

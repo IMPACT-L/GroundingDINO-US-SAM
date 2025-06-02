@@ -186,8 +186,10 @@ if terminal and args.text_threshold:
 if terminal and args.top_k:
     top_k= args.top_k
 # image_path = 'multimodal-data/Breast/images/train/000002.png'
-image_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140).png'
-mask_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140)_mask.png'
+# image_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140).png'
+# mask_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140)_mask.png'
+image_path = '/home/hamze/Documents/Dataset/CCAUI/Image/202201121748100022VAS_slice_1069.png'
+mask_path = '//home/hamze/Documents/Dataset/CCAUI/Mask/202201121748100022VAS_slice_1069.png'
 # image_path = 'sample_tests/two_dogs.png'
 # mask_path = 'sample_tests/two_dogs.png'
 # image_path = '/home/hamze/Documents/Dataset/BUSBRA/Images/bus_0064-s.png'
@@ -233,7 +235,7 @@ if len(boxes>0):
         boxes = boxes* torch.Tensor([w, h, w, h])
 
         xyxy = box_convert(boxes=boxes, in_fmt="cxcywh", out_fmt="xyxy").numpy()
-        
+
         fig, ax = plt.subplots(1, 3, figsize=(12, 8))
         ax[0].set_title(f'Source Image')
         ax[0].axis('off')

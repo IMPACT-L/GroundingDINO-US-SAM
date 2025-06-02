@@ -186,8 +186,11 @@ if terminal and args.text_threshold:
 if terminal and args.top_k:
     top_k= args.top_k
 # image_path = 'multimodal-data/Breast/images/train/000002.png'
-image_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/benign/benign (109).png'
-mask_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/benign/benign (109)_mask.png'
+# image_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/benign/benign (109).png'
+# mask_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/benign/benign (109)_mask.png'
+image_path = '/home/hamze/Documents/Dataset/CCAUI/Image/202201121748100022VAS_slice_1069.png'
+mask_path = '//home/hamze/Documents/Dataset/CCAUI/Mask/202201121748100022VAS_slice_1069.png'
+
 # image_path = '/home/hamze/Documents/Dataset/BUSBRA/Images/bus_0064-s.png'
 # image_path = '/home/hamze/Documents/Dataset/BUS-UCLM Breast ultrasound lesion segmentation dataset/images/ALWI_000.png'
 # image_path = 'samples_with_text.png'
@@ -237,7 +240,10 @@ if len(boxes>0):
         box_h = y2 - y1
 
         mask_source = Image.open(mask_path)
-        mask_source = np.asarray(mask_source)
+        mask_source = np.asarray(mask_source).copy()
+        
+        mask_source[mask_source>0]=1
+        
         iou = sklearn_iou(masks,mask_source)*100
         dic = sklearn_dice(masks,mask_source)*100
 

@@ -67,7 +67,7 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
 #%%
 selectedDataset = None
-selectedDataset = 'busi'
+selectedDataset = 'ccaui'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(desDir, 'r', newline='') as csvfile:
@@ -220,7 +220,7 @@ for img in os.listdir(data_config.val_dir):
                 ax[3].imshow(connected_mask, alpha=0.5)
 
                 plt.show()
-            if iou_after>50:
+            if iou_after>30:
                 detected = True
             if detected:
                 ious_before.append(iou_before)

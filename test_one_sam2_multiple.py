@@ -102,8 +102,11 @@ if terminal and args.text_threshold:
 if terminal and args.top_k:
     top_k= args.top_k
 # image_path = 'multimodal-data/Breast/images/train/000002.png'
-image_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140).png'
-mask_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140)_mask.png'
+image_path = '/home/hamze/Documents/Dataset/CCAUI/Image/202201121748100022VAS_slice_1069.png'
+mask_path = '//home/hamze/Documents/Dataset/CCAUI/Mask/202201121748100022VAS_slice_1069.png'
+
+# image_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140).png'
+# mask_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140)_mask.png'
 # image_path = 'sample_tests/two_dogs.png'
 # mask_path = 'sample_tests/two_dogs.png'
 # image_path = '/home/hamze/Documents/Dataset/BUSBRA/Images/bus_0064-s.png'

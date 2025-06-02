@@ -172,7 +172,7 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
     return image, image_transformed
 #%%
 # selectedDataset = None
-selectedDataset = 'busi'
+selectedDataset = 'ccaui'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(desDir, 'r', newline='') as csvfile:
@@ -318,7 +318,7 @@ for img in os.listdir(data_config.val_dir):
                 ax[3].imshow(connected_mask, alpha=0.5)
 
                 plt.show()
-            if iou_after>50:
+            if iou_after>30:
                 detected = True
             if detected:
                 ious_before.append(iou_before)

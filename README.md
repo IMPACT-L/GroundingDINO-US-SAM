@@ -40,7 +40,7 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | 105US                 | [researchgate](https://www.researchgate.net/publication/329586355_100_2D_US_Images_and_Tumor_Segmentation_Masks) | Breast             | ✅    |
 | AbdomenUS             | [kaggle](https://www.kaggle.com/datasets/ignaciorlando/ussimandsegm)                                           | Abdomen            | ❌    |
 | ACOUSLIC              | [grand-challenge](https://acouslic-ai.grand-challenge.org/overview-and-goals/)                                 | Liver              | ❌    |
-| ASUS                  | [onedrive](https://onedrive.live.com/?authkey=%21AMIrL6S1cSjlo1&id=7230D4DEC6058018%2191725&cid=7230D4DEC6058018) | Liver              | ❌    |
+| ASUS                  | [onedrive](https://onedrive.live.com/?authkey=%21AMIrL6S1cSjlo1I&id=7230D4DEC6058018%2191725&cid=7230D4DEC6058018) | Liver              | ❌    |
 | AUL                   | [zenodo](https://zenodo.org/records/7272660)                                                                   | Lung               | ❌    |
 | brachial plexus       | [github](https://github.com/Regional-US/brachial_plexus)                                                       | Nerve              | ❌    |
 | BrEaST                | [cancer imaging archive](https://www.cancerimagingarchive.net/collection/breast-lesions-usg/)                  | Breast             | ✅    |
@@ -50,7 +50,7 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | BUS-BRA               | [github](https://github.com/wgomezf/BUS-BRA)                                                                   | Breast             | ✅    |
 | BUS (Dataset B)       | [mmu](http://www2.docm.mmu.ac.uk/STAFF/M.Yap/dataset.php)                                                      | Breast             | ✅    |
 | BUSI                  | [HomePage](https://scholar.cu.edu.eg/?q=afahmy/pages/dataset)                                                  | Breast             | ✅    |
-| CAMUS                 | [insa-lyon](https://humanheart-project.creatis.insa-lyon.fr/database/#collection/6373703d73e9f0047faa1bc8)     | Heart              | ❌    |
+| CAMUS                 | [insa-lyon](https://humanheart-project.creatis.insa-lyon.fr/database/#collection/6373703d73e9f0047faa1bc8g)     | Heart              | ❌    |
 | CardiacUDC            | [kaggle](https://www.kaggle.com/datasets/xiaoweixumedicalai/cardiacudc-dataset)                                | Heart              | ❌    |
 | CCAUI                 | [mendeley](https://data.mendeley.com/datasets/d4xt63mgjm/1)                                                    | Carotid Artery     | ✅    |
 | DDTI                  | [github](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                    | Thyroid            | ❌    |
@@ -80,6 +80,7 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | TNSCUI                | [grand-challenge](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN-SCUI2020.md)    | Thyroid            | ❌    |
 | UPBD                  | [HomePage](https://ubpd.worldwidetracing.com:9443/)                                                            | Bladder            | ❌    |
 | US nerve Segmentation | [kaggle](https://www.kaggle.com/c/ultrasound-nerve-segmentation/data)                                          | Nerve              | ❌    |
+
 
 
 > We plan to hold out some datasets entirely as **unseen test datasets** to evaluate generalization. This is in contrast to traditional train/val/test splits.

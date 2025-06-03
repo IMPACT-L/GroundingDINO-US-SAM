@@ -163,8 +163,8 @@ medsam_model.eval()
 #%%
 terminal = False
 top_k=3
-box_threshold=0.1
-text_threshold=0.1
+box_threshold=0.01
+text_threshold=0.3
 # python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
 
 if terminal:
@@ -204,7 +204,7 @@ mask_path = '//home/hamze/Documents/Dataset/CCAUI/Mask/202201121748100022VAS_sli
 # text_prompt="thyroid. lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
 # text_prompt="find malignant on the center of the image." #1
 # text_prompt= "chair . person . dog ."
-text_prompt="benign . malignant . chair . person . dog ." #1
+text_prompt="carotid artery . benign . malignant . chair . person . dog ." #1
 if terminal and args.path:
     image_path =  args.path
 
@@ -260,7 +260,7 @@ if len(boxes>0):
             masks = medsam_inference(medsam_model, image_embedding, box_1024, h,w)
             iou = sklearn_iou(masks,mask_source)*100
             dic = sklearn_dice(masks,mask_source)*100
-            if iou>=0:
+            if iou>=10:
                 overlay_mask[:,:,2][masks>0]=255
                 x1, y1, x2, y2 = box_np[0]
                 box_w = x2 - x1

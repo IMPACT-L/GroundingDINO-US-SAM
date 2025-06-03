@@ -79,8 +79,8 @@ model = load_model(model_config,test_config.use_lora)
 #%%
 terminal = False
 top_k=3
-box_threshold=0.1
-text_threshold=0.3
+box_threshold=0.05
+text_threshold=0.05
 # python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
 
 if terminal:
@@ -121,14 +121,13 @@ mask_path = '//home/hamze/Documents/Dataset/CCAUI/Mask/202201121748100022VAS_sli
 # text_prompt="thyroid. lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
 # text_prompt="find malignant on the center of the image." #1
 # text_prompt= "chair . person . dog ."
-text_prompt="benign . malignant . chair . person . dog ." #1
+text_prompt="carotid . benign . malignant . chair . person . dog ." #1
 if terminal and args.path:
     image_path =  args.path
 
 
 if terminal and args.text_prompt:
     text_prompt = args.text_prompt
-#%%
 
 caption = preprocess_caption(caption=text_prompt)
 image_source, image = load_image(image_path)
@@ -186,7 +185,7 @@ if len(boxes>0):
 
             iou = sklearn_iou(masks,mask_source)*100
             dic = sklearn_dice(masks,mask_source)*100
-            if iou>=0:
+            if iou>=10:
                 overlay_mask[:,:,2][masks>0]=255
                 x1, y1, x2, y2 = box_np[0]
                 box_w = x2 - x1
@@ -202,4 +201,39 @@ if len(boxes>0):
         plt.show()
 else:
     print('NO BOX FOUNDED')  
+# %%
+def visualize_image_features(model, image_tensor):
+    """Visualize intermediate image features from the backbone"""
+    # Prepare input (ensure proper dimensions and normalization)
+    if image_tensor.ndim == 3:
+        image_tensor = image_tensor.unsqueeze(0)  # Add batch dimension
+    
+    # Create NestedTensor
+    mask = torch.ones((1, image_tensor.shape[2], image_tensor.shape[3]), 
+                     dtype=torch.bool, device=image_tensor.device)
+    samples = NestedTensor(image_tensor, mask)
+    
+    # Extract features
+    with torch.no_grad():
+        features, poss = model.backbone(samples)
+        
+        # Visualize feature maps from different levels
+        for i, feat in enumerate(features):
+            src, mask = feat.decompose()
+            print(f"Level {i} feature shape:", src.shape)
+            
+            # Visualize first channel of first image in batch
+            plt.figure(figsize=(10, 10))
+            plt.imshow(src[0, 0].cpu().numpy(), cmap='viridis')
+            plt.title(f"Backbone feature level {i}")
+            plt.colorbar()
+            plt.show()
+            
+            # Projected features
+            projected = model.input_proj[i](src)
+            plt.figure(figsize=(10, 10))
+            plt.imshow(projected[0, 0].cpu().numpy(), cmap='viridis')
+            plt.title(f"Projected feature level {i}")
+            plt.colorbar()
+            plt.show()
 # %%

@@ -1,6 +1,39 @@
-Grounding-Sam-Ultrasound
+# Grounding SAM for Breast and Thyroid Ultrasound Image Segmentation
 
-## Dataset
+Welcome to the official repository of our research on **Grounding-DINO + SAM2** for ultrasound (US) image segmentation. This project focuses on **fine-tuning GroundingDINO** for ultrasound object grounding and applying **SAM2 for segmentation mask generation**, with additional post-processing to enhance the quality of results.
+
+## 🔍 Project Objective
+
+Our goal is to segment and localize key structures (e.g., **tumor**, **benign**, **malignant**, **carotid artery**) in **ultrasound images**, primarily of the **breast** and **thyroid**, using state-of-the-art vision-language models and promptable segmentation frameworks.
+
+## 🧪 Methodology
+
+We build upon the **GroundingDINO** model for object detection and grounding using text prompts and apply **SAM2** (Segment Anything Model) for pixel-level segmentation.
+
+### 🔧 Fine-Tuning
+
+We fine-tune **only GroundingDINO** on US datasets. The SAM2 model is used as a frozen module for mask generation. In future work, we plan to explore:
+- Fine-tuning **SAM2**
+- Leveraging **contrastive learning** for better image-to/from-text embeddings (based on Taha’s method)
+
+### 🔁 Post-processing
+
+Since SAM's raw masks may contain **holes and cracks**, we apply:
+- **Connected Components Analysis**
+- **Morphological Operations**
+- **Dilation**
+to generate smooth and complete masks.
+
+## 🧪 Ablation Studies
+
+We explore the optimal configuration for:
+- Fine-tuning **hyperparameters** of GroundingDINO
+- Effective **post-processing** pipelines
+
+## 📊 Datasets
+
+We compiled a wide range of publicly available ultrasound datasets. Currently, most datasets are **breast US**. To enhance generalizability and avoid a breast-only limitation, we aim to include **thyroid** and other organ datasets.
+
 
 | Dataset               | Link                                                                                                            | Organ Type        | Added |
 |-----------------------|----------------------------------------------------------------------------------------------------------------|-------------------|-------|
@@ -48,3 +81,21 @@ Grounding-Sam-Ultrasound
 | UPBD                  | [HomePage](https://ubpd.worldwidetracing.com:9443/)                                                            | Bladder           | No    |
 | US nerve Segmentation | [kaggle](https://www.kaggle.com/c/ultrasound-nerve-segmentation/data)                                          | Nerve             | No    |
 
+✅ = Currently added  
+❌ = Not yet added
+
+> We plan to hold out some datasets entirely as **unseen test datasets** to evaluate generalization. This is in contrast to traditional train/val/test splits.
+
+## 📌 Contributions
+
+- [x] GroundingDINO fine-tuning for US grounding
+- [x] Post-processing pipeline for SAM masks
+- [ ] Contrastive learning integration
+- [ ] Multiorgan evaluation (breast + thyroid)
+
+## 💡 Future Work
+
+- Add and evaluate **Thyroid** and **Carotid** datasets
+- Explore **text-prompt variability**
+- Incorporate **SAM2 fine-tuning**
+- Benchmark against other segmentation methods

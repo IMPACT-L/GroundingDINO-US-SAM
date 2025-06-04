@@ -45,7 +45,7 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | BUS-BRA               | [GitHub](https://github.com/wgomezf/BUS-BRA)                                                                      | Breast             | ✅    |
 | BUS (Dataset B)       | [MMU](http://www2.docm.mmu.ac.uk/STAFF/M.Yap/dataset.php)                                                         | Breast             | ✅    |
 | BUSI                  | [Cairo University](https://scholar.cu.edu.eg/?q=afahmy/pages/dataset)                                             | Breast             | ✅    |
-| STU-Hospital          | [GitHub](https://github.com/xbhlk/STU-Hospital)                                                                   | Breast             | ❌    |
+| STU-Hospital          | [GitHub](https://github.com/xbhlk/STU-Hospital)                                                                   | Breast             | ✅    |
 | S1                    | [NCBI](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8205136/)                                                     | Breast             | ✅    |
 | ————————              | ————————— | ————————             | ——    |
 | TN3K                  | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                       | Thyroid            | ❌    |

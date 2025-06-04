@@ -50,12 +50,13 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | ————————              | ————————— | ————————             | ——    |
 | Thyroid US Cineclip   | [Stanford AIMI](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5)             | Thyroid            | ❌    |
 | TN3K                  | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                       | Thyroid            | ❌    |
+| TG3K                  | [GitHub](https://github.com/haifangong/TRFE-Net-for-thyroid-nodule-segmentation)                                  | Thyroid            | ❌    |
 | TNSCUI                | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN-SCUI2020.md)                | Thyroid            | ❌    |
 | Segthy                | [TUM](https://www.cs.cit.tum.de/camp/publications/segthy-dataset/)                                                | Thyroid            | ❌    |
 | ————————              | ————————— | ————————             | ——    |
 | AbdomenUS             | [Kaggle](https://www.kaggle.com/datasets/ignaciorlando/ussimandsegm)                                              | Abdomen            | ❌    |
 | FASS                  | [Mendeley](https://data.mendeley.com/datasets/4gcpm9dsc3/1)                                                       | Abdomen            | ❌    |
-| ACOUSLIC              | [Grand-Challenge](https://acouslic-ai.grand-challenge.org/overview-and-goals/)                                   | Liver              | ❌    |
+| ACOUSLIC              | [Grand-Challenge](https://acouslic-ai.grand-challenge.org/overview-and-goals/)                                    | Liver              | ❌    |
 | ASUS                  | [OneDrive](https://onedrive.live.com/?authkey=%21AMIrL6S1cSjlo1I&id=7230D4DEC6058018%2191725&cid=7230D4DEC6058018)| Liver              | ❌    |
 | Fast-U-Net            | [GitHub](https://github.com/vahidashkani/Fast-U-Net)                                                              | Liver              | ❌    |
 | GIST514-DB            | [GitHub](https://github.com/howardchina/query2)                                                                   | Liver              | ❌    |

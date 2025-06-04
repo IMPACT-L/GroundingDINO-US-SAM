@@ -52,8 +52,8 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | TN3K                  | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                       | Thyroid            | ❌    |
 | TG3K                  | [GitHub](https://github.com/haifangong/TRFE-Net-for-thyroid-nodule-segmentation)                                  | Thyroid            | ❌    |
 | TNSCUI                | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN-SCUI2020.md)                | Thyroid            | ❌    |
-| Segthy                | [TUM](https://www.cs.cit.tum.de/camp/publications/segthy-dataset/)                                                | Thyroid            | ❌    |
 | ————————              | ————————— | ————————             | ——    |
+| Segthy                | [TUM](https://www.cs.cit.tum.de/camp/publications/segthy-dataset/)                                                | Thyroid            | ❌    |
 | AbdomenUS             | [Kaggle](https://www.kaggle.com/datasets/ignaciorlando/ussimandsegm)                                              | Abdomen            | ❌    |
 | FASS                  | [Mendeley](https://data.mendeley.com/datasets/4gcpm9dsc3/1)                                                       | Abdomen            | ❌    |
 | ACOUSLIC              | [Grand-Challenge](https://acouslic-ai.grand-challenge.org/overview-and-goals/)                                    | Liver              | ❌    |

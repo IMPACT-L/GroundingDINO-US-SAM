@@ -53,7 +53,6 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | CAMUS                 | [insa-lyon](https://humanheart-project.creatis.insa-lyon.fr/database/#collection/6373703d73e9f0047faa1bc8g)        | Heart              | ❌    |
 | CardiacUDC            | [kaggle](https://www.kaggle.com/datasets/xiaoweixumedicalai/cardiacudc-dataset)                                    | Heart              | ❌    |
 | CCAUI                 | [mendeley](https://data.mendeley.com/datasets/d4xt63mgjm/1)                                                        | Carotid Artery     | ✅    |
-| DDTI                  | [github](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                        | Thyroid            | ❌    |
 | EchoCP                | [kaggle](https://www.kaggle.com/datasets/xiaoweixumedicalai/echocp)                                                | Heart              | ❌    |
 | EchoNet-Dynamic       | [github](https://github.com/echonet/dynamic)                                                                       | Heart              | ❌    |
 | EchoNet-Pediatric     | [github](https://echonet.github.io/pediatric)                                                                      | Heart              | ❌    |
@@ -70,11 +69,10 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | MMOTU-3D              | [github](https://github.com/cv516Buaa/MMOTU_DS2Net)                                                                | Multi-organ        | ❌    |
 | MUP                   | [zenodo](https://zenodo.org/records/10475293)                                                                      | Prostate           | ❌    |
 | regPro                | [HomePage](https://muregpro.github.io/data.html)                                                                   | Prostate           | ❌    |
-| S1                    | [ncbi](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8205136/)                                                      | Thyroid            | ❌    |
+| S1                    | [ncbi](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8205136/)                                                      | Breast             | ❌    |
 | Segthy                | [TUM](https://www.cs.cit.tum.de/camp/publications/segthy-dataset/)                                                 | Thyroid            | ❌    |
 | STMUS_NDA             | [mendeley](https://data.mendeley.com/datasets/3jykz7wz8d/1)                                                        | Thyroid            | ❌    |
 | STU-Hospital          | [github](https://github.com/xbhlk/STU-Hospital)                                                                    | Breast             | ❌    |
-| TG3K                  | [github](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                        | Thyroid            | ❌    |
 | Thyroid US Cineclip   | [standford](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5)                  | Thyroid            | ❌    |
 | TN3K                  | [github](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                        | Thyroid            | ❌    |
 | TNSCUI                | [grand-challenge](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN-SCUI2020.md)        | Thyroid            | ❌    |

@@ -45,13 +45,15 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | BUS-BRA               | [github](https://github.com/wgomezf/BUS-BRA)                                                                       | Breast             | ✅    |
 | BUS (Dataset B)       | [mmu](http://www2.docm.mmu.ac.uk/STAFF/M.Yap/dataset.php)                                                          | Breast             | ✅    |
 | BUSI                  | [HomePage](https://scholar.cu.edu.eg/?q=afahmy/pages/dataset)                                                      | Breast             | ✅    |
+| STU-Hospital          | [github](https://github.com/xbhlk/STU-Hospital)                                                                    | Breast             | ❌    |
+| S1                    | [ncbi](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8205136/)                                                      | Breast             | ❌    |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------|--------------------|-------|
 | STMUS_NDA             | [mendeley](https://data.mendeley.com/datasets/3jykz7wz8d/1)                                                        | Thyroid            | ❌    |
 | Thyroid US Cineclip   | [standford](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5)                  | Thyroid            | ❌    |
 | TN3K                  | [github](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                        | Thyroid            | ❌    |
 | TNSCUI                | [grand-challenge](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN-SCUI2020.md)        | Thyroid            | ❌    |
 | Segthy                | [TUM](https://www.cs.cit.tum.de/camp/publications/segthy-dataset/)                                                 | Thyroid            | ❌    |
-| STU-Hospital          | [github](https://github.com/xbhlk/STU-Hospital)                                                                    | Breast             | ❌    |
-| S1                    | [ncbi](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8205136/)                                                      | Breast             | ❌    |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------|--------------------|-------|
 | AbdomenUS             | [kaggle](https://www.kaggle.com/datasets/ignaciorlando/ussimandsegm)                                               | Abdomen            | ❌    |
 | ACOUSLIC              | [grand-challenge](https://acouslic-ai.grand-challenge.org/overview-and-goals/)                                     | Liver              | ❌    |
 | ASUS                  | [onedrive](https://onedrive.live.com/?authkey=%21AMIrL6S1cSjlo1I&id=7230D4DEC6058018%2191725&cid=7230D4DEC6058018) | Liver              | ❌    |

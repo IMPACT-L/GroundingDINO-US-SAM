@@ -10,11 +10,11 @@ random.seed(42)
 #%%
 srcDir = '/home/hamze/Documents/Dataset/Breast_BUS_B_2024/BUS'
 desDir = '../multimodal-data/USDATASET'
+dataset = 'busb'
 #%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)
 os.makedirs(f'{desDir}/images/test', exist_ok=True)
-dataset = 'busb'
 #%%
 def readTextPrompt(prompt_dir):
     prompts = []

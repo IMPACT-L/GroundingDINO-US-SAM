@@ -23,7 +23,6 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from sklearn.metrics import jaccard_score, f1_score
 import csv
-from sklearn.metrics import jaccard_score, f1_score
 
 #%%
 desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/test_annotation.CSV'
@@ -67,7 +66,7 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
 #%%
 selectedDataset = None
-selectedDataset = 'ccaui'
+selectedDataset = 's1'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(desDir, 'r', newline='') as csvfile:

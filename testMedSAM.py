@@ -172,7 +172,7 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
     return image, image_transformed
 #%%
 # selectedDataset = None
-selectedDataset = 'ccaui'
+selectedDataset = 's1'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(desDir, 'r', newline='') as csvfile:

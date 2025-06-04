@@ -80,7 +80,7 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | kidneyUS              | [GitHub](https://github.com/rsingla92/kidneyUS)                                                                   | Kidney             | ❌    |
 | MMOTU-2D              | [GitHub](https://github.com/cv516Buaa/MMOTU_DS2Net)                                                               | Multi-organ        | ❌    |
 | MMOTU-3D              | [GitHub](https://github.com/cv516Buaa/MMOTU_DS2Net)                                                               | Multi-organ        | ❌    |
-| STMUS_NDA             | [Mendeley](https://data.mendeley.com/datasets/3jykz7wz8d/1)                                                       | Transverse Musculoskeletal            | ❌    |
+| STMUS_NDA             | [Mendeley](https://data.mendeley.com/datasets/3jykz7wz8d/1)                                                       | Transverse Musculoskeletal| ❌    |
 
 
 

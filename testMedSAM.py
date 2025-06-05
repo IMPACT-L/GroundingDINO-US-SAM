@@ -172,7 +172,7 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
     return image, image_transformed
 #%%
 # selectedDataset = None
-selectedDataset = 's1'
+selectedDataset = 'tn3k'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(desDir, 'r', newline='') as csvfile:
@@ -207,10 +207,11 @@ data_config, model_config, training_config = ConfigurationManager.load_config(co
 model = load_model(model_config,training_config.use_lora)
 #%%
 show_plots = True
-margin = 10
+margin = 5
 box_threshold=0.05
 text_threshold=0.3
 iou_threshold=10
+cc_treshold=(15, 15)
 
 ious_before = []
 dices_before = []
@@ -277,7 +278,7 @@ for image_index,image_name in enumerate(textCSV):
         filled_mask = binary_mask | (inverted_filled > 0).astype(np.uint8)
 
         # Connect components
-        kernel = np.ones((35, 35), np.uint8)
+        kernel = np.ones(cc_treshold, np.uint8)
         connected_mask = cv2.morphologyEx(filled_mask, cv2.MORPH_CLOSE, kernel)
         dilated = cv2.dilate(connected_mask, kernel, iterations=1)
         iou_after = sklearn_iou(connected_mask,mask_source)*100

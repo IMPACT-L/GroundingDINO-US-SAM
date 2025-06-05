@@ -13,7 +13,7 @@ random.seed(42)
 #%%
 srcDir = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k'
 desDir = '../multimodal-data/USDATASET'
-dataset = 'tn3k'
+dataset = 'tg3k'
 #%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)

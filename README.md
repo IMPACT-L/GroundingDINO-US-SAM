@@ -37,7 +37,6 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 
 | Dataset               | Link                                                                                                               | Organ Type         | Added |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------|--------------------|-------|
-| 105US                 | [ResearchGate](https://www.researchgate.net/publication/329586355_100_2D_US_Images_and_Tumor_Segmentation_Masks)  | Breast             | ✅    |
 | BrEaST                | [Cancer Imaging Archive](https://www.cancerimagingarchive.net/collection/breast-lesions-usg/)                     | Breast             | ✅    |
 | BUID                  | [QAMeBi](https://qamebi.com/breast-ultrasound-images-database/)                                                   | Breast             | ✅    |
 | BUS_UC                | [Mendeley](https://data.mendeley.com/datasets/3ksd7w7jkx/1)                                                       | Breast             | ✅    |
@@ -52,38 +51,21 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | TG3K                  | [GitHub](https://github.com/haifangong/TRFE-Net-for-thyroid-nodule-segmentation)                                  | Thyroid            | ✅    |
 | TNSCUI                | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN-SCUI2020.md)                | Thyroid            | ✅    |
 | ————————              | ————————— | ————————             | ——    |
+| 105US                 | [ResearchGate](https://www.researchgate.net/publication/329586355_100_2D_US_Images_and_Tumor_Segmentation_Masks)  | Liver              | ✅    |
+| AUL                   | [Zenodo](https://zenodo.org/records/7272660)                                                                      | Liver              | ❌    |
+| ————————              | ————————— | ————————             | ——    |
 | ACOUSLIC              | [Grand-Challenge](https://acouslic-ai.grand-challenge.org/overview-and-goals/)                                    | Liver              | ❌    |
 | ASUS                  | [OneDrive](https://onedrive.live.com/?authkey=%21AMIrL6S1cSjlo1I&id=7230D4DEC6058018%2191725&cid=7230D4DEC6058018)| Liver              | ❌    |
 | Fast-U-Net            | [GitHub](https://github.com/vahidashkani/Fast-U-Net)                                                              | Liver              | ❌    |
 | GIST514-DB            | [GitHub](https://github.com/howardchina/query2)                                                                   | Liver              | ❌    |
 | ————————              | ————————— | ————————             | ——    |
-| FH-PS-AOP             | [Zenodo](https://zenodo.org/records/10829116)                                                                     | Prostate           | ❌    |
-| MicroSeg              | [Zenodo](https://zenodo.org/records/10475293)                                                                     | Prostate           | ❌    |
-| MUP                   | [Zenodo](https://zenodo.org/records/10475293)                                                                     | Prostate           | ❌    |
-| regPro                | [Homepage](https://muregpro.github.io/data.html)                                                                  | Prostate           | ❌    |
+| MicroSeg              | [Zenodo](https://zenodo.org/records/10475293)                                                                     | Prostate           | DL    |
+| regPro                | [Homepage](https://muregpro.github.io/data.html)                                                                  | Prostate           | DL    |
 | ————————              | ————————— | ————————             | ——    |
+| KiTS23                | [GitHub](https://github.com/neheller/kits23/tree/main)                                                            | Kidney             | DL    |
 | kidneyUS              | [GitHub](https://github.com/rsingla92/kidneyUS)                                                                   | Kidney             | ❌    |
 | ————————              | ————————— | ————————             | ——    |
-| Segthy                | [TUM](https://www.cs.cit.tum.de/camp/publications/segthy-dataset/)                                                | Thyroid            | ❌    |
-| Thyroid US Cineclip   | [Stanford AIMI](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5)             | Thyroid            | ❌    |
-| AbdomenUS             | [Kaggle](https://www.kaggle.com/datasets/ignaciorlando/ussimandsegm)                                              | Abdomen            | ❌    |
-| FASS                  | [Mendeley](https://data.mendeley.com/datasets/4gcpm9dsc3/1)                                                       | Abdomen            | ❌    |
-| AUL                   | [Zenodo](https://zenodo.org/records/7272660)                                                                      | Lung               | ❌    |
-| LUSS_phantom          | [Leeds](https://archive.researchdata.leeds.ac.uk/1263/)                                                           | Lung               | ❌    |
-| CAMUS                 | [INSA-Lyon](https://humanheart-project.creatis.insa-lyon.fr/database/#collection/6373703d73e9f0047faa1bc8g)       | Heart              | ❌    |
-| CardiacUDC            | [Kaggle](https://www.kaggle.com/datasets/xiaoweixumedicalai/cardiacudc-dataset)                                   | Heart              | ❌    |
-| EchoCP                | [Kaggle](https://www.kaggle.com/datasets/xiaoweixumedicalai/echocp)                                               | Heart              | ❌    |
-| EchoNet-Dynamic       | [GitHub](https://github.com/echonet/dynamic)                                                                      | Heart              | ❌    |
-| EchoNet-Pediatric     | [EchoNet](https://echonet.github.io/pediatric)                                                                    | Heart              | ❌    |
-| brachial plexus       | [GitHub](https://github.com/Regional-US/brachial_plexus)                                                          | Nerve              | ❌    |
-| US nerve Segmentation | [Kaggle](https://www.kaggle.com/c/ultrasound-nerve-segmentation/data)                                             | Nerve              | ❌    |
-| FALLMUD               | [Kalisteo](https://kalisteo.cea.fr/index.php/fallmud/#)                                                           | Muscle             | ❌    |
-| UPBD                  | [Homepage](https://ubpd.worldwidetracing.com:9443/)                                                               | Bladder            | ❌    |
-| CCAUI                 | [Mendeley](https://data.mendeley.com/datasets/d4xt63mgjm/1)                                                       | Carotid Artery     | ✅    |
-| HC                    | [Grand-Challenge](https://hc18.grand-challenge.org/)                                                              | Head Circumference | ❌    |
-| MMOTU-2D              | [GitHub](https://github.com/cv516Buaa/MMOTU_DS2Net)                                                               | Multi-organ        | ❌    |
-| MMOTU-3D              | [GitHub](https://github.com/cv516Buaa/MMOTU_DS2Net)                                                               | Multi-organ        | ❌    |
-| STMUS_NDA             | [Mendeley](https://data.mendeley.com/datasets/3jykz7wz8d/1)                                                       | Transverse Musculoskeletal| ❌    |
+
 
 
 

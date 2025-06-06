@@ -28,7 +28,7 @@ for mask_path in mask_paths:
     for _, contour in enumerate(contours):
         x, y, w, h = cv2.boundingRect(contour)
         row =[
-            'tumor',
+            'pancreatic cancer liver',
             x, y, w, h,
             f"{dataset}_{file_name.replace(' G man','')}",
             mask.shape[1],

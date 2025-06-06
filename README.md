@@ -48,9 +48,9 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | STU-Hospital          | [GitHub](https://github.com/xbhlk/STU-Hospital)                                                                   | Breast             | ✅    |
 | S1                    | [NCBI](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8205136/)                                                     | Breast             | ✅    |
 | ————————              | ————————— | ————————             | ——    |
-| TN3K                  | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                       | Thyroid            | ❌    |
+| TN3K                  | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN3K.md)                       | Thyroid            | ✅    |
 | TG3K                  | [GitHub](https://github.com/haifangong/TRFE-Net-for-thyroid-nodule-segmentation)                                  | Thyroid            | ✅    |
-| TNSCUI                | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN-SCUI2020.md)                | Thyroid            | ❌    |
+| TNSCUI                | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN-SCUI2020.md)                | Thyroid            | ✅    |
 | ————————              | ————————— | ————————             | ——    |
 | Segthy                | [TUM](https://www.cs.cit.tum.de/camp/publications/segthy-dataset/)                                                | Thyroid            | ❌    |
 | Thyroid US Cineclip   | [Stanford AIMI](https://stanfordaimi.azurewebsites.net/datasets/a72f2b02-7b53-4c5d-963c-d7253220bfd5)             | Thyroid            | ❌    |

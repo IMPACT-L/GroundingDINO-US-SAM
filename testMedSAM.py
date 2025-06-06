@@ -171,8 +171,8 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
     image_transformed = transform(image_source)
     return image, image_transformed
 #%%
-# selectedDataset = None
-selectedDataset = 'tn3k'
+selectedDataset = None
+selectedDataset = 'tnscui'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(desDir, 'r', newline='') as csvfile:
@@ -269,6 +269,7 @@ for image_index,image_name in enumerate(textCSV):
 
         binary_mask = (mask_uint8 > 0).astype(np.uint8)
 
+
         # Fill holes
         inverted = cv2.bitwise_not(binary_mask * 255)
         h, w = inverted.shape
@@ -281,8 +282,8 @@ for image_index,image_name in enumerate(textCSV):
         kernel = np.ones(cc_treshold, np.uint8)
         connected_mask = cv2.morphologyEx(filled_mask, cv2.MORPH_CLOSE, kernel)
         dilated = cv2.dilate(connected_mask, kernel, iterations=1)
-        iou_after = sklearn_iou(connected_mask,mask_source)*100
-        dic_after = sklearn_dice(connected_mask,mask_source)*100
+        iou_after = sklearn_iou(dilated,mask_source)*100
+        dic_after = sklearn_dice(dilated,mask_source)*100
 
         if show_plots:
             fig, ax = plt.subplots(1, 4, figsize=(20, 8))

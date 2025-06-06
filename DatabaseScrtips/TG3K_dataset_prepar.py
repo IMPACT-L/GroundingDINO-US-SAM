@@ -15,6 +15,15 @@ srcDir = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k'
 desDir = '../multimodal-data/USDATASET'
 dataset = 'tg3k'
 #%%
+folder_path = '../multimodal-data/USDATASET/images/val'
+for filename in os.listdir(folder_path):
+    if 'tn3k' in filename:
+        new_name = filename.replace('tn3k', 'tg3k')
+        src = os.path.join(folder_path, filename)
+        dst = os.path.join(folder_path, new_name)
+        os.rename(src, dst)
+        print(f'Renamed: {filename} -> {new_name}')
+#%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)
 os.makedirs(f'{desDir}/images/test', exist_ok=True)

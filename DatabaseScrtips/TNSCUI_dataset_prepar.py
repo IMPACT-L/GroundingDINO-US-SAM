@@ -9,19 +9,28 @@ import random
 import matplotlib.patches as patches
 import glob
 import numpy as np
+import glob
 random.seed(42)
 #%%
 srcDir = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/TNSCUI/DDTI/2_preprocessed_data/stage2'
 desDir = '../multimodal-data/USDATASET'
-dataset = 'tbscui'
+dataset = 'tnscui'
+#%%
+folder_path = '../multimodal-data/USDATASET/images/val'
+for filename in os.listdir(folder_path):
+    if 'tbscui' in filename:
+        new_name = filename.replace('tbscui', 'tnscui')
+        src = os.path.join(folder_path, filename)
+        dst = os.path.join(folder_path, new_name)
+        os.rename(src, dst)
+        print(f'Renamed: {filename} -> {new_name}')
 #%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)
 os.makedirs(f'{desDir}/images/val', exist_ok=True)
 os.makedirs(f'{desDir}/images/test', exist_ok=True)
 #%%
 mask_paths = glob.glob(f'{srcDir}/p_mask/*')
-min_area = 100
-min_area=500
+min_area = 500
 data = []
 for mask_path in mask_paths:
     mask = cv2.imread(mask_path)
@@ -45,15 +54,15 @@ for mask_path in mask_paths:
     for i, contour in enumerate(contours[:2]):
         x, y, w, h = cv2.boundingRect(contour)
 
-        # fig, ax = plt.subplots(1,2)
-        # ax[0].imshow(img)
-        # ax[1].imshow(mask)
-        # rect = patches.Rectangle((x, y), w, h,
-        #                         linewidth=2, edgecolor='r', facecolor='none')
-        # ax[1].add_patch(rect)
-        # plt.title("Bounding Box")
-        # # plt.axis('off')
-        # plt.show() Thyroid Nodule
+        fig, ax = plt.subplots(1,2)
+        ax[0].imshow(img)
+        ax[1].imshow(mask)
+        rect = patches.Rectangle((x, y), w, h,
+                                linewidth=2, edgecolor='r', facecolor='none')
+        ax[1].add_patch(rect)
+        plt.title("Bounding Box")
+        # plt.axis('off')
+        plt.show()
         row =[
             'thyroid nodule',
             x, y, w, h,
@@ -69,7 +78,7 @@ for mask_path in mask_paths:
     print(contour.shape)
     # break
 
-# print(data)
+print(data)
 
 #%%
 random.shuffle(data)
@@ -96,12 +105,12 @@ create_dataset(test_data, 'test')
 # %%
 def copyImages(data_in, output_type):
     for data in data_in:
-        image_name_original = data[5][7:]
+        image_name_original = data[5][9:] #p_mask','p_image'replace('test_image','Test_Image')
 
-        img_path = f"{srcDir}/p_image/{image_name_original.replace('test_image','Test_Image')}"
+        img_path = f"{srcDir}/p_image/{image_name_original}"
         dst = f'{desDir}/images/{output_type}/{data[5]}'
         shutil.copy2(img_path, dst)
-        print(dst)
+        print(img_path)
 
 
 # %%

@@ -66,7 +66,7 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
 #%%
 selectedDataset = None
-selectedDataset = 's1'
+selectedDataset = 'tg3k'#'tg3k'#'tnscui'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(desDir, 'r', newline='') as csvfile:
@@ -184,8 +184,8 @@ for image_index,image_name in enumerate(textCSV):
         kernel = np.ones(cc_treshold, np.uint8)
         connected_mask = cv2.morphologyEx(filled_mask, cv2.MORPH_CLOSE, kernel)
         dilated = cv2.dilate(connected_mask, kernel, iterations=1)
-        iou_after = sklearn_iou(connected_mask,mask_source)*100
-        dic_after = sklearn_dice(connected_mask,mask_source)*100
+        iou_after = sklearn_iou(dilated,mask_source)*100
+        dic_after = sklearn_dice(dilated,mask_source)*100
 
         if show_plots:
             fig, ax = plt.subplots(1, 4, figsize=(20, 8))

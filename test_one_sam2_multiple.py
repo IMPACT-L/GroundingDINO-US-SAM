@@ -102,11 +102,15 @@ if terminal and args.text_threshold:
 if terminal and args.top_k:
     top_k= args.top_k
 # image_path = 'multimodal-data/Breast/images/train/000002.png'
-image_path = '/home/hamze/Documents/Dataset/CCAUI/Image/202201121748100022VAS_slice_1069.png'
-mask_path = '//home/hamze/Documents/Dataset/CCAUI/Mask/202201121748100022VAS_slice_1069.png'
+# image_path = '/home/hamze/Documents/Dataset/CCAUI/Image/202201121748100022VAS_slice_1069.png'
+# mask_path = '//home/hamze/Documents/Dataset/CCAUI/Mask/202201121748100022VAS_slice_1069.png'
 
-# image_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140).png'
-# mask_path = '/home/hamze/Documents/Dataset/BreastBUSI_Images/malignant/malignant (140)_mask.png'
+# image_path = '/home/hamze/Documents/Dataset/1-BreastDataset/BreastBUSI_Images/malignant/malignant (140).png'
+# mask_path = '/home/hamze/Documents/Dataset/1-BreastDataset/BreastBUSI_Images/malignant/malignant (140)_mask.png'
+
+image_path = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k/thyroid-image/0805.jpg'
+mask_path = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k/thyroid-mask/0805.jpg'
+
 # image_path = 'sample_tests/two_dogs.png'
 # mask_path = 'sample_tests/two_dogs.png'
 # image_path = '/home/hamze/Documents/Dataset/BUSBRA/Images/bus_0064-s.png'
@@ -121,7 +125,8 @@ mask_path = '//home/hamze/Documents/Dataset/CCAUI/Mask/202201121748100022VAS_sli
 # text_prompt="thyroid. lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
 # text_prompt="find malignant on the center of the image." #1
 # text_prompt= "chair . person . dog ."
-text_prompt="carotid . benign . malignant . chair . person . dog ." #1
+# text_prompt="carotid . benign . malignant . chair . person . dog ." #1
+text_prompt="tumor. thyroid. carotid . benign . malignant . chair . person . dog ." #1
 if terminal and args.path:
     image_path =  args.path
 
@@ -202,38 +207,38 @@ if len(boxes>0):
 else:
     print('NO BOX FOUNDED')  
 # %%
-def visualize_image_features(model, image_tensor):
-    """Visualize intermediate image features from the backbone"""
-    # Prepare input (ensure proper dimensions and normalization)
-    if image_tensor.ndim == 3:
-        image_tensor = image_tensor.unsqueeze(0)  # Add batch dimension
+# def visualize_image_features(model, image_tensor):
+#     """Visualize intermediate image features from the backbone"""
+#     # Prepare input (ensure proper dimensions and normalization)
+#     if image_tensor.ndim == 3:
+#         image_tensor = image_tensor.unsqueeze(0)  # Add batch dimension
     
-    # Create NestedTensor
-    mask = torch.ones((1, image_tensor.shape[2], image_tensor.shape[3]), 
-                     dtype=torch.bool, device=image_tensor.device)
-    samples = NestedTensor(image_tensor, mask)
+#     # Create NestedTensor
+#     mask = torch.ones((1, image_tensor.shape[2], image_tensor.shape[3]), 
+#                      dtype=torch.bool, device=image_tensor.device)
+#     samples = NestedTensor(image_tensor, mask)
     
-    # Extract features
-    with torch.no_grad():
-        features, poss = model.backbone(samples)
+#     # Extract features
+#     with torch.no_grad():
+#         features, poss = model.backbone(samples)
         
-        # Visualize feature maps from different levels
-        for i, feat in enumerate(features):
-            src, mask = feat.decompose()
-            print(f"Level {i} feature shape:", src.shape)
+#         # Visualize feature maps from different levels
+#         for i, feat in enumerate(features):
+#             src, mask = feat.decompose()
+#             print(f"Level {i} feature shape:", src.shape)
             
-            # Visualize first channel of first image in batch
-            plt.figure(figsize=(10, 10))
-            plt.imshow(src[0, 0].cpu().numpy(), cmap='viridis')
-            plt.title(f"Backbone feature level {i}")
-            plt.colorbar()
-            plt.show()
+#             # Visualize first channel of first image in batch
+#             plt.figure(figsize=(10, 10))
+#             plt.imshow(src[0, 0].cpu().numpy(), cmap='viridis')
+#             plt.title(f"Backbone feature level {i}")
+#             plt.colorbar()
+#             plt.show()
             
-            # Projected features
-            projected = model.input_proj[i](src)
-            plt.figure(figsize=(10, 10))
-            plt.imshow(projected[0, 0].cpu().numpy(), cmap='viridis')
-            plt.title(f"Projected feature level {i}")
-            plt.colorbar()
-            plt.show()
-# %%
+#             # Projected features
+#             projected = model.input_proj[i](src)
+#             plt.figure(figsize=(10, 10))
+#             plt.imshow(projected[0, 0].cpu().numpy(), cmap='viridis')
+#             plt.title(f"Projected feature level {i}")
+#             plt.colorbar()
+#             plt.show()
+# # %%

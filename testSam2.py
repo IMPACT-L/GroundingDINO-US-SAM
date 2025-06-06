@@ -66,7 +66,7 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
 #%%
 selectedDataset = None
-selectedDataset = 'tg3k'#'tg3k'#'tnscui'
+selectedDataset = 'tn3k'#'tg3k'#'tnscui'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(desDir, 'r', newline='') as csvfile:

@@ -54,11 +54,6 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | 105US                 | [ResearchGate](https://www.researchgate.net/publication/329586355_100_2D_US_Images_and_Tumor_Segmentation_Masks)  | Liver              | ✅    |
 | AUL                   | [Zenodo](https://zenodo.org/records/7272660)                                                                      | Liver              | ❌    |
 | ————————              | ————————— | ————————             | ——    |
-| ACOUSLIC              | [Grand-Challenge](https://acouslic-ai.grand-challenge.org/overview-and-goals/)                                    | Liver              | ❌    |
-| ASUS                  | [OneDrive](https://onedrive.live.com/?authkey=%21AMIrL6S1cSjlo1I&id=7230D4DEC6058018%2191725&cid=7230D4DEC6058018)| Liver              | ❌    |
-| Fast-U-Net            | [GitHub](https://github.com/vahidashkani/Fast-U-Net)                                                              | Liver              | ❌    |
-| GIST514-DB            | [GitHub](https://github.com/howardchina/query2)                                                                   | Liver              | ❌    |
-| ————————              | ————————— | ————————             | ——    |
 | MicroSeg              | [Zenodo](https://zenodo.org/records/10475293)                                                                     | Prostate           | DL    |
 | regPro                | [Homepage](https://muregpro.github.io/data.html)                                                                  | Prostate           | DL    |
 | ————————              | ————————— | ————————             | ——    |

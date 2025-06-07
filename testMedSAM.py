@@ -42,8 +42,6 @@ from sklearn.metrics import jaccard_score, f1_score
 import csv
 
 #%%
-desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/test_annotation.CSV'
-
 def sklearn_iou(pred_mask, true_mask):
     return jaccard_score(true_mask.flatten(), pred_mask.flatten())
 
@@ -171,11 +169,13 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
     image_transformed = transform(image_source)
     return image, image_transformed
 #%%
+import csv
+csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
-selectedDataset = 'tnscui'
+selectedDataset =  'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 def getTextSample(dataset=None):
     textCSV = {}
-    with open(desDir, 'r', newline='') as csvfile:
+    with open(csvPath, 'r', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             if dataset == None or row['dataset'] == dataset:
@@ -192,7 +192,7 @@ def getTextSample(dataset=None):
                             int(row['image_width']),
                             int(row['image_height'])
                         ],
-                        'mask_path': row['mask_path']
+                        # 'mask_path': row['mask_path']
                     }
     return textCSV
 textCSV = getTextSample(selectedDataset)
@@ -254,9 +254,7 @@ for image_index,image_name in enumerate(textCSV):
         box_w = x2 - x1+2*margin
         box_h = y2 - y1+2*margin
 
-        # Plot image and rectangle
-        # Overlay the mask with transparency
-        mask_path = textCSV[image_name]['mask_path']
+        mask_path = os.path.join(data_config.val_dir.replace('test_image','test_mask'),image_name)
         mask_source = Image.open(mask_path).convert('L')
         mask_source = np.asarray(mask_source).copy()
         mask_source[mask_source>0]=1

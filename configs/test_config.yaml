@@ -1,14 +1,14 @@
 data:
   batch_size: 4
   num_workers: 8
-  train_ann: multimodal-data/USDATASET/train_annotation.CSV
-  train_dir: multimodal-data/USDATASET/images/train
-  val_ann: multimodal-data/USDATASET/test_annotation.CSV
-  val_dir: multimodal-data/USDATASET/images/test
+  train_ann: multimodal-data/train.CSV
+  train_dir: multimodal-data/train
+  val_ann: multimodal-data/test.CSV
+  val_dir: multimodal-data/test_image
 model:
   config_path: groundingdino/config/GroundingDINO_SwinT_OGC.py
   # lora_weights: weights/ObjectName/freez_1/best_model.pth
-  lora_weights: weights/20250606_0814/best_model.pth
+  lora_weights: weights/trained_alot/best_model.pth
   # lora_weights: weights/ObjectName/freez_7/best_model.pth
   # lora_weights: weights/ObjectName/freez_7/checkpoint_epoch_15.pth
   # lora_weights: weights/groundingdino_swint_ogc.pth

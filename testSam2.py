@@ -22,10 +22,9 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from sklearn.metrics import jaccard_score, f1_score
-import csv
+
 
 #%%
-desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/test_annotation.CSV'
 
 def sklearn_iou(pred_mask, true_mask):
     return jaccard_score(true_mask.flatten(), pred_mask.flatten())
@@ -65,11 +64,13 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
 
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
 #%%
+import csv
+csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
-selectedDataset = 'tn3k'#'tg3k'#'tnscui'
+selectedDataset =  'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 def getTextSample(dataset=None):
     textCSV = {}
-    with open(desDir, 'r', newline='') as csvfile:
+    with open(csvPath, 'r', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             if dataset == None or row['dataset'] == dataset:
@@ -86,7 +87,7 @@ def getTextSample(dataset=None):
                             int(row['image_width']),
                             int(row['image_height'])
                         ],
-                        'mask_path': row['mask_path']
+                        # 'mask_path': row['mask_path']
                     }
     return textCSV
 textCSV = getTextSample(selectedDataset)
@@ -156,9 +157,7 @@ for image_index,image_name in enumerate(textCSV):
         box_w = x2 - x1+2*margin
         box_h = y2 - y1+2*margin
 
-        # Plot image and rectangle
-        # Overlay the mask with transparency
-        mask_path = textCSV[image_name]['mask_path']
+        mask_path = os.path.join(data_config.val_dir.replace('test_image','test_mask'),image_name)
         mask_source = Image.open(mask_path).convert('L').resize((w,h))
         mask_source
         mask_source = np.asarray(mask_source).copy()

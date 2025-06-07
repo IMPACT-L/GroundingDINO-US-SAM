@@ -6,85 +6,55 @@ import csv
 import shutil
 import matplotlib.pyplot as plt
 import random
+import sys
+sys.path.append(os.path.abspath('..'))
+from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/Breast_BUS_B_2024/BUS'
-desDir = '../multimodal-data/USDATASET'
+srcDir = '/home/hamze/Documents/Dataset/1-BreastDataset/Breast_BUS_B_2024/BUS'
 dataset = 'busb'
 #%%
-os.makedirs(f'{desDir}/images/train', exist_ok=True)
-os.makedirs(f'{desDir}/images/val', exist_ok=True)
-os.makedirs(f'{desDir}/images/test', exist_ok=True)
+rows=[]
+csvDir = f'{srcDir}/DatasetB.csv'
+with open(csvDir, 'r', newline='') as csvfile:
+    reader = csv.reader(csvfile)
+    next(reader)  # Skip header row
+    for row_ in reader:
+        # print(row_[0],row_[1])
+        image_name = f'{row_[0]}.png'
+        mask_path = f"{srcDir}/GT/{image_name}"
+
+        mask = cv2.imread(mask_path)
+        mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
+
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        for i, contour in enumerate(contours):
+            x, y, w, h = cv2.boundingRect(contour)
+            row=[
+                row_[1],
+                x, y, w, h,
+                f"{srcDir}/original/{image_name}",
+                mask.shape[1],
+                mask.shape[0],
+                mask_path,
+                dataset
+            ]
+        
+        rows.append(row)
+
+print(rows)
 #%%
-def readTextPrompt(prompt_dir):
-    prompts = []
-    with open(prompt_dir, 'r', newline='') as csvfile:
-        reader = csv.reader(csvfile)
-        next(reader)  # Skip header row
-        for columns in reader:
-            prompts.append((columns[0],columns[1]))
-    return prompts
-prompts = readTextPrompt(f'{srcDir}/DatasetB.csv')
-print(prompts)
-random.shuffle(prompts)
-print(prompts)
-total = len(prompts)
+random.shuffle(rows)
+print(rows)
+total = len(rows)
 train_size = int(0.7 * total)  # 70%
 valid_size = int(0.2 * total)  # 20%
 test_size = total - train_size - valid_size  # Remaining 10%
 
-train_prompts = prompts[:train_size]
-valid_prompts = prompts[train_size:train_size+valid_size]
-test_prompts = prompts[train_size+valid_size:]
-#%%
-def create_dataset(prompts_in, output_type):
-    with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-                
-        for prompt in prompts_in:
-            image_name = f'{prompt[0]}.png'
-            mask_path = f'{srcDir}/GT/{image_name}'
-            img_path = f'{srcDir}/original/{image_name}'
-            mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)                
-            contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-            
-            for i, contour in enumerate(contours):
-                x, y, w, h = cv2.boundingRect(contour)
-                print(f'Contour {i}: x={x}, y={y}, w={w}, h={h}')
-                contour = contour.squeeze()  # shape becomes (N, 2)
-
-                contour = contour.reshape(-1, 2)
-
-                # plt.imshow(mask, cmap='gray')
-                # plt.plot(contour[:, 0], contour[:, 1], color='lime')  # plot x vs y
-                # plt.scatter([x, x+w, x+w, x], [y, y, y+h, y+h], color=['red', 'green', 'blue', 'yellow'])
-                # plt.title(f'{prompt[0]}')
-                # plt.show()
-
-                writer.writerow([
-                    prompt[1].lower(),
-                    x, y, w, h,
-                    f'{dataset}_{image_name}',
-                    mask.shape[1],
-                    mask.shape[0],
-                    mask_path,
-                    dataset
-                ])
-
-##
+train_prompts = rows[:train_size]
+valid_prompts = rows[train_size:train_size+valid_size]
+test_prompts = rows[train_size+valid_size:]
 create_dataset(train_prompts, 'train')
 create_dataset(valid_prompts, 'val')
 create_dataset(test_prompts, 'test')
-# %%
-def copyImages(prompts_in, output_type):
-    for prompt in prompts_in:
-        image_name = f'{prompt[0]}.png'
-        img_path = f'{srcDir}/original/{image_name}'
-        dst = f'{desDir}/images/{output_type}/{dataset}_{image_name}'
-        shutil.copy2(img_path, dst)
-
-# %%
-copyImages(train_prompts, 'train')
-copyImages(valid_prompts, 'val')
-copyImages(test_prompts, 'test')
-# %%
+#%%

@@ -9,24 +9,22 @@ import random
 import matplotlib.patches as patches
 import glob
 import numpy as np
+import sys
+sys.path.append(os.path.abspath('..'))
+from dataSaver import create_dataset
 random.seed(42)
 #%%
 srcDir = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k'
-desDir = '../multimodal-data/USDATASET'
 dataset = 'tg3k'
 #%%
-folder_path = '../multimodal-data/USDATASET/images/val'
-for filename in os.listdir(folder_path):
-    if 'tn3k' in filename:
-        new_name = filename.replace('tn3k', 'tg3k')
-        src = os.path.join(folder_path, filename)
-        dst = os.path.join(folder_path, new_name)
-        os.rename(src, dst)
-        print(f'Renamed: {filename} -> {new_name}')
-#%%
-os.makedirs(f'{desDir}/images/train', exist_ok=True)
-os.makedirs(f'{desDir}/images/val', exist_ok=True)
-os.makedirs(f'{desDir}/images/test', exist_ok=True)
+# folder_path = '../multimodal-data/USDATASET/images/val'
+# for filename in os.listdir(folder_path):
+#     if 'tn3k' in filename:
+#         new_name = filename.replace('tn3k', 'tg3k')
+#         src = os.path.join(folder_path, filename)
+#         dst = os.path.join(folder_path, new_name)
+#         os.rename(src, dst)
+#         print(f'Renamed: {filename} -> {new_name}')
 #%%
 mask_paths = glob.glob(f'{srcDir}/thyroid-mask/*')
 min_area = 100
@@ -53,7 +51,6 @@ for mask_path in mask_paths:
 
     for i, contour in enumerate(contours[:2]):
         x, y, w, h = cv2.boundingRect(contour)
-
         # fig, ax = plt.subplots(1,2)
         # ax[0].imshow(img)
         # ax[1].imshow(mask)
@@ -66,19 +63,20 @@ for mask_path in mask_paths:
         row =[
             'thyroid tumor',
             x, y, w, h,
-            f"{dataset}-{i+1}_{file_name.replace('thyroid-mask','thyroid-image')}",
+            img_path,
             mask.shape[1],
             mask.shape[0],
             mask_path,
-            dataset
+            dataset,
+            i
         ]
         # print(row)
         data.append(row)
 
-    print(contour.shape)
+    # print(contour.shape)
     # break
 
-# print(data)
+print(data[0])
 
 #%%
 random.shuffle(data)
@@ -91,30 +89,9 @@ test_size = total - train_size - valid_size  # Remaining 10%
 train_data = data[:train_size]
 valid_data = data[train_size:train_size+valid_size]
 test_data = data[train_size+valid_size:]
-#%%
-def create_dataset(dat_in, output_type):
-    with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerows(dat_in)  
-
 
 #%%
 create_dataset(train_data, 'train')
 create_dataset(valid_data, 'val')
 create_dataset(test_data, 'test')
-# %%
-def copyImages(data_in, output_type):
-    for data in data_in:
-        image_name_original = data[5][7:]
-
-        img_path = f"{srcDir}/thyroid-image/{image_name_original.replace('test_image','Test_Image')}"
-        dst = f'{desDir}/images/{output_type}/{data[5]}'
-        shutil.copy2(img_path, dst)
-        print(dst)
-
-
-# %%
-copyImages(train_data, 'train')
-copyImages(valid_data, 'val')
-copyImages(test_data, 'test')
 # %%

@@ -13,30 +13,20 @@ sys.path.append(os.path.abspath('..'))
 from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/1-BreastDataset/S1/TrainingDataSet'
-dataset = 's1'
+srcDir = '/home/hamze/Documents/Dataset/1-BreastDataset/STU-Hospital/'
+dataset = 'stu'
 #%%
-mask_paths = glob.glob(f'{srcDir}/General-1-channel-Labels/*')
+mask_paths = glob.glob(f'{srcDir}/mask_*')
 data = []
 for mask_path in mask_paths:
     mask = cv2.imread(mask_path)
     mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
-    type = ''
-    if mask.max() == 1:
-        type = 'malignant'
-    elif mask.max() == 2:
-        type = 'benign'
-    else:
-        type = 'normal'
 
     file_name = mask_path.split('/')[-1]
 
-    img_path = f"{mask_path.replace('General-1-channel-Labels','BreastTumourImages').replace('png','jpg')}"
-    img = cv2.imread(f'{img_path}')
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    # plt.title(file_name)
-    # plt.imshow(mask)
-    # plt.show()
+    img_path = f"{mask_path.replace('mask','Test_Image')}"
+    # img = cv2.imread(f'{img_path}')
+    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     for _, contour in enumerate(contours):
         x, y, w, h = cv2.boundingRect(contour)
@@ -55,7 +45,7 @@ for mask_path in mask_paths:
         # plt.show()
 
         row =[
-            type,
+            'tumor',
             x, y, w, h,
             img_path,
             mask.shape[1],
@@ -82,5 +72,4 @@ test_data = data[train_size+valid_size:]
 create_dataset(train_data, 'train')
 create_dataset(valid_data, 'val')
 create_dataset(test_data, 'test')
-
 # %%

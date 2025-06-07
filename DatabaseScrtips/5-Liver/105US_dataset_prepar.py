@@ -8,19 +8,18 @@ import matplotlib.pyplot as plt
 import random
 import glob
 import numpy as np
+import sys
+sys.path.append(os.path.abspath('..'))
+from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/105US'
-desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET'
+srcDir = '/home/hamze/Documents/Dataset/5-Liver/105US'
 dataset = '105us'
-#%%
-os.makedirs(f'{desDir}/images/train', exist_ok=True)
-os.makedirs(f'{desDir}/images/val', exist_ok=True)
-os.makedirs(f'{desDir}/images/test', exist_ok=True)
 #%%
 mask_paths = glob.glob(f'{srcDir}/Masks/*')
 tumors = []
 for mask_path in mask_paths:
+
     mask = cv2.imread(mask_path)
     mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
     file_name = mask_path.split('/')[-1]
@@ -28,9 +27,9 @@ for mask_path in mask_paths:
     for _, contour in enumerate(contours):
         x, y, w, h = cv2.boundingRect(contour)
         row =[
-            'pancreatic cancer liver',
+            'pancreatic cancer liver metastases',
             x, y, w, h,
-            f"{dataset}_{file_name.replace(' G man','')}",
+            mask_path.replace(' G man','').replace('Masks','Images'),
             mask.shape[1],
             mask.shape[0],
             mask_path,
@@ -39,24 +38,6 @@ for mask_path in mask_paths:
        
         tumors.append(row)
 print(tumors)
-#%%
-def create_dataset(number_list, output_type):
-    with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-
-        for row in number_list:
-            try:
-                writer.writerow(row)
-                image_name = row[5]
-                img_path = f"{srcDir}/Images/{image_name.replace(dataset+'_','')}"
-                dst = f'{desDir}/images/{output_type}/{image_name}'
-                
-                shutil.copy2(img_path, dst)
-                print('saved')
-               
-            except Exception as e:
-                print(f"Error processing {row}: {str(e)}")
-
 #%%
 random.shuffle(tumors)
 

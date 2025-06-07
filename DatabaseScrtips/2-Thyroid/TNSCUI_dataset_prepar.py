@@ -10,24 +10,22 @@ import matplotlib.patches as patches
 import glob
 import numpy as np
 import glob
+import sys
+sys.path.append(os.path.abspath('..'))
+from dataSaver import create_dataset
 random.seed(42)
 #%%
 srcDir = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/TNSCUI/DDTI/2_preprocessed_data/stage2'
-desDir = '../multimodal-data/USDATASET'
 dataset = 'tnscui'
 #%%
-folder_path = '../multimodal-data/USDATASET/images/val'
-for filename in os.listdir(folder_path):
-    if 'tbscui' in filename:
-        new_name = filename.replace('tbscui', 'tnscui')
-        src = os.path.join(folder_path, filename)
-        dst = os.path.join(folder_path, new_name)
-        os.rename(src, dst)
-        print(f'Renamed: {filename} -> {new_name}')
-#%%
-os.makedirs(f'{desDir}/images/train', exist_ok=True)
-os.makedirs(f'{desDir}/images/val', exist_ok=True)
-os.makedirs(f'{desDir}/images/test', exist_ok=True)
+# folder_path = '../multimodal-data/USDATASET/images/val'
+# for filename in os.listdir(folder_path):
+#     if 'tbscui' in filename:
+#         new_name = filename.replace('tbscui', 'tnscui')
+#         src = os.path.join(folder_path, filename)
+#         dst = os.path.join(folder_path, new_name)
+#         os.rename(src, dst)
+#         print(f'Renamed: {filename} -> {new_name}')
 #%%
 mask_paths = glob.glob(f'{srcDir}/p_mask/*')
 min_area = 500
@@ -54,28 +52,29 @@ for mask_path in mask_paths:
     for i, contour in enumerate(contours[:2]):
         x, y, w, h = cv2.boundingRect(contour)
 
-        fig, ax = plt.subplots(1,2)
-        ax[0].imshow(img)
-        ax[1].imshow(mask)
-        rect = patches.Rectangle((x, y), w, h,
-                                linewidth=2, edgecolor='r', facecolor='none')
-        ax[1].add_patch(rect)
-        plt.title("Bounding Box")
-        # plt.axis('off')
-        plt.show()
+        # fig, ax = plt.subplots(1,2)
+        # ax[0].imshow(img)
+        # ax[1].imshow(mask)
+        # rect = patches.Rectangle((x, y), w, h,
+        #                         linewidth=2, edgecolor='r', facecolor='none')
+        # ax[1].add_patch(rect)
+        # plt.title("Bounding Box")
+        # # plt.axis('off')
+        # plt.show()
         row =[
             'thyroid nodule',
             x, y, w, h,
-            f"{dataset}-{i+1}_{file_name.replace('p_mask','p_image')}",
+            img_path,
             mask.shape[1],
             mask.shape[0],
             mask_path,
-            dataset
+            dataset,
+            i
         ]
         # print(row)
         data.append(row)
 
-    print(contour.shape)
+    # print(contour.shape)
     # break
 
 print(data)
@@ -92,29 +91,6 @@ train_data = data[:train_size]
 valid_data = data[train_size:train_size+valid_size]
 test_data = data[train_size+valid_size:]
 #%%
-def create_dataset(dat_in, output_type):
-    with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerows(dat_in)  
-
-
-#%%
 create_dataset(train_data, 'train')
 create_dataset(valid_data, 'val')
 create_dataset(test_data, 'test')
-# %%
-def copyImages(data_in, output_type):
-    for data in data_in:
-        image_name_original = data[5][9:] #p_mask','p_image'replace('test_image','Test_Image')
-
-        img_path = f"{srcDir}/p_image/{image_name_original}"
-        dst = f'{desDir}/images/{output_type}/{data[5]}'
-        shutil.copy2(img_path, dst)
-        print(img_path)
-
-
-# %%
-copyImages(train_data, 'train')
-copyImages(valid_data, 'val')
-copyImages(test_data, 'test')
-# %%

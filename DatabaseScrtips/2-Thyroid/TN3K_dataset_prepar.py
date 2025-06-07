@@ -9,10 +9,12 @@ import random
 import matplotlib.patches as patches
 import glob
 import numpy as np
+import sys
+sys.path.append(os.path.abspath('..'))
+from dataSaver import create_dataset
 random.seed(42)
 #%%
 srcDir = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tn3k'
-desDir = '../multimodal-data/USDATASET'
 dataset = 'tn3k'
 #%%
 # folder_path = '/home/hamze/Documents/Dataset/2-Dataset/tn3k/test-image'
@@ -23,10 +25,6 @@ dataset = 'tn3k'
 #     os.rename(src, dst)
 #     print(f'Renamed: {filename} -> {new_name}')
     # break
-#%%
-os.makedirs(f'{desDir}/images/train', exist_ok=True)
-os.makedirs(f'{desDir}/images/val', exist_ok=True)
-os.makedirs(f'{desDir}/images/test', exist_ok=True)
 #%%
 mask_paths = glob.glob(f'{srcDir}/mask/*')
 min_area = 300
@@ -41,9 +39,6 @@ for mask_path in mask_paths:
     img_path = f"{mask_path.replace('mask','image')}"
     img = cv2.imread(f'{img_path}')
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    # plt.title(file_name)
-    # plt.imshow(mask)
-    # plt.show()
     
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     contours = [r for r in contours if cv2.contourArea(r) >= min_area]
@@ -65,16 +60,17 @@ for mask_path in mask_paths:
         row =[
             'thyroid nodule',
             x, y, w, h,
-            f"{dataset}-{i+1}_{file_name.replace('mask','image')}",
+            img_path,
             mask.shape[1],
             mask.shape[0],
             mask_path,
-            dataset
+            dataset,
+            i
         ]
         # print(row)
         data.append(row)
 
-    print(contour.shape)
+    # print(contour.shape)
     # break
 
 print(data)
@@ -91,28 +87,7 @@ train_data = data[:train_size]
 valid_data = data[train_size:train_size+valid_size]
 test_data = data[train_size+valid_size:]
 #%%
-def create_dataset(dat_in, output_type):
-    with open( f'{desDir}/{output_type}_annotation.CSV', 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerows(dat_in)  
-
-
-#%%
 create_dataset(train_data, 'train')
 create_dataset(valid_data, 'val')
 create_dataset(test_data, 'test')
-# %%
-def copyImages(data_in, output_type):
-    for data in data_in:
-        image_name_original = data[5][7:]
-
-        img_path = f"{srcDir}/image/{image_name_original}"
-        dst = f'{desDir}/images/{output_type}/{data[5]}'
-        shutil.copy2(img_path, dst)
-        print(dst)
-
-# %%
-copyImages(train_data, 'train')
-copyImages(valid_data, 'val')
-copyImages(test_data, 'test')
 # %%

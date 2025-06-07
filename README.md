@@ -52,7 +52,7 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | TNSCUI                | [GitHub](https://github.com/openmedlab/Awesome-Medical-Dataset/blob/main/resources/TN-SCUI2020.md)                | Thyroid            | ✅    |
 | ————————              | ————————— | ————————             | ——    |
 | 105US                 | [ResearchGate](https://www.researchgate.net/publication/329586355_100_2D_US_Images_and_Tumor_Segmentation_Masks)  | Liver              | ✅    |
-| AUL                   | [Zenodo](https://zenodo.org/records/7272660)                                                                      | Liver              | ❌    |
+| AUL                   | [Zenodo](https://zenodo.org/records/7272660)                                                                      | Liver              | ✅    |
 | ————————              | ————————— | ————————             | ——    |
 | MicroSeg              | [Zenodo](https://zenodo.org/records/10475293)                                                                     | Prostate           | DL    |
 | regPro                | [Homepage](https://muregpro.github.io/data.html)                                                                  | Prostate           | DL    |

@@ -58,7 +58,7 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | regPro                | [Homepage](https://muregpro.github.io/data.html)                                                                  | Prostate           | DL    |
 | ————————              | ————————— | ————————             | ——    |
 | KiTS23                | [GitHub](https://github.com/neheller/kits23/tree/main)                                                            | Kidney             | not us|
-| kidneyUS              | [GitHub](https://github.com/rsingla92/kidneyUS)                                                                   | Kidney             | wt    |
+| kidneyUS              | [GitHub](https://github.com/rsingla92/kidneyUS)                                                                   | Kidney             | ✅    |
 | ————————              | ————————— | ————————             | ——    |
 
 

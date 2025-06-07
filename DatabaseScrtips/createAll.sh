@@ -14,6 +14,10 @@ python S1_dataset_prepar.py
 python STU_dataset_prepar.py
 python UCLM_dataset_prepar.py
 
+cd "$root/DatabaseScrtips/3-Kidney" || { echo "Directory not found"; exit 1; }
+echo ' ************ Add Liver dataset ************ '
+python kidneyUS_dataset_prepar.py
+
 cd "$root/DatabaseScrtips/5-Liver" || { echo "Directory not found"; exit 1; }
 echo ' ************ Add Liver dataset ************ '
 python AUL_dataset_prepar.py

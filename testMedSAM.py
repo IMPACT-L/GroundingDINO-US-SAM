@@ -172,7 +172,7 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
 import csv
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
-selectedDataset =  'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
+selectedDataset =  'kidnyus' #'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(csvPath, 'r', newline='') as csvfile:

@@ -57,7 +57,6 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | MicroSeg              | [Zenodo](https://zenodo.org/records/10475293)                                                                     | Prostate           | DL    |
 | regPro                | [Homepage](https://muregpro.github.io/data.html)                                                                  | Prostate           | DL    |
 | ————————              | ————————— | ————————             | ——    |
-| KiTS23                | [GitHub](https://github.com/neheller/kits23/tree/main)                                                            | Kidney             | not us|
 | kidneyUS              | [GitHub](https://github.com/rsingla92/kidneyUS)                                                                   | Kidney             | ✅    |
 | ————————              | ————————— | ————————             | ——    |
 

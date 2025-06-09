@@ -14,9 +14,21 @@ python S1_dataset_prepar.py
 python STU_dataset_prepar.py
 python UCLM_dataset_prepar.py
 
+cd "$root/DatabaseScrtips/2-Thyroid" || { echo "Directory not found"; exit 1; }
+echo ' ************ Add Thyroid dataset ************ '
+python TG3K_dataset_prepar.py
+python TN3K_dataset_prepar.py
+python TNSCUI_dataset_prepar.py
+
+
 cd "$root/DatabaseScrtips/3-Kidney" || { echo "Directory not found"; exit 1; }
-echo ' ************ Add Liver dataset ************ '
+echo ' ************ Add Kidney dataset ************ '
 python kidneyUS_dataset_prepar.py
+
+cd "$root/DatabaseScrtips/4-Prostate" || { echo "Directory not found"; exit 1; }
+echo ' ************ Add Prostate dataset ************ '
+python MicroSeg_dataset_prepar.py
+python RegPro_dataset_prepar.py
 
 cd "$root/DatabaseScrtips/5-Liver" || { echo "Directory not found"; exit 1; }
 echo ' ************ Add Liver dataset ************ '

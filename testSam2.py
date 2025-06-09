@@ -22,8 +22,6 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from sklearn.metrics import jaccard_score, f1_score
-
-
 #%%
 
 def sklearn_iou(pred_mask, true_mask):
@@ -67,7 +65,7 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
 import csv
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
-selectedDataset =  'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
+selectedDataset =  'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(csvPath, 'r', newline='') as csvfile:
@@ -103,7 +101,7 @@ config_path="configs/test_config.yaml"
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,test_config.use_lora)
 #%%
-show_plots = True
+show_plots = False
 margin = 5
 box_threshold=0.05
 text_threshold=0.3

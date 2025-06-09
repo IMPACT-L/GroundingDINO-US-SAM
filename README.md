@@ -54,14 +54,40 @@ We compiled a wide range of publicly available ultrasound datasets. Currently, m
 | 105US                 | [ResearchGate](https://www.researchgate.net/publication/329586355_100_2D_US_Images_and_Tumor_Segmentation_Masks)  | Liver              | ✅    |
 | AUL                   | [Zenodo](https://zenodo.org/records/7272660)                                                                      | Liver              | ✅    |
 | ————————              | ————————— | ————————             | ——    |
-| MicroSeg              | [Zenodo](https://zenodo.org/records/10475293)                                                                     | Prostate           | DL    |
-| regPro                | [Homepage](https://muregpro.github.io/data.html)                                                                  | Prostate           | DL    |
+| MicroSeg              | [Zenodo](https://zenodo.org/records/10475293)                                                                     | Prostate           | ✅    |
+| RegPro                | [Homepage](https://muregpro.github.io/data.html)                                                                  | Prostate           | ✅    |
 | ————————              | ————————— | ————————             | ——    |
 | kidneyUS              | [GitHub](https://github.com/rsingla92/kidneyUS)                                                                   | Kidney             | ✅    |
 | ————————              | ————————— | ————————             | ——    |
 
 
+## Results
 
+| Dataset        |    MedSam   |   MedSam    |    Sam2      |   Sam2      |
+|----------------|-------------|-------------|--------------|-------------|
+|                | DICE        |   IOU       |  DICE        |   IOU       |
+| BrEaST         |             |             |              |             | 
+| BUID           |             |             |              |             |
+| BUS_UC         |             |             |              |             |
+| BUS_UCML       |             |             |              |             |
+| BUS-BRA        |             |             |              |             |
+| BUS (Dataset B)|             |             |              |             |
+| BUSI           |             |             |              |             |
+| STU-Hospital   |             |             |              |             |
+| S1             |             |             |              |             |
+| ————————       | ——————————— | ——————————— | ———————————  | ——————————— |
+| TN3K           |             |             |              |             | 
+| TG3K           |             |             |              |             | 
+| TNSCUI         |             |             |              |             | 
+| ————————       | ——————————— | ——————————— | ———————————  | ——————————— | 
+| 105US          |             |             |              |             | 
+| AUL            |             |             |              |             | 
+| ————————       | ——————————— | ——————————— | ———————————  | ——————————— | 
+| MicroSeg       |             |             |              |             | 
+| RegPro         |             |             |              |             | 
+| ————————       | ——————————— | ——————————— | ———————————  | ——————————— | 
+| kidneyUS       |             |             |              |             | 
+| ————————       | ——————————— | ——————————— | ———————————  | ——————————— |
 
 
 > We plan to hold out some datasets entirely as **unseen test datasets** to evaluate generalization. This is in contrast to traditional train/val/test splits.

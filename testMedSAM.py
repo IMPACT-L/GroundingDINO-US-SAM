@@ -172,6 +172,9 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
 import csv
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
+selectedDataset =  'busi' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
+save_result_path = f'visualizations/MedSam/{selectedDataset}'
+os.makedirs(save_result_path, exist_ok=True)
 # selectedDataset =  'busuclm' #'kidnyus' #'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 def getTextSample(dataset=None):
     textCSV = {}
@@ -225,7 +228,7 @@ for image_index,image_name in enumerate(textCSV):
     
     image_source, image = load_image(image_path)
     h, w, _ = image_source.shape
-    boxes, logits, phrases  = predict(model,
+    boxes, _logits, phrases  = predict(model,
             image,
             caption,
             box_threshold,
@@ -233,12 +236,17 @@ for image_index,image_name in enumerate(textCSV):
             remove_combined= True)
     iou_before = None
     dic_before = None
-    iou_after = None
-    dic_after = None
+    # iou_after = None
+    # dic_after = None
+    threshold = .5
+
     detected = False
     if len(boxes>0):
-        boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases,box_threshold)
-
+        print('brfore',_logits)
+        boxes, _logits, phrases = apply_nms_per_phrase(image_source, boxes, _logits, phrases, box_threshold)
+        best_box=_logits.argmax()
+        print('after',_logits,'\tbest_box',best_box)
+    
         with torch.no_grad():
             image_embedding = medsam_model.image_encoder(image.float().permute(0, 2, 1).unsqueeze(0).to(device))
         boxes = boxes* torch.Tensor([w, h, w, h])
@@ -255,46 +263,48 @@ for image_index,image_name in enumerate(textCSV):
         box_h = y2 - y1+2*margin
 
         mask_path = os.path.join(data_config.val_dir.replace('test_image','test_mask'),image_name)
-        mask_source = Image.open(mask_path).convert('L')
+        mask_source = Image.open(mask_path).convert('L').resize((w,h))
+        
         mask_source = np.asarray(mask_source).copy()
-        mask_source[mask_source>0]=1
+        mask_source[mask_source>=threshold]=1
+        mask_source[mask_source<threshold]=0
 
         iou_before = sklearn_iou(masks,mask_source)*100
         dic_before = sklearn_dice(masks,mask_source)*100
 
-        mask_uint8 = (masks * 255).astype(np.uint8)
-        num_labels, labels_im = cv2.connectedComponents(mask_uint8)
+        # mask_uint8 = (masks * 255).astype(np.uint8)
+        # num_labels, labels_im = cv2.connectedComponents(mask_uint8)
 
-        binary_mask = (mask_uint8 > 0).astype(np.uint8)
+        # binary_mask = (mask_uint8 > 0).astype(np.uint8)
 
 
         # Fill holes
-        inverted = cv2.bitwise_not(binary_mask * 255)
-        h, w = inverted.shape
-        mask = np.zeros((h + 2, w + 2), np.uint8)
-        cv2.floodFill(inverted, mask, (0, 0), 255)
-        inverted_filled = cv2.bitwise_not(inverted)
-        filled_mask = binary_mask | (inverted_filled > 0).astype(np.uint8)
+        # inverted = cv2.bitwise_not(binary_mask * 255)
+        # h, w = inverted.shape
+        # mask = np.zeros((h + 2, w + 2), np.uint8)
+        # cv2.floodFill(inverted, mask, (0, 0), 255)
+        # inverted_filled = cv2.bitwise_not(inverted)
+        # filled_mask = binary_mask | (inverted_filled > 0).astype(np.uint8)
 
         # Connect components
-        kernel = np.ones(cc_treshold, np.uint8)
-        connected_mask = cv2.morphologyEx(filled_mask, cv2.MORPH_CLOSE, kernel)
-        dilated = cv2.dilate(connected_mask, kernel, iterations=1)
-        iou_after = sklearn_iou(dilated,mask_source)*100
-        dic_after = sklearn_dice(dilated,mask_source)*100
+        # kernel = np.ones(cc_treshold, np.uint8)
+        # connected_mask = cv2.morphologyEx(filled_mask, cv2.MORPH_CLOSE, kernel)
+        # dilated = cv2.dilate(connected_mask, kernel, iterations=1)
+        # iou_after = sklearn_iou(dilated,mask_source)*100
+        # dic_after = sklearn_dice(dilated,mask_source)*100
 
         if show_plots:
-            fig, ax = plt.subplots(1, 4, figsize=(20, 8))
-
+            fig, ax = plt.subplots(1, 3, figsize=(20, 8))
 
             ax[0].set_title(f'Source: {image_name}')
             ax[0].axis('off')
             ax[0].imshow(image_source)
 
-
+            tmp_image = image_source.copy()
+            tmp_image[:,:,2][mask_source==1]=255
             ax[1].set_title(f'Ground Truth[{image_index}]')
             ax[1].axis('off')
-            ax[1].imshow(mask_source)
+            ax[1].imshow(tmp_image)
             
             tmp_image = image_source.copy()
             tmp_image[:,:,2][masks==1]=255
@@ -303,46 +313,29 @@ for image_index,image_name in enumerate(textCSV):
                                     linewidth=2, edgecolor='red', facecolor='none')
             ax[2].add_patch(rect1)
             ax[2].set_title(f'iou_before: {iou_before:.2f}, dice_before: {dic_before:.2f}')
-            # plt.text(x=x1, y=y1, s=phrases, color='red', fontsize=10)
             ax[2].axis('off')
 
-            # ax[3].imshow(image_source)
-            tmp_image = image_source.copy()
-            tmp_image[:,:,2][connected_mask==1]=255
-            rect2 = patches.Rectangle((x1, y1), box_w, box_h,
-                                    linewidth=2, edgecolor='red', facecolor='none')
-            ax[3].imshow(tmp_image)
-            ax[3].add_patch(rect2)
-            ax[3].set_title(f'iou_after: {iou_after:.2f}, dice_after: {dic_after:.2f}')
-            ax[3].axis('off')
-            # ax[3].imshow(connected_mask, alpha=0.5)
-
-            plt.show()
-        if iou_after>iou_threshold:
-            detected = True
-        if detected:
-            ious_before.append(iou_before)
-            dices_before.append(dic_before)
-            ious_after.append(iou_after)
-            dices_after.append(dic_after)
-        # else:
-        #     not_detected_count += 1
+            plt.savefig(f'{save_result_path}/{image_name}') 
+            plt.close()
+        ious_before.append(iou_before)
+        dices_before.append(dic_before)
     else:
         print(f'[{image_name}{image_index}]NO BOX FOUNDED FOR ')  
         not_detected_list.append(image_name)
-    image_index += 1   
     # break
 # %%
 ious_before = np.array(ious_before)
 dices_before = np.array(dices_before)
-ious_after = np.array(ious_after)
-dices_after = np.array(dices_after)
+# ious_after = np.array(ious_after)
+# dices_after = np.array(dices_after)
 
 print(f"Number of not detected: {len(not_detected_list)}")
-print(f"Average IoU: {ious_before.mean():.2f}±{ious_before.std():.2f} -> {ious_after.mean():.2f}±{ious_after.std():.2f}")
-print(f"Average Dic: {dices_before.mean():.2f}±{dices_before.std():.2f}-> {dices_after.mean():.2f}±{dices_after.std():.2f}")
-print(f"Min IoU[{1+ious_after.argmin()}]: {ious_after.min():.2f}")
-print(f"Max IoU[{1+ious_after.argmax()}]: {ious_after.max():.2f}")
+print(f"Average IoU: {ious_before.mean():.2f}±{ious_before.std():.2f}")
+print(f"Average Dic: {dices_before.mean():.2f}±{dices_before.std():.2f}")
+print(f"Min IoU[{1+ious_before.argmin()}]: {ious_before.min():.2f}")
+print(f"Max IoU[{1+ious_before.argmax()}]: {ious_before.max():.2f}")
 
-print(not_detected_list)
+with open(f'{save_result_path}/result.txt', 'w') as f:
+    f.write(f"Average IoU: {ious_before.mean():.2f}±{ious_before.std():.2f}\n")
+    f.write(f"Average Dic: {dices_before.mean():.2f}±{dices_before.std():.2f}\n")
 # %%

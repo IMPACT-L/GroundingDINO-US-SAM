@@ -285,7 +285,7 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
 
     steps_per_epoch = len(train_loader.dataset) // data_config.batch_size
     
-    visualizer = GroundingDINOVisualizer(save_dir=save_dir, visualize_frequency=200)
+    visualizer = GroundingDINOVisualizer(save_dir=save_dir, visualize_frequency=100)
     
     # freeze_config1 = {
     #         'backbone': True,

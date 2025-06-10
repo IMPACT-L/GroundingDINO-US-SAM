@@ -216,9 +216,8 @@ class GroundingDINOVisualizer:
                         labels=targets[0].get("str_cls_lst", None)
                     )
 
-                cv2.imwrite(f"{save_dir}/val_pred_{idx}.jpg", img_bgr)
-                if idx >= self.visualize_frequency:
-                    break
+                if idx % self.visualize_frequency==0:
+                    cv2.imwrite(f"{save_dir}/val_pred_{idx}.jpg", img_bgr)
 
 
     def visualize_image(self, model, image, caption,image_source,fname,device="cuda", box_th=0.3,txt_th=0.2):

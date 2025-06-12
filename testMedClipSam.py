@@ -6,6 +6,7 @@ import os
 from PIL import Image
 from sklearn.metrics import jaccard_score, f1_score
 import warnings
+import cv2
 warnings.filterwarnings("ignore")
 #%%
 def sklearn_iou(pred_mask, true_mask):
@@ -17,7 +18,7 @@ def sklearn_dice(pred_mask, true_mask):
 test_path = f'multimodal-data/test_image'
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
-selectedDataset =  'busi' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
+selectedDataset =  'luminous' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 save_result_path = f'visualizations/MedClipSam/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
 
@@ -55,14 +56,17 @@ for image_index,image_name in enumerate(textCSV):
     image_source = Image.open(image_path).convert('RGB')
     image_source = np.asarray(image_source)
     mask_path = os.path.join(test_path.replace('test_image','test_mask'),image_name)
-    mask_source = Image.open(mask_path).convert('L')
+    mask_source = Image.open(mask_path).convert('L').resize((image_source.shape[1],image_source.shape[0]))
     mask_source = np.asarray(mask_source).copy()
     mask_source[mask_source>=threshold]=1
     mask_source[mask_source<threshold]=0
 
-    sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAM/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz')
+    sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAM/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
     data = np.load(sam_path)
-    sam_mask = data['arr']  # Replace 'array_name' with actual key from data.files
+    sam_mask = data['arr']  
+    if sam_mask.shape[0]!=image_source.shape[0] or sam_mask.shape[1]!=image_source.shape[1]:
+        sam_mask = cv2.resize(sam_mask.astype(np.uint8), (image_source.shape[1], image_source.shape[0]), interpolation=cv2.INTER_NEAREST)
+
     sam_mask[sam_mask>=threshold]=1
     sam_mask[sam_mask<threshold]=0
 
@@ -87,7 +91,7 @@ for image_index,image_name in enumerate(textCSV):
         ax[2].set_title(f'iou: {iou:.2f}, dice: {dic:.2f}')
         ax[2].axis('off')
         ax[2].imshow(tmp_image)
-        plt.savefig(f'{save_result_path}/{image_name}') 
+        plt.savefig(f"{save_result_path}/{image_name.replace('.bmp','.png')}") 
         # plt.show()
         plt.close()
 
@@ -101,7 +105,7 @@ print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
 print(f"Min IoU[{1+ious.argmin()}]: {ious.min():.2f}")
 print(f"Max IoU[{1+ious.argmax()}]: {ious.max():.2f}")
 with open(f'{save_result_path}/result.txt', 'w') as f:
-    f.write(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}\n")
-    f.write(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}\n")
+    f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
+
 
 # %%

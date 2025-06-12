@@ -20,6 +20,6 @@ training:
   num_epochs: 200
   save_dir: weights
   save_frequency: 5
-  use_lora: true
+  use_lora: True
   visualization_frequency: 5
   warmup_epochs: 5

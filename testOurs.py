@@ -74,15 +74,15 @@ sam2_predictor = SAM2ImagePredictor(sam2_model)
 #%%
 config_path="configs/test_config.yaml"
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
-model = load_model(model_config,False)
+model = load_model(model_config,True)
 #%%
 # 105us, aul, busuclm,stu,s1, busi,busuc,busb,buid,breast,
 # kidnyus, muregpro,regpro,tg3k,tn3k,
 # luminous, tnscui, busbra
 import csv
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
-selectedDataset =  'luminous' 
-save_result_path = f'visualizations/sam2/{selectedDataset}'
+selectedDataset =  'tnscui' 
+save_result_path = f'visualizations/ours/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
 
 def getTextSample(dataset=None):

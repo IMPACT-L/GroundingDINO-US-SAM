@@ -91,6 +91,6 @@ train_data = data[:train_size]
 valid_data = data[train_size:train_size+valid_size]
 test_data = data[train_size+valid_size:]
 #%%
-create_dataset(train_data, 'train')
-create_dataset(valid_data, 'val')
-create_dataset(test_data, 'test')
+# create_dataset(train_data, 'train')
+# create_dataset(valid_data, 'val')
+create_dataset(data, 'test')

@@ -38,7 +38,8 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from sklearn.metrics import jaccard_score, f1_score
-
+import warnings
+warnings.filterwarnings("ignore")
 import csv
 
 #%%
@@ -108,7 +109,7 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
     scaled_boxes = box_convert(boxes=scaled_boxes, in_fmt="cxcywh", out_fmt="xyxy")
     nms_boxes_list, nms_logits_list, nms_phrases_list = [], [], []
 
-    print(f"The unique detected phrases are {set(phrases)}")
+    # print(f"The unique detected phrases are {set(phrases)}")
 
     for unique_phrase in set(phrases):
         indices = [i for i, phrase in enumerate(phrases) if phrase == unique_phrase]
@@ -172,7 +173,7 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
 import csv
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
-selectedDataset =  'busi' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
+selectedDataset =  'luminous' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 save_result_path = f'visualizations/MedSam/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
 # selectedDataset =  'busuclm' #'kidnyus' #'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
@@ -214,7 +215,7 @@ margin = 5
 box_threshold=0.05
 text_threshold=0.3
 iou_threshold=10
-cc_treshold=(15, 15)
+# cc_treshold=(15, 15)
 
 ious_before = []
 dices_before = []
@@ -315,7 +316,7 @@ for image_index,image_name in enumerate(textCSV):
             ax[2].set_title(f'iou_before: {iou_before:.2f}, dice_before: {dic_before:.2f}')
             ax[2].axis('off')
 
-            plt.savefig(f'{save_result_path}/{image_name}') 
+            plt.savefig(f"{save_result_path}/{image_name.replace('.bmp','.png')}") 
             plt.close()
         ious_before.append(iou_before)
         dices_before.append(dic_before)
@@ -336,6 +337,5 @@ print(f"Min IoU[{1+ious_before.argmin()}]: {ious_before.min():.2f}")
 print(f"Max IoU[{1+ious_before.argmax()}]: {ious_before.max():.2f}")
 
 with open(f'{save_result_path}/result.txt', 'w') as f:
-    f.write(f"Average IoU: {ious_before.mean():.2f}±{ious_before.std():.2f}\n")
-    f.write(f"Average Dic: {dices_before.mean():.2f}±{dices_before.std():.2f}\n")
+    f.write(f"Average Dice, IoU: {dices_before.mean():.2f}±{dices_before.std():.0f} & {ious_before.mean():.2f}±{ious_before.std():.0f}\n")
 # %%

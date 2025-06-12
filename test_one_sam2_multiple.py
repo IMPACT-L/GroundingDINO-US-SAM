@@ -79,8 +79,8 @@ model = load_model(model_config,test_config.use_lora)
 #%%
 terminal = False
 top_k=3
-box_threshold=0.05
-text_threshold=0.05
+box_threshold=0.01
+text_threshold=0.02
 # python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
 
 if terminal:
@@ -108,14 +108,13 @@ if terminal and args.top_k:
 # image_path = '/home/hamze/Documents/Dataset/1-BreastDataset/BreastBUSI_Images/malignant/malignant (140).png'
 # mask_path = '/home/hamze/Documents/Dataset/1-BreastDataset/BreastBUSI_Images/malignant/malignant (140)_mask.png'
 
-image_path = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k/thyroid-image/0805.jpg'
-mask_path = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k/thyroid-mask/0805.jpg'
+# image_path = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k/thyroid-image/0805.jpg'
+# mask_path = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k/thyroid-mask/0805.jpg'
 
 # image_path = 'sample_tests/two_dogs.png'
 # mask_path = 'sample_tests/two_dogs.png'
 # image_path = '/home/hamze/Documents/Dataset/BUSBRA/Images/bus_0064-s.png'
 # image_path = '/home/hamze/Documents/Dataset/BUS-UCLM Breast ultrasound lesion segmentation dataset/images/ALWI_000.png'
-# image_path = 'samples_with_text.png'
 #** image_path = '/home/hamze/Documents/Dataset/fetal head circumference/training_set/001_HC.png'
 #** image_path = '/home/hamze/Documents/Dataset/BrEaST-Lesions_USG-images_and_masks-Dec-15-2023/BrEaST-Lesions_USG-images_and_masks/case001.png'
 # image_path = '/home/hamze/Documents/Dataset/kidneyUS_images_14_june_2022/kidneyUS_images_14_june_2022/1_IM-0001-0059_anon.png'
@@ -125,6 +124,13 @@ mask_path = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k/thyroid-mask/0
 # text_prompt="thyroid. lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
 # text_prompt="find malignant on the center of the image." #1
 # text_prompt= "chair . person . dog ."
+
+image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busi_benign (34).png'
+mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busi_benign (34).png'
+
+image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busi_benign (83).png'
+mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busi_benign (83).png'
+
 # text_prompt="carotid . benign . malignant . chair . person . dog ." #1
 text_prompt="tumor. thyroid. carotid . benign . malignant . chair . person . dog ." #1
 if terminal and args.path:
@@ -149,8 +155,10 @@ dic = None
 if len(boxes>0):
 
     boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases,box_threshold)
-    # _, top_indices = torch.topk(logits, top_k if boxes.shape[0]>=top_k else boxes.shape[0])
-
+    _, top_indices = torch.topk(logits, top_k if boxes.shape[0]>=top_k else boxes.shape[0])
+    boxes=boxes[top_indices]
+    logits=logits[top_indices]
+    phrases=[phrases[i] for i in top_indices]
     with torch.no_grad():
         
         sam2_predictor.set_image(np.array(image_source))
@@ -190,7 +198,7 @@ if len(boxes>0):
 
             iou = sklearn_iou(masks,mask_source)*100
             dic = sklearn_dice(masks,mask_source)*100
-            if iou>=10:
+            if iou>=3:
                 overlay_mask[:,:,2][masks>0]=255
                 x1, y1, x2, y2 = box_np[0]
                 box_w = x2 - x1
@@ -206,39 +214,5 @@ if len(boxes>0):
         plt.show()
 else:
     print('NO BOX FOUNDED')  
+
 # %%
-# def visualize_image_features(model, image_tensor):
-#     """Visualize intermediate image features from the backbone"""
-#     # Prepare input (ensure proper dimensions and normalization)
-#     if image_tensor.ndim == 3:
-#         image_tensor = image_tensor.unsqueeze(0)  # Add batch dimension
-    
-#     # Create NestedTensor
-#     mask = torch.ones((1, image_tensor.shape[2], image_tensor.shape[3]), 
-#                      dtype=torch.bool, device=image_tensor.device)
-#     samples = NestedTensor(image_tensor, mask)
-    
-#     # Extract features
-#     with torch.no_grad():
-#         features, poss = model.backbone(samples)
-        
-#         # Visualize feature maps from different levels
-#         for i, feat in enumerate(features):
-#             src, mask = feat.decompose()
-#             print(f"Level {i} feature shape:", src.shape)
-            
-#             # Visualize first channel of first image in batch
-#             plt.figure(figsize=(10, 10))
-#             plt.imshow(src[0, 0].cpu().numpy(), cmap='viridis')
-#             plt.title(f"Backbone feature level {i}")
-#             plt.colorbar()
-#             plt.show()
-            
-#             # Projected features
-#             projected = model.input_proj[i](src)
-#             plt.figure(figsize=(10, 10))
-#             plt.imshow(projected[0, 0].cpu().numpy(), cmap='viridis')
-#             plt.title(f"Projected feature level {i}")
-#             plt.colorbar()
-#             plt.show()
-# # %%

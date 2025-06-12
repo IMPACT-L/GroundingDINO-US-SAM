@@ -38,28 +38,28 @@ with open(csvDir, 'r', newline='') as csvfile:
             row_[3],
             x, y, w, h,
             f"{srcDir}/Images/{image_name}",
-            row_[3],
-            row_[4],
+            mask.shape[1],
+            mask.shape[0],
             mask_path,
             dataset
         ]
         
         rows.append(row)
-
 print(rows)
 
 #%%
 random.shuffle(rows)
-print(rows)
+# print(rows)
 total = len(rows)
-train_size = int(0.7 * total)  # 70%
-valid_size = int(0.2 * total)  # 20%
-test_size = total - train_size - valid_size  # Remaining 10%
+print(row)
+# train_size = int(0.7 * total)  # 70%
+# valid_size = int(0.2 * total)  # 20%
+# test_size = total - train_size - valid_size  # Remaining 10%
 
-train_prompts = rows[:train_size]
-valid_prompts = rows[train_size:train_size+valid_size]
-test_prompts = rows[train_size+valid_size:]
-create_dataset(train_prompts, 'train')
-create_dataset(valid_prompts, 'val')
-create_dataset(test_prompts, 'test')
+# train_prompts = rows[:train_size]
+# valid_prompts = rows[train_size:train_size+valid_size]
+# test_prompts = rows[train_size+valid_size:]
+# create_dataset(train_prompts, 'train')
+# create_dataset(valid_prompts, 'val')
+create_dataset(rows, 'test')
 #%%

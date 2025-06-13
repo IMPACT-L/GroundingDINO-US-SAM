@@ -3,10 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 import os
+import cv2
 from PIL import Image
 from sklearn.metrics import jaccard_score, f1_score
 import warnings
-import cv2
 warnings.filterwarnings("ignore")
 #%%
 def sklearn_iou(pred_mask, true_mask):
@@ -15,13 +15,15 @@ def sklearn_iou(pred_mask, true_mask):
 def sklearn_dice(pred_mask, true_mask):
     return f1_score(true_mask.flatten(), pred_mask.flatten())
 #%%
+# 105us, aul, busuclm,stu,s1, busi,busuc,busb,buid,breast,
+# kidnyus, muregpro,regpro,tg3k,tn3k,
+# luminous, tnscui, busbra
 test_path = f'multimodal-data/test_image'
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
 selectedDataset =  'luminous' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
-save_result_path = f'visualizations/MedClipSam/{selectedDataset}'
+save_result_path = f'visualizations/UniverSeg/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
-
 def getTextSample(dataset=None):
     textCSV = {}
     with open(csvPath, 'r', newline='') as csvfile:
@@ -51,21 +53,24 @@ dices = []
 ious_after = []
 threshold = .5
 for image_index,image_name in enumerate(textCSV):
-
+    sam_path = f'/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+    if not os.path.exists(sam_path):
+        continue
     image_path=os.path.join(test_path,image_name)
     image_source = Image.open(image_path).convert('RGB')
     image_source = np.asarray(image_source)
     mask_path = os.path.join(test_path.replace('test_image','test_mask'),image_name)
-    mask_source = Image.open(mask_path).convert('L').resize((image_source.shape[1],image_source.shape[0]))
+    mask_source = Image.open(mask_path).convert('L')
     mask_source = np.asarray(mask_source).copy()
+    if mask_source.shape[0]!=image_source.shape[0] or mask_source.shape[1]!=image_source.shape[1]:
+        mask_source = cv2.resize(mask_source.astype(np.uint8), (image_source.shape[1], image_source.shape[0]), interpolation=cv2.INTER_NEAREST)
+
     mask_source[mask_source>=threshold]=1
     mask_source[mask_source<threshold]=0
 
-    sam_path = f'/home/hamze/Documents/Grounding-Sam-Ultrasound/visualizations/GroundedSAM-US_unseen/MedCLIP-SAM/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-
-    # sam_path = f'multimodal-data/GroundedSAM-US_unseen/MedClipSamResults/MedCLIP-SAM/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+    # sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
     data = np.load(sam_path)
-    sam_mask = data['arr']  
+    sam_mask = data['arr']  # Replace 'array_name' with actual key from data.files
     if sam_mask.shape[0]!=image_source.shape[0] or sam_mask.shape[1]!=image_source.shape[1]:
         sam_mask = cv2.resize(sam_mask.astype(np.uint8), (image_source.shape[1], image_source.shape[0]), interpolation=cv2.INTER_NEAREST)
 
@@ -94,8 +99,8 @@ for image_index,image_name in enumerate(textCSV):
         ax[2].axis('off')
         ax[2].imshow(tmp_image)
         plt.savefig(f"{save_result_path}/{image_name.replace('.bmp','.png')}") 
-        # plt.show()
         plt.close()
+        # plt.show(block=False)
 
         ious.append(iou)
         dices.append(dic)
@@ -108,6 +113,4 @@ print(f"Min IoU[{1+ious.argmin()}]: {ious.min():.2f}")
 print(f"Max IoU[{1+ious.argmax()}]: {ious.max():.2f}")
 with open(f'{save_result_path}/result.txt', 'w') as f:
     f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
-
-
 # %%

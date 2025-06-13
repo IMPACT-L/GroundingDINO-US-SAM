@@ -78,7 +78,7 @@ data_config, model_config, test_config = ConfigurationManager.load_config(config
 model = load_model(model_config,test_config.use_lora)
 #%%
 terminal = False
-top_k=3
+top_k=5
 box_threshold=0.01
 text_threshold=0.02
 # python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
@@ -130,6 +130,9 @@ mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test
 
 image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busi_benign (83).png'
 mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busi_benign (83).png'
+
+image_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
+mask_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
 
 # text_prompt="carotid . benign . malignant . chair . person . dog ." #1
 text_prompt="tumor. thyroid. carotid . benign . malignant . chair . person . dog ." #1

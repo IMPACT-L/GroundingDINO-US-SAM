@@ -81,7 +81,7 @@ model = load_model(model_config,True)
 # luminous, tnscui, busbra
 import csv
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
-selectedDataset =  'tnscui' 
+selectedDataset =  'busi' 
 save_result_path = f'visualizations/ours/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
 
@@ -250,9 +250,9 @@ for image_index,image_name in enumerate(textCSV):
             # ax[3].axis('off')
             # ax[3].imshow(connected_mask, alpha=0.5)
 
-            plt.savefig(f"{save_result_path}/{image_name.replace('.bmp','.png')}") 
-            # plt.show()
-            plt.close()
+            # plt.savefig(f"{save_result_path}/{image_name.replace('.bmp','.png')}") 
+            plt.show()
+            # plt.close()
         # if iou_after>iou_threshold:
         #     detected = True
         # if detected:
@@ -265,8 +265,8 @@ for image_index,image_name in enumerate(textCSV):
     else:
         print(f'[{image_name}{image_index}] NO BOX FOUNDED FOR ')  
         not_detected_list.append(image_name)
-    # if image_index>10:       
-    #     break
+    if image_index>10:       
+        break
 #%%
 ious_before = np.array(ious_before)
 dices_before = np.array(dices_before)

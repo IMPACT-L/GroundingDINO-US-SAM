@@ -173,7 +173,7 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
 import csv
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
-selectedDataset =  'luminous' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
+selectedDataset =  'busbra' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 save_result_path = f'visualizations/MedSam/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
 # selectedDataset =  'busuclm' #'kidnyus' #'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'

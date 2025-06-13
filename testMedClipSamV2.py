@@ -18,7 +18,7 @@ def sklearn_dice(pred_mask, true_mask):
 test_path = f'multimodal-data/test_image'
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
-selectedDataset =  'luminous' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
+selectedDataset =  'tnscui' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 save_result_path = f'visualizations/MedClipSamv2/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
 def getTextSample(dataset=None):
@@ -63,7 +63,8 @@ for image_index,image_name in enumerate(textCSV):
     mask_source[mask_source>=threshold]=1
     mask_source[mask_source<threshold]=0
 
-    sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
+    sam_path = f'/home/hamze/Documents/Grounding-Sam-Ultrasound/visualizations/GroundedSAM-US_unseen/MedCLIP-SAMv2/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+    # sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
     data = np.load(sam_path)
     sam_mask = data['arr']  # Replace 'array_name' with actual key from data.files
     if sam_mask.shape[0]!=image_source.shape[0] or sam_mask.shape[1]!=image_source.shape[1]:

@@ -75,13 +75,14 @@ sam2_predictor = SAM2ImagePredictor(sam2_model)
 config_path="configs/test_config.yaml"
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,True)
+
 #%%
 # 105us, aul, busuclm,stu,s1, busi,busuc,busb,buid,breast,
 # kidnyus, muregpro,regpro,tg3k,tn3k,
 # luminous, tnscui, busbra
 import csv
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
-selectedDataset =  'busi' 
+selectedDataset =  'luminous' 
 save_result_path = f'visualizations/ours/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
 
@@ -122,7 +123,8 @@ dices_before = []
 # dices_after = []
 not_detected_list = []
 threshold = .5
-
+sam2_model.eval()
+model.eval()
 for image_index,image_name in enumerate(textCSV):
     caption = preprocess_caption(caption=textCSV[image_name]['promt_text'])
     image_path=os.path.join(data_config.val_dir,image_name)
@@ -234,7 +236,7 @@ for image_index,image_name in enumerate(textCSV):
             ax[2].imshow(tmp_image)
             rect1 = patches.Rectangle((x1, y1), box_w, box_h,
                                     linewidth=2, edgecolor='red', facecolor='none')
-            ax[2].add_patch(rect1)
+            # ax[2].add_patch(rect1)
             ax[2].set_title(f'iou_before: {iou_before:.2f}, dice_before: {dic_before:.2f}')
             # plt.text(x=x1, y=y1, s=phrases, color='red', fontsize=10)
             ax[2].axis('off')

@@ -75,6 +75,7 @@ sam2_predictor = SAM2ImagePredictor(sam2_model)
 config_path="configs/test_config.yaml"
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,False)
+model.eval()
 #%%
 # 105us, aul, busuclm,stu,s1, busi,busuc,busb,buid,breast,
 # kidnyus, muregpro,regpro,tg3k,tn3k,

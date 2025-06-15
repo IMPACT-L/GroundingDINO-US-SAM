@@ -141,7 +141,7 @@ if is_unseen:
     dataTuple = [
         ('busbra', 'busbra_bus_0054-s.png'),
         ('luminous', 'luminous_106_24_bmode.tif'),
-        ('tnscui', 'tnscui_10131.png'),
+        ('tnscui', 'tnscui_175.png'),
     ]
 else:
     dataTuple = [
@@ -304,7 +304,7 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
             dice = sklearn_dice(mask_source, pred_mask)*100
             
             # Display metrics on image
-            text_str = f'IOU: {iou:.2f}\nDICE: {dice:.2f}'
+            text_str = f'IoU: {iou:.2f}\nDSC: {dice:.2f}'
             ax.text(0.5, 0.05, text_str, 
                 transform=ax.transAxes,
                 fontsize=label_fontsize, 
@@ -316,7 +316,7 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
             
         
         if row_idx == 0:
-            titles = ["Original", "Ground Truth", "Ours", "MedClipSAM", "MedClipSAMv2", "UniverSeg"]
+            titles = ["Original", "Ground Truth", "Ours", "MedClip-SAM", "MedClip-SAMv2", "UniverSeg"]
             ax.set_title(titles[col_idx], fontsize=label_fontsize, pad=10, fontweight='bold')
             
         ax.set_xticks([])

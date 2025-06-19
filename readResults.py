@@ -1,7 +1,7 @@
 #%%
 import os
 methods =  ['sam2','MedSam','MedClipSam','MedClipSamv2','UniverSeg','ours']
-methods =  ['UniverSeg']
+# methods =  ['UniverSeg']
 # datasets = [
 #     "105us", "aul", "busuclm", "stu-hospital", "s1", 
 #     "busi", "busbra", "bus_uc", "bus (dataset b)", "buid", "breast",
@@ -13,7 +13,8 @@ methods =  ['UniverSeg']
             # "busuc","busb","buid","breast","kidnyus",
             # "muregpro","regpro","tg3k","tn3k"]
 
-datasets = ['busbra','tnscui','luminous']
+# datasets = ['busbra','tnscui','luminous']
+datasets = ['luminous']
 for selectedDataset in datasets:
     print('*'*10,selectedDataset,'*'*10)
     for method in methods:

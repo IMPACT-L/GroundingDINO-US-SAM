@@ -18,7 +18,7 @@ def sklearn_dice(pred_mask, true_mask):
 test_path = f'multimodal-data/test_image'
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
-selectedDataset =  'tnscui' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
+selectedDataset =  'luminous' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 save_result_path = f'visualizations/MedClipSamv2/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
 def getTextSample(dataset=None):

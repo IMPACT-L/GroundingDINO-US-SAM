@@ -71,14 +71,16 @@ SAM2_MODEL_CONFIG = 'configs/sam2.1/sam2.1_hiera_l.yaml'
 sam2_checkpoint = SAM2_CHECKPOINT
 model_cfg = SAM2_MODEL_CONFIG
 sam2_model = build_sam2(model_cfg, sam2_checkpoint, device='cuda')
+sam2_model.eval()
 sam2_predictor = SAM2ImagePredictor(sam2_model)
 #%%
 config_path="configs/test_config.yaml"
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,test_config.use_lora)
+model.eval()
 #%%
 terminal = False
-top_k=5
+top_k=1
 box_threshold=0.01
 text_threshold=0.02
 # python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
@@ -134,8 +136,15 @@ mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test
 image_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
 mask_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
 
+image_path = '/home/hamze/Documents/Dataset/LUMINOUS_Database/images/1_1_Bmode.tif'
+mask_path ='/home/hamze/Documents/Dataset/LUMINOUS_Database/masks/1_1_Mask.tif'
 # text_prompt="carotid . benign . malignant . chair . person . dog ." #1
-text_prompt="tumor. thyroid. carotid . benign . malignant . chair . person . dog ." #1
+image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busbra_bus_0017-s.png'
+mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busbra_bus_0017-s.png'
+
+
+text_prompt="right lower-back muscle ." #1
+# text_prompt="tumor. thyroid. carotid . benign . malignant . chair . person . dog ." #1
 if terminal and args.path:
     image_path =  args.path
 
@@ -145,6 +154,10 @@ if terminal and args.text_prompt:
 
 caption = preprocess_caption(caption=text_prompt)
 image_source, image = load_image(image_path)
+
+import time
+start_time = time.time()
+
 h, w, _ = image_source.shape
 boxes, logits, phrases = predict(model,
         image,
@@ -201,7 +214,7 @@ if len(boxes>0):
 
             iou = sklearn_iou(masks,mask_source)*100
             dic = sklearn_dice(masks,mask_source)*100
-            if iou>=3:
+            if dic>=50:
                 overlay_mask[:,:,2][masks>0]=255
                 x1, y1, x2, y2 = box_np[0]
                 box_w = x2 - x1
@@ -218,4 +231,7 @@ if len(boxes>0):
 else:
     print('NO BOX FOUNDED')  
 
+end_time = time.time()
+# times.append(end_time - start_time)
+print(f"Execution time: {end_time - start_time:.4f} seconds")
 # %%

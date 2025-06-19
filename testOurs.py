@@ -70,12 +70,13 @@ SAM2_MODEL_CONFIG = 'configs/sam2.1/sam2.1_hiera_l.yaml'
 sam2_checkpoint = SAM2_CHECKPOINT
 model_cfg = SAM2_MODEL_CONFIG
 sam2_model = build_sam2(model_cfg, sam2_checkpoint, device='cuda')
+sam2_model.eval()
 sam2_predictor = SAM2ImagePredictor(sam2_model)
 #%%
 config_path="configs/test_config.yaml"
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,True)
-
+model.eval()
 #%%
 # 105us, aul, busuclm,stu,s1, busi,busuc,busb,buid,breast,
 # kidnyus, muregpro,regpro,tg3k,tn3k,
@@ -112,7 +113,7 @@ textCSV = getTextSample(selectedDataset)
 #%%
 show_plots = True
 margin = 0
-box_threshold=0.1
+box_threshold=0.05
 text_threshold=0.3
 iou_threshold=10
 # cc_treshold=(15, 15)
@@ -267,8 +268,8 @@ for image_index,image_name in enumerate(textCSV):
     else:
         print(f'[{image_name}{image_index}] NO BOX FOUNDED FOR ')  
         not_detected_list.append(image_name)
-    if image_index>10:       
-        break
+    # if image_index>10:       
+    #     break
 #%%
 ious_before = np.array(ious_before)
 dices_before = np.array(dices_before)

@@ -70,6 +70,7 @@ SAM2_MODEL_CONFIG = 'configs/sam2.1/sam2.1_hiera_l.yaml'
 sam2_checkpoint = SAM2_CHECKPOINT
 model_cfg = SAM2_MODEL_CONFIG
 sam2_model = build_sam2(model_cfg, sam2_checkpoint, device='cuda')
+sam2_model.eval()
 sam2_predictor = SAM2ImagePredictor(sam2_model)
 #%%
 config_path="configs/test_config.yaml"
@@ -82,7 +83,7 @@ model.eval()
 # luminous, tnscui, busbra
 import csv
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
-selectedDataset =  'busi' 
+selectedDataset =  'luminous' 
 save_result_path = f'visualizations/sam2/{selectedDataset}'
 os.makedirs(save_result_path, exist_ok=True)
 
@@ -266,8 +267,8 @@ for image_index,image_name in enumerate(textCSV):
     else:
         print(f'[{image_name}{image_index}] NO BOX FOUNDED FOR ')  
         not_detected_list.append(image_name)
-    if image_index>10:       
-        break
+    # if image_index>10:       
+    #     break
 #%%
 ious_before = np.array(ious_before)
 dices_before = np.array(dices_before)

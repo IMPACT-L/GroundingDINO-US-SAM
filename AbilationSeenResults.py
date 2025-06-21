@@ -1,6 +1,7 @@
 #%%
 import os
 methods =  {'UniverSeg':'UniverSeg',
+            'BiomedParse':'BiomedParse',
             'SAMUS':'SAMUS',
             'MedClipSam':'MedClip-SAM',
             'MedClipSamv2':'MedClip-SAMv2',
@@ -13,7 +14,6 @@ datasets = [{"Breast":{"breast":"BrEaST", "buid":"BUID", "busuc":"BUSUC", "busuc
             {"Kidney":{"kidnyus":"KidneyUS"}}
             ]
             
-# %%
 for organs in datasets:
     # print(organs)
     for organ in organs:

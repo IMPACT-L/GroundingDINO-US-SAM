@@ -106,6 +106,7 @@ csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.C
 datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
             "stu","s1","tn3k","tg3k","105us",
             "aul","muregpro","regpro","kidnyus"]
+
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)
     save_result_path = f'visualizations/sam2/{selectedDataset}'
@@ -215,8 +216,6 @@ for selectedDataset in datasets:
     print(f"Number of not detected: {len(not_detected_list)}")
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
-    print(f"Min IoU[{1+ious.argmin()}]: {ious.min():.2f}")
-    print(f"Max IoU[{1+ious.argmax()}]: {ious.max():.2f}")
 
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")

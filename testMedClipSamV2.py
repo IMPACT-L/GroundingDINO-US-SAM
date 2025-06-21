@@ -38,9 +38,18 @@ def getTextSample(dataset=None):
 #%%
 test_path = f'multimodal-data/test_image'
 csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
-datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
-            "stu","s1","tn3k","tg3k","105us",
-            "aul","muregpro","regpro","kidnyus"]
+
+is_unseen = True
+
+if is_unseen:
+    datasets = ["busbra","tnscui","luminous"]
+else:
+    datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
+                "stu","s1","tn3k","tg3k","105us",
+                "aul","muregpro","regpro","kidnyus"]
+
+threshold = .5
+
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)
     save_result_path = f'visualizations/MedClipSamv2/{selectedDataset}'
@@ -51,7 +60,7 @@ for selectedDataset in datasets:
     ious = []
     dices = []
     ious_after = []
-    threshold = .5
+    
     for image_index,image_name in enumerate(textCSV):
 
         image_path=os.path.join(test_path,image_name)
@@ -64,8 +73,15 @@ for selectedDataset in datasets:
         mask_source[mask_source>=threshold]=1
         mask_source[mask_source<threshold]=0
 
-        # sam_path = f'/visualizations/GroundedSAM-US_unseen/MedCLIP-SAMv2/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-        sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
+        if is_unseen:
+            sam_path = f'visualizations/GroundedSAM-US_unseen/MedCLIP-SAMv2/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        else:
+            sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
+        
+        if not os.path.exists(sam_path):
+            print(sam_path)
+            continue
+
         data = np.load(sam_path)
         sam_mask = data['arr']  # Replace 'array_name' with actual key from data.files
         if sam_mask.shape[0]!=image_source.shape[0] or sam_mask.shape[1]!=image_source.shape[1]:
@@ -108,8 +124,6 @@ for selectedDataset in datasets:
     dices = np.array(dices)
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
-    print(f"Min IoU[{1+ious.argmin()}]: {ious.min():.2f}")
-    print(f"Max IoU[{1+ious.argmax()}]: {ious.max():.2f}")
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
 

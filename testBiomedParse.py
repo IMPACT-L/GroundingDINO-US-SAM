@@ -3,10 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 import os
+import cv2
 from PIL import Image
 from sklearn.metrics import jaccard_score, f1_score
 import warnings
-import cv2
 warnings.filterwarnings("ignore")
 #%%
 def sklearn_iou(pred_mask, true_mask):
@@ -14,6 +14,7 @@ def sklearn_iou(pred_mask, true_mask):
 
 def sklearn_dice(pred_mask, true_mask):
     return f1_score(true_mask.flatten(), pred_mask.flatten())
+
 def getTextSample(dataset=None):
     textCSV = {}
     with open(csvPath, 'r', newline='') as csvfile:
@@ -36,22 +37,25 @@ def getTextSample(dataset=None):
                     }
     return textCSV
 #%%
+
 test_path = f'multimodal-data/test_image'
 csvPath = 'multimodal-data/test.CSV'
 
 is_unseen = True
 
 if is_unseen:
-    datasets = ["busbra","tnscui","luminous"]
+    # datasets = ["busbra","tnscui","luminous"]
+    datasets = ["tnscui","luminous"]
 else:
     datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
                 "stu","s1","tn3k","tg3k","105us",
                 "aul","muregpro","regpro","kidnyus"]
+
 threshold = .5
 
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)
-    save_result_path = f'visualizations/MedClipSam/{selectedDataset}'
+    save_result_path = f'visualizations/BiomedParse/{selectedDataset}'
     os.makedirs(save_result_path, exist_ok=True)
 
     textCSV = getTextSample(selectedDataset)
@@ -61,39 +65,35 @@ for selectedDataset in datasets:
     ious_after = []
     
     for image_index,image_name in enumerate(textCSV):
-
+        biomed_path = f'multimodal-data/BiomedParse/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        if not os.path.exists(biomed_path):
+            print(biomed_path)
+            continue
         image_path=os.path.join(test_path,image_name)
         image_source = Image.open(image_path).convert('RGB')
         image_source = np.asarray(image_source)
         mask_path = os.path.join(test_path.replace('test_image','test_mask'),image_name)
-        mask_source = Image.open(mask_path).convert('L').resize((image_source.shape[1],image_source.shape[0]))
+        mask_source = Image.open(mask_path).convert('L')
         mask_source = np.asarray(mask_source).copy()
+        
         mask_source[mask_source>=threshold]=1
         mask_source[mask_source<threshold]=0
 
-        if is_unseen:
-            mded_clip_sam_path = f'visualizations/GroundedSAM-US_unseen/MedCLIP-SAM/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-        else:
-            mded_clip_sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAM/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        # biomed_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
+        data = np.load(biomed_path)
+        biomed_mask = data['logits']  
+        biomed_mask[biomed_mask>=threshold]=1
+        biomed_mask[biomed_mask<threshold]=0
 
-        if not os.path.exists(mded_clip_sam_path):
-            print(mded_clip_sam_path)
-            continue
+        if biomed_mask.shape[0]!=mask_source.shape[0] or biomed_mask.shape[1]!=mask_source.shape[1]:
+            mask_source = cv2.resize(mask_source.astype(np.uint8), (biomed_mask.shape[1], biomed_mask.shape[0]), interpolation=cv2.INTER_NEAREST)
 
-        data = np.load(mded_clip_sam_path)
-        sam_mask = data['arr']  
+        if image_source.shape[0]!=biomed_mask.shape[0] or image_source.shape[1]!=biomed_mask.shape[1]:
+            image_source = cv2.resize(image_source.astype(np.uint8), (biomed_mask.shape[1], biomed_mask.shape[0]), interpolation=cv2.INTER_NEAREST)
 
-        sam_mask[sam_mask>=threshold]=1
-        sam_mask[sam_mask<threshold]=0
 
-        if sam_mask.shape[0]!=image_source.shape[0] or sam_mask.shape[1]!=image_source.shape[1]:
-            image_source = cv2.resize(image_source.astype(np.uint8), (sam_mask.shape[1], sam_mask.shape[0]), interpolation=cv2.INTER_NEAREST)
-
-        if sam_mask.shape[0]!=mask_source.shape[0] or sam_mask.shape[1]!=mask_source.shape[1]:
-            mask_source = cv2.resize(mask_source.astype(np.uint8), (sam_mask.shape[1], sam_mask.shape[0]), interpolation=cv2.INTER_NEAREST)
-
-        iou = sklearn_iou(sam_mask,mask_source)*100
-        dic = sklearn_dice(sam_mask,mask_source)*100
+        iou = sklearn_iou(biomed_mask,mask_source)*100
+        dic = sklearn_dice(biomed_mask,mask_source)*100
         if show_plots:
             fig, ax = plt.subplots(1, 3, figsize=(20, 8))
 
@@ -108,13 +108,13 @@ for selectedDataset in datasets:
             ax[1].imshow(tmp_image)
             
             tmp_image = image_source.copy()
-            tmp_image[:,:,2][sam_mask==1]=255
+            tmp_image[:,:,2][biomed_mask==1]=255
             ax[2].set_title(f'iou: {iou:.2f}, dice: {dic:.2f}')
             ax[2].axis('off')
             ax[2].imshow(tmp_image)
             plt.savefig(f"{save_result_path}/{image_name.replace('.bmp','.png')}") 
-            # plt.show()
             plt.close()
+            # plt.show()
 
             ious.append(iou)
             dices.append(dic)
@@ -124,7 +124,5 @@ for selectedDataset in datasets:
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
-
 print('Finished')
-
-    # %%
+# %%

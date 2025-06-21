@@ -3,6 +3,7 @@ import os
 datasets = ['busbra','tnscui','luminous']# Unseen Dataset
 
 methods =  {'UniverSeg':'UniverSeg',
+            'BiomedParse':'BiomedParse',
             'SAMUS':'SAMUS',
             'MedClipSam':'MedClip-SAM',
             'MedClipSamv2':'MedClip-SAMv2',

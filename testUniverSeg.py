@@ -37,15 +37,22 @@ def getTextSample(dataset=None):
                     }
     return textCSV
 #%%
-# 105us, aul, busuclm,stu,s1, busi,busuc,busb,buid,breast,
-# kidnyus, muregpro,regpro,tg3k,tn3k,
-# luminous, tnscui, busbra
-test_path = f'multimodal-data/test_image'
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 
-datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
-            "stu","s1","tn3k","tg3k","105us",
-            "aul","muregpro","regpro","kidnyus"]
+test_path = f'multimodal-data/test_image'
+csvPath = 'multimodal-data/test.CSV'
+
+is_unseen = True
+
+if is_unseen:
+    datasets = ["busbra","tnscui","luminous"]
+else:
+    datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
+                "stu","s1","tn3k","tg3k","105us",
+                "aul","muregpro","regpro","kidnyus"]
+
+
+threshold = .5
+
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)
     save_result_path = f'visualizations/UniverSeg/{selectedDataset}'
@@ -56,12 +63,14 @@ for selectedDataset in datasets:
     ious = []
     dices = []
     ious_after = []
-    threshold = .5
+    
     for image_index,image_name in enumerate(textCSV):
-        # universeg_path = f'multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-        universeg_path = f'multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-        # if not os.path.exists(universeg_path):
-        #     continue
+        if is_unseen:
+            universeg_path = f'multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        else:
+            universeg_path = f'multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        if not os.path.exists(universeg_path):
+            continue
         image_path=os.path.join(test_path,image_name)
         image_source = Image.open(image_path).convert('RGB')
         image_source = np.asarray(image_source)
@@ -116,8 +125,6 @@ for selectedDataset in datasets:
     dices = np.array(dices)
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
-    print(f"Min IoU[{1+ious.argmin()}]: {ious.min():.2f}")
-    print(f"Max IoU[{1+ious.argmax()}]: {ious.max():.2f}")
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
 print('Finished')

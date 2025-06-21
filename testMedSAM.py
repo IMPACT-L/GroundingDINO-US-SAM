@@ -204,22 +204,28 @@ model = load_model(model_config,training_config.use_lora)
 model.eval()
 #%%
 import csv
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
-# datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
-#             "stu","s1","tn3k","tg3k","105us",
-#             "aul","muregpro","regpro","kidnyus"]
-datasets = ["muregpro","regpro","kidnyus"]
+csvPath = 'multimodal-data/test.CSV'
+
+is_unseen = True
+
+if is_unseen:
+    datasets = ["busbra","tnscui","luminous"]
+else:
+    datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
+                "stu","s1","tn3k","tg3k","105us",
+                "aul","muregpro","regpro","kidnyus"]
+
+show_plots = True
+margin = 0
+box_threshold=0.05
+text_threshold=0.3
+threshold = .5
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)
     save_result_path = f'visualizations/MedSam/{selectedDataset}'
     os.makedirs(save_result_path, exist_ok=True)
 
     textCSV = getTextSample(selectedDataset)
-
-    show_plots = True
-    margin = 0
-    box_threshold=0.05
-    text_threshold=0.3
 
     ious = []
     dices = []
@@ -241,8 +247,6 @@ for selectedDataset in datasets:
                 remove_combined= True)
         iou = None
         dic = None
-
-        threshold = .5
 
         detected = False
         if len(boxes>0):
@@ -311,8 +315,6 @@ for selectedDataset in datasets:
     print(f"Number of not detected: {len(not_detected_list)}")
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
-    print(f"Min IoU[{1+ious.argmin()}]: {ious.min():.2f}")
-    print(f"Max IoU[{1+ious.argmax()}]: {ious.max():.2f}")
 
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")

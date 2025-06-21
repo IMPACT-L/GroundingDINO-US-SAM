@@ -94,39 +94,41 @@ model_cfg = SAM2_MODEL_CONFIG
 sam2_model = build_sam2(model_cfg, sam2_checkpoint, device='cuda')
 sam2_model.eval()
 sam2_predictor = SAM2ImagePredictor(sam2_model)
+sam2_model.eval()
 #%%
 config_path="configs/test_config.yaml"
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,True)
 model.eval()
 #%%
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
+csvPath = 'multimodal-data/test.CSV'
 
-datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
-            "stu","s1","tn3k","tg3k","105us",
-            "aul","muregpro","regpro","kidnyus"]
+is_unseen = True
 
-datasets = ["tn3k","tg3k","105us","aul"]
+if is_unseen:
+    datasets = ["busbra","tnscui","luminous"]
+else:
+    datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
+                "stu","s1","tn3k","tg3k","105us",
+                "aul","muregpro","regpro","kidnyus"]
 
-# datasets = ['busbra','tnscui','luminous']
+show_plots = True
+margin = 0
+box_threshold= 0.05
+text_threshold=0.3
+iou_threshold=10
+threshold = .5
 
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)
     save_result_path = f'visualizations/ours/{selectedDataset}'
     os.makedirs(save_result_path, exist_ok=True)
     textCSV = getTextSample(selectedDataset)
-    show_plots = True
-    margin = 0
-    box_threshold= 0.15 # 0.05
-    text_threshold=0.3
-    iou_threshold=10
+
 
     ious = []
     dices = []
     not_detected_list = []
-    threshold = .5
-    sam2_model.eval()
-    model.eval()
     for image_index,image_name in enumerate(textCSV):
         caption = preprocess_caption(caption=textCSV[image_name]['promt_text'])
         image_path=os.path.join(data_config.val_dir,image_name)
@@ -218,8 +220,6 @@ for selectedDataset in datasets:
     print(f"Number of not detected: {len(not_detected_list)}")
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
-    print(f"Min IoU[{1+ious.argmin()}]: {ious.min():.2f}")
-    print(f"Max IoU[{1+ious.argmax()}]: {ious.max():.2f}")
 
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")

@@ -169,14 +169,7 @@ def load_image(image_path: str)-> Tuple[np.array, torch.Tensor]:
     image = np.asarray(image_source)
     image_transformed = transform(image_source)
     return image, image_transformed
-#%%
-import csv
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
-selectedDataset = None
-selectedDataset =  'busbra' # 'kidnyus' # 'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
-save_result_path = f'visualizations/MedSam/{selectedDataset}'
-os.makedirs(save_result_path, exist_ok=True)
-# selectedDataset =  'busuclm' #'kidnyus' #'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
+
 def getTextSample(dataset=None):
     textCSV = {}
     with open(csvPath, 'r', newline='') as csvfile:
@@ -199,8 +192,7 @@ def getTextSample(dataset=None):
                         # 'mask_path': row['mask_path']
                     }
     return textCSV
-textCSV = getTextSample(selectedDataset)
-#%% load model and image
+#%%
 device = 'cuda'
 medsam_model = sam_model_registry["vit_b"](checkpoint="/home/hamze/Documents/MedSAM/work_dir/MedSAM/medsam_vit_b.pth")
 medsam_model = medsam_model.to(device)
@@ -209,133 +201,120 @@ medsam_model.eval()
 config_path="configs/test_config.yaml"
 data_config, model_config, training_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,training_config.use_lora)
+model.eval()
 #%%
-show_plots = True
-margin = 5
-box_threshold=0.05
-text_threshold=0.3
-iou_threshold=10
-# cc_treshold=(15, 15)
+import csv
+csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
+# datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
+#             "stu","s1","tn3k","tg3k","105us",
+#             "aul","muregpro","regpro","kidnyus"]
+datasets = ["muregpro","regpro","kidnyus"]
+for selectedDataset in datasets:
+    print("*"*20,selectedDataset,"*"*20)
+    save_result_path = f'visualizations/MedSam/{selectedDataset}'
+    os.makedirs(save_result_path, exist_ok=True)
 
-ious_before = []
-dices_before = []
-ious_after = []
-dices_after = []
-not_detected_list = []
-for image_index,image_name in enumerate(textCSV):
-    caption = preprocess_caption(caption=textCSV[image_name]['promt_text'])
+    textCSV = getTextSample(selectedDataset)
 
-    image_path=os.path.join(data_config.val_dir,image_name)
-    
-    image_source, image = load_image(image_path)
-    h, w, _ = image_source.shape
-    boxes, _logits, phrases  = predict(model,
-            image,
-            caption,
-            box_threshold,
-            text_threshold,
-            remove_combined= True)
-    iou_before = None
-    dic_before = None
-    # iou_after = None
-    # dic_after = None
-    threshold = .5
+    show_plots = True
+    margin = 0
+    box_threshold=0.05
+    text_threshold=0.3
 
-    detected = False
-    if len(boxes>0):
-        print('brfore',_logits)
-        boxes, _logits, phrases = apply_nms_per_phrase(image_source, boxes, _logits, phrases, box_threshold)
-        best_box=_logits.argmax()
-        print('after',_logits,'\tbest_box',best_box)
-    
-        with torch.no_grad():
-            image_embedding = medsam_model.image_encoder(image.float().permute(0, 2, 1).unsqueeze(0).to(device))
-        boxes = boxes* torch.Tensor([w, h, w, h])
+    ious = []
+    dices = []
+    ious_after = []
+    dices_after = []
+    not_detected_list = []
+    for image_index,image_name in enumerate(textCSV):
+        caption = preprocess_caption(caption=textCSV[image_name]['promt_text'])
 
-        xyxy = box_convert(boxes=boxes, in_fmt="cxcywh", out_fmt="xyxy").numpy()
-        box_np = np.array([[int(x) for x in xyxy[0]]]) 
-        box_1024 = box_np / np.array([w,h,w,h]) * 1024
-        masks = medsam_inference(medsam_model, image_embedding, box_1024, h,w)
-
-        x1, y1, x2, y2 = box_np[0]
-        x1-=margin
-        y1-=margin
-        box_w = x2 - x1+2*margin
-        box_h = y2 - y1+2*margin
-
-        mask_path = os.path.join(data_config.val_dir.replace('test_image','test_mask'),image_name)
-        mask_source = Image.open(mask_path).convert('L').resize((w,h))
+        image_path=os.path.join(data_config.val_dir,image_name)
         
-        mask_source = np.asarray(mask_source).copy()
-        mask_source[mask_source>=threshold]=1
-        mask_source[mask_source<threshold]=0
+        image_source, image = load_image(image_path)
+        h, w, _ = image_source.shape
+        boxes, _logits, phrases  = predict(model,
+                image,
+                caption,
+                box_threshold,
+                text_threshold,
+                remove_combined= True)
+        iou = None
+        dic = None
 
-        iou_before = sklearn_iou(masks,mask_source)*100
-        dic_before = sklearn_dice(masks,mask_source)*100
+        threshold = .5
 
-        # mask_uint8 = (masks * 255).astype(np.uint8)
-        # num_labels, labels_im = cv2.connectedComponents(mask_uint8)
+        detected = False
+        if len(boxes>0):
+            # print('brfore',_logits)
+            boxes, _logits, phrases = apply_nms_per_phrase(image_source, boxes, _logits, phrases, box_threshold)
+            best_box=_logits.argmax()
+            # print('after',_logits,'\tbest_box',best_box)
+        
+            with torch.no_grad():
+                image_embedding = medsam_model.image_encoder(image.float().permute(0, 2, 1).unsqueeze(0).to(device))
+            boxes = boxes* torch.Tensor([w, h, w, h])
 
-        # binary_mask = (mask_uint8 > 0).astype(np.uint8)
+            xyxy = box_convert(boxes=boxes, in_fmt="cxcywh", out_fmt="xyxy").numpy()
+            box_np = np.array([[int(x) for x in xyxy[0]]]) 
+            box_1024 = box_np / np.array([w,h,w,h]) * 1024
+            masks = medsam_inference(medsam_model, image_embedding, box_1024, h,w)
 
+            x1, y1, x2, y2 = box_np[0]
+            x1-=margin
+            y1-=margin
+            box_w = x2 - x1+2*margin
+            box_h = y2 - y1+2*margin
 
-        # Fill holes
-        # inverted = cv2.bitwise_not(binary_mask * 255)
-        # h, w = inverted.shape
-        # mask = np.zeros((h + 2, w + 2), np.uint8)
-        # cv2.floodFill(inverted, mask, (0, 0), 255)
-        # inverted_filled = cv2.bitwise_not(inverted)
-        # filled_mask = binary_mask | (inverted_filled > 0).astype(np.uint8)
-
-        # Connect components
-        # kernel = np.ones(cc_treshold, np.uint8)
-        # connected_mask = cv2.morphologyEx(filled_mask, cv2.MORPH_CLOSE, kernel)
-        # dilated = cv2.dilate(connected_mask, kernel, iterations=1)
-        # iou_after = sklearn_iou(dilated,mask_source)*100
-        # dic_after = sklearn_dice(dilated,mask_source)*100
-
-        if show_plots:
-            fig, ax = plt.subplots(1, 3, figsize=(20, 8))
-
-            ax[0].set_title(f'Source: {image_name}')
-            ax[0].axis('off')
-            ax[0].imshow(image_source)
-
-            tmp_image = image_source.copy()
-            tmp_image[:,:,2][mask_source==1]=255
-            ax[1].set_title(f'Ground Truth[{image_index}]')
-            ax[1].axis('off')
-            ax[1].imshow(tmp_image)
+            mask_path = os.path.join(data_config.val_dir.replace('test_image','test_mask'),image_name)
+            mask_source = Image.open(mask_path).convert('L').resize((w,h))
             
-            tmp_image = image_source.copy()
-            tmp_image[:,:,2][masks==1]=255
-            ax[2].imshow(tmp_image)
-            rect1 = patches.Rectangle((x1, y1), box_w, box_h,
-                                    linewidth=2, edgecolor='red', facecolor='none')
-            ax[2].add_patch(rect1)
-            ax[2].set_title(f'iou_before: {iou_before:.2f}, dice_before: {dic_before:.2f}')
-            ax[2].axis('off')
+            mask_source = np.asarray(mask_source).copy()
+            mask_source[mask_source>=threshold]=1
+            mask_source[mask_source<threshold]=0
 
-            plt.savefig(f"{save_result_path}/{image_name.replace('.bmp','.png')}") 
-            plt.close()
-        ious_before.append(iou_before)
-        dices_before.append(dic_before)
-    else:
-        print(f'[{image_name}{image_index}]NO BOX FOUNDED FOR ')  
-        not_detected_list.append(image_name)
-    # break
-# %%
-ious_before = np.array(ious_before)
-dices_before = np.array(dices_before)
-# ious_after = np.array(ious_after)
-# dices_after = np.array(dices_after)
+            iou = sklearn_iou(masks,mask_source)*100
+            dic = sklearn_dice(masks,mask_source)*100
 
-print(f"Number of not detected: {len(not_detected_list)}")
-print(f"Average IoU: {ious_before.mean():.2f}±{ious_before.std():.2f}")
-print(f"Average Dic: {dices_before.mean():.2f}±{dices_before.std():.2f}")
-print(f"Min IoU[{1+ious_before.argmin()}]: {ious_before.min():.2f}")
-print(f"Max IoU[{1+ious_before.argmax()}]: {ious_before.max():.2f}")
+            if show_plots:
+                fig, ax = plt.subplots(1, 3, figsize=(20, 8))
 
-with open(f'{save_result_path}/result.txt', 'w') as f:
-    f.write(f"Average Dice, IoU: {dices_before.mean():.2f}±{dices_before.std():.0f} & {ious_before.mean():.2f}±{ious_before.std():.0f}\n")
+                ax[0].set_title(f'Source: {image_name}')
+                ax[0].axis('off')
+                ax[0].imshow(image_source)
+
+                tmp_image = image_source.copy()
+                tmp_image[:,:,2][mask_source==1]=255
+                ax[1].set_title(f'Ground Truth[{image_index}]')
+                ax[1].axis('off')
+                ax[1].imshow(tmp_image)
+                
+                tmp_image = image_source.copy()
+                tmp_image[:,:,2][masks==1]=255
+                ax[2].imshow(tmp_image)
+                rect1 = patches.Rectangle((x1, y1), box_w, box_h,
+                                        linewidth=2, edgecolor='red', facecolor='none')
+                ax[2].add_patch(rect1)
+                ax[2].set_title(f'iou: {iou:.2f}, dice: {dic:.2f}')
+                ax[2].axis('off')
+
+                plt.savefig(f"{save_result_path}/{image_name.replace('.bmp','.png')}") 
+                plt.close()
+            ious.append(iou)
+            dices.append(dic)
+        else:
+            print(f'[{image_name}{image_index}]NO BOX FOUNDED FOR ')  
+            not_detected_list.append(image_name)
+    ious = np.array(ious)
+    dices = np.array(dices)
+
+    print(f"Number of not detected: {len(not_detected_list)}")
+    print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
+    print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
+    print(f"Min IoU[{1+ious.argmin()}]: {ious.min():.2f}")
+    print(f"Max IoU[{1+ious.argmax()}]: {ious.max():.2f}")
+
+    with open(f'{save_result_path}/result.txt', 'w') as f:
+        f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
+print('Finished')
 # %%

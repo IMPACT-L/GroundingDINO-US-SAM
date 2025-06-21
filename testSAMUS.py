@@ -14,6 +14,7 @@ def sklearn_iou(pred_mask, true_mask):
 
 def sklearn_dice(pred_mask, true_mask):
     return f1_score(true_mask.flatten(), pred_mask.flatten())
+
 def getTextSample(dataset=None):
     textCSV = {}
     with open(csvPath, 'r', newline='') as csvfile:
@@ -37,41 +38,50 @@ def getTextSample(dataset=None):
     return textCSV
 #%%
 test_path = f'multimodal-data/test_image'
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
+csvPath = 'multimodal-data/test.CSV'
+
 datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
             "stu","s1","tn3k","tg3k","105us",
             "aul","muregpro","regpro","kidnyus"]
+
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)
-    save_result_path = f'visualizations/MedClipSamv2/{selectedDataset}'
-    os.makedirs(save_result_path, exist_ok=True)
 
+    save_result_path = f'visualizations/SAMUS/{selectedDataset}'
+    os.makedirs(save_result_path, exist_ok=True)
     textCSV = getTextSample(selectedDataset)
+
     show_plots = True
     ious = []
     dices = []
     ious_after = []
     threshold = .5
     for image_index,image_name in enumerate(textCSV):
+        # samus_path = f'visualizations/GroundedSAM-US_unseen/SAMUS/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
 
+        sam_path = f'multimodal-data/SAMUS/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        # if not os.path.exists(sam_path):
+        #     continue
         image_path=os.path.join(test_path,image_name)
         image_source = Image.open(image_path).convert('RGB')
         image_source = np.asarray(image_source)
         mask_path = os.path.join(test_path.replace('test_image','test_mask'),image_name)
         mask_source = Image.open(mask_path).convert('L')
         mask_source = np.asarray(mask_source).copy()
-        
+    
         mask_source[mask_source>=threshold]=1
         mask_source[mask_source<threshold]=0
 
-        # sam_path = f'/visualizations/GroundedSAM-US_unseen/MedCLIP-SAMv2/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-        sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
+        # sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
         data = np.load(sam_path)
-        sam_mask = data['arr']  # Replace 'array_name' with actual key from data.files
-        if sam_mask.shape[0]!=image_source.shape[0] or sam_mask.shape[1]!=image_source.shape[1]:
+        sam_mask = data['prediction']  # Replace 'array_name' with actual key from data.files
+        # if sam_mask.shape[0]!=image_source.shape[0] or sam_mask.shape[1]!=image_source.shape[1]:
+        #     sam_mask = cv2.resize(sam_mask.astype(np.uint8), (image_source.shape[1], image_source.shape[0]), interpolation=cv2.INTER_NEAREST)
+
+        if image_source.shape[0]!=sam_mask.shape[0] or image_source.shape[1]!=sam_mask.shape[1]:
             image_source = cv2.resize(image_source.astype(np.uint8), (sam_mask.shape[1], sam_mask.shape[0]), interpolation=cv2.INTER_NEAREST)
 
-        if sam_mask.shape[0]!=mask_source.shape[0] or sam_mask.shape[1]!=mask_source.shape[1]:
+        if mask_source.shape[0]!=sam_mask.shape[0] or mask_source.shape[1]!=sam_mask.shape[1]:
             mask_source = cv2.resize(mask_source.astype(np.uint8), (sam_mask.shape[1], sam_mask.shape[0]), interpolation=cv2.INTER_NEAREST)
 
         sam_mask[sam_mask>=threshold]=1
@@ -104,6 +114,7 @@ for selectedDataset in datasets:
 
             ious.append(iou)
             dices.append(dic)
+
     ious = np.array(ious)
     dices = np.array(dices)
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
@@ -112,7 +123,5 @@ for selectedDataset in datasets:
     print(f"Max IoU[{1+ious.argmax()}]: {ious.max():.2f}")
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
-
 print('Finished')
-
     # %%

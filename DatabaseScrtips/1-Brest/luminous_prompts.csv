@@ -1,342 +1,296 @@
-image_name,prompt_text
-7_4_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-66_22_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, fascicle orientation and adjacent vertebral structures."
-69_24_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-34_28_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with uniform echogenicity and fascial boundaries.
-35_30_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with uniform echogenicity and fascial boundaries.
-109_29_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-37_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-9_26_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, optimized depth settings for clear LM visualization."
-67_29_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-16_37_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-3_22_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-81_5_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-58_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-63_5_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, tendon attachments and minimal fatty infiltration."
-72_33_Bmode.tif,Transverse view of the LM muscle showing fascicle orientation and adjacent vertebral structures.
-88_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-41_2_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with tendon attachments and minimal fatty infiltration.
-65_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-104_26_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle-tendon junctions and adjacent connective tissue."
-18_23_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-15_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, reduced muscle thickness due to atrophy."
-34_24_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-49_22_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, parallel muscle fibers and hyperechoic perimysium."
-48_33_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-108_27_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, reduced muscle thickness due to atrophy."
-57_32_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with reduced muscle thickness due to atrophy.
-7_24_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-88_31_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-101_6_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-3_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with tendon attachments and minimal fatty infiltration.
-16_11_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-8_5_Bmode.tif,Transverse view of the LM muscle showing high-frequency details of muscle fascicles.
-28_30_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-17_37_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with visible fascicles and hypoechoic muscle tissue.
-72_34_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-14_28_Bmode.tif,Transverse view of the LM muscle showing optimized depth settings for clear LM visualization.
-99_1_Bmode.tif,Transverse view of the LM muscle showing tendon attachments and minimal fatty infiltration.
-45_4_Bmode.tif,Transverse view of the LM muscle showing manual segmentation overlay for deep learning.
-2_32_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with visible fascicles and hypoechoic muscle tissue.
-98_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-64_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with high-frequency details of muscle fascicles.
-55_26_Bmode.tif,Transverse view of the LM muscle showing optimized depth settings for clear LM visualization.
-18_31_Bmode.tif,Transverse view of the LM muscle showing tendon attachments and minimal fatty infiltration.
-53_29_Bmode.tif,Transverse view of the LM muscle showing reduced muscle thickness due to atrophy.
-33_22_Bmode.tif,Transverse view of the LM muscle showing well-defined borders and homogeneous muscle texture.
-70_27_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-23_30_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with visible fascicles and hypoechoic muscle tissue.
-56_31_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with high-frequency details of muscle fascicles.
-76_30_Bmode.tif,Transverse view of the LM muscle showing optimized depth settings for clear LM visualization.
-40_4_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-90_28_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-60_33_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-24_3_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-55_3_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle striations and echogenic septa.
-96_33_Bmode.tif,Transverse view of the LM muscle showing muscle-tendon junctions and adjacent connective tissue.
-37_4_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-106_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-30_1_Bmode.tif,Transverse view of the LM muscle showing tendon attachments and minimal fatty infiltration.
-81_37_Bmode.tif,Transverse view of the LM muscle showing tendon attachments and minimal fatty infiltration.
-14_3_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, mild fatty infiltration and disrupted fiber pattern."
-31_30_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-56_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-22_5_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-51_3_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-50_3_Bmode.tif,Transverse view of the LM muscle showing optimized depth settings for clear LM visualization.
-21_27_Bmode.tif,Transverse view of the LM muscle showing manual segmentation overlay for deep learning.
-63_29_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-74_25_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-23_29_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with parallel muscle fibers and hyperechoic perimysium.
-33_1_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-95_30_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with tendon attachments and minimal fatty infiltration.
-55_28_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with cross-sectional area and surrounding aponeurosis.
-62_26_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-91_27_Bmode.tif,Transverse view of the LM muscle showing optimized depth settings for clear LM visualization.
-70_7_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-30_26_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-68_25_Bmode.tif,Transverse view of the LM muscle showing reduced muscle thickness due to atrophy.
-96_29_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with parallel muscle fibers and hyperechoic perimysium.
-87_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-36_31_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with high-frequency details of muscle fascicles.
-107_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, fascicle orientation and adjacent vertebral structures."
-97_3_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, parallel muscle fibers and hyperechoic perimysium."
-82_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-42_24_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-38_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-84_21_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-88_3_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, mild fatty infiltration and disrupted fiber pattern."
-96_2_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-101_35_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with manual segmentation overlay for deep learning.
-59_29_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with tendon attachments and minimal fatty infiltration.
-26_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with manual segmentation overlay for deep learning.
-79_6_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-29_6_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with cross-sectional area and surrounding aponeurosis.
-6_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-47_18_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with parallel muscle fibers and hyperechoic perimysium.
-75_3_Bmode.tif,Transverse view of the LM muscle showing high-frequency details of muscle fascicles.
-39_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-84_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with visible fascicles and hypoechoic muscle tissue.
-38_5_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with manual segmentation overlay for deep learning.
-64_2_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-1_27_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, parallel muscle fibers and hyperechoic perimysium."
-73_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle striations and echogenic septa.
-101_29_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle striations and echogenic septa.
-102_26_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with visible fascicles and hypoechoic muscle tissue.
-109_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-70_29_Bmode.tif,Transverse view of the LM muscle showing tendon attachments and minimal fatty infiltration.
-108_4_Bmode.tif,Transverse view of the LM muscle showing manual segmentation overlay for deep learning.
-10_34_Bmode.tif,Transverse view of the LM muscle showing tendon attachments and minimal fatty infiltration.
-61_1_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-78_22_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-31_27_Bmode.tif,Transverse view of the LM muscle showing muscle-tendon junctions and adjacent connective tissue.
-42_6_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with manual segmentation overlay for deep learning.
-43_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle-tendon junctions and adjacent connective tissue."
-84_24_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-89_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-57_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-21_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-99_20_Bmode.tif,Transverse view of the LM muscle showing manual segmentation overlay for deep learning.
-17_33_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-13_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-26_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-94_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, manual segmentation overlay for deep learning."
-82_37_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-71_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-71_24_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with manual segmentation overlay for deep learning.
-54_31_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, tendon attachments and minimal fatty infiltration."
-93_26_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-67_33_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle striations and echogenic septa.
-1_3_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-32_31_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-15_3_Bmode.tif,Transverse view of the LM muscle showing manual segmentation overlay for deep learning.
-62_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with tendon attachments and minimal fatty infiltration.
-36_5_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-6_28_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle-tendon junctions and adjacent connective tissue."
-80_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle striations and echogenic septa.
-21_32_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with visible fascicles and hypoechoic muscle tissue.
-41_28_Bmode.tif,Transverse view of the LM muscle showing high-frequency details of muscle fascicles.
-90_27_Bmode.tif,Transverse view of the LM muscle showing visible fascicles and hypoechoic muscle tissue.
-48_29_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, optimized depth settings for clear LM visualization."
-94_24_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with high-frequency details of muscle fascicles.
-64_24_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-94_28_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-41_29_Bmode.tif,Transverse view of the LM muscle showing optimized depth settings for clear LM visualization.
-102_1_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-34_3_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle-tendon junctions and adjacent connective tissue."
-40_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with manual segmentation overlay for deep learning.
-94_5_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with high-frequency details of muscle fascicles.
-31_1_Bmode.tif,Transverse view of the LM muscle showing fascicle orientation and adjacent vertebral structures.
-22_22_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-1_23_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-9_3_Bmode.tif,Transverse view of the LM muscle showing fascicle orientation and adjacent vertebral structures.
-13_32_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-58_29_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-107_23_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-83_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-106_24_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, reduced muscle thickness due to atrophy."
-24_20_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-40_20_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-70_9_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with tendon attachments and minimal fatty infiltration.
-5_1_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-45_33_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle striations and echogenic septa.
-10_33_Bmode.tif,Transverse view of the LM muscle showing reduced muscle thickness due to atrophy.
-87_6_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-60_4_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-56_5_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, parallel muscle fibers and hyperechoic perimysium."
-93_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-42_3_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-10_4_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-79_3_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with high-frequency details of muscle fascicles.
-58_33_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, fascicle orientation and adjacent vertebral structures."
-85_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-46_28_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-57_6_Bmode.tif,Transverse view of the LM muscle showing high-frequency details of muscle fascicles.
-40_23_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with visible fascicles and hypoechoic muscle tissue.
-16_36_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-49_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, fascicle orientation and adjacent vertebral structures."
-19_4_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-67_3_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with reduced muscle thickness due to atrophy.
-100_24_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-86_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-8_1_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-51_27_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-5_28_Bmode.tif,Transverse view of the LM muscle showing muscle-tendon junctions and adjacent connective tissue.
-48_3_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-105_3_Bmode.tif,Transverse view of the LM muscle showing visible fascicles and hypoechoic muscle tissue.
-51_26_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-20_22_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, mild fatty infiltration and disrupted fiber pattern."
-32_1_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-25_6_Bmode.tif,Transverse view of the LM muscle showing manual segmentation overlay for deep learning.
-32_6_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, tendon attachments and minimal fatty infiltration."
-9_1_Bmode.tif,Transverse view of the LM muscle showing well-defined borders and homogeneous muscle texture.
-78_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-69_29_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with reduced muscle thickness due to atrophy.
-69_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with high-frequency details of muscle fascicles.
-108_28_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with tendon attachments and minimal fatty infiltration.
-97_1_Bmode.tif,Transverse view of the LM muscle showing tendon attachments and minimal fatty infiltration.
-71_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with uniform echogenicity and fascial boundaries.
-83_3_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-89_19_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-1_1_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-92_4_Bmode.tif,Transverse view of the LM muscle showing optimized depth settings for clear LM visualization.
-8_29_Bmode.tif,Transverse view of the LM muscle showing fascicle orientation and adjacent vertebral structures.
-12_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle striations and echogenic septa.
-96_1_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-66_1_Bmode.tif,Transverse view of the LM muscle showing manual segmentation overlay for deep learning.
-51_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-23_4_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-91_3_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle striations and echogenic septa.
-74_29_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-47_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with parallel muscle fibers and hyperechoic perimysium.
-17_5_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with cross-sectional area and surrounding aponeurosis.
-68_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with reduced muscle thickness due to atrophy.
-6_5_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with manual segmentation overlay for deep learning.
-69_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-80_3_Bmode.tif,Transverse view of the LM muscle showing visible fascicles and hypoechoic muscle tissue.
-100_1_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-30_3_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-95_7_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-104_23_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-32_32_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-23_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-37_23_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-65_4_Bmode.tif,Transverse view of the LM muscle showing muscle-tendon junctions and adjacent connective tissue.
-109_1_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-76_28_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, well-defined borders and homogeneous muscle texture."
-63_25_Bmode.tif,Transverse view of the LM muscle showing fascicle orientation and adjacent vertebral structures.
-50_18_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-28_5_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, reduced muscle thickness due to atrophy."
-59_2_Bmode.tif,Transverse view of the LM muscle showing fascicle orientation and adjacent vertebral structures.
-18_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with uniform echogenicity and fascial boundaries.
-7_26_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with manual segmentation overlay for deep learning.
-77_4_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, optimized depth settings for clear LM visualization."
-54_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with visible fascicles and hypoechoic muscle tissue.
-41_4_Bmode.tif,Transverse view of the LM muscle showing muscle striations and echogenic septa.
-15_18_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-63_4_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-36_25_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, reduced muscle thickness due to atrophy."
-60_1_Bmode.tif,Transverse view of the LM muscle showing fascicle orientation and adjacent vertebral structures.
-27_24_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-66_26_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-31_4_Bmode.tif,Transverse view of the LM muscle showing manual segmentation overlay for deep learning.
-43_5_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-85_24_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle-tendon junctions and adjacent connective tissue."
-52_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-10_1_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-66_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle striations and echogenic septa.
-11_3_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-64_29_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-58_4_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-37_21_Bmode.tif,Transverse view of the LM muscle showing reduced muscle thickness due to atrophy.
-19_1_Bmode.tif,Transverse view of the LM muscle showing optimized depth settings for clear LM visualization.
-67_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-90_3_Bmode.tif,Transverse view of the LM muscle showing visible fascicles and hypoechoic muscle tissue.
-14_34_Bmode.tif,Transverse view of the LM muscle showing well-defined borders and homogeneous muscle texture.
-79_31_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-105_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-36_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with reduced muscle thickness due to atrophy.
-48_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-16_12_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-28_3_Bmode.tif,Transverse view of the LM muscle showing well-defined borders and homogeneous muscle texture.
-76_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-75_32_Bmode.tif,Transverse view of the LM muscle showing high-frequency details of muscle fascicles.
-91_1_Bmode.tif,Transverse view of the LM muscle showing well-defined borders and homogeneous muscle texture.
-91_29_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-106_5_Bmode.tif,Transverse view of the LM muscle showing reduced muscle thickness due to atrophy.
-18_5_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-17_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-39_21_Bmode.tif,Transverse view of the LM muscle showing fascicle orientation and adjacent vertebral structures.
-45_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-65_26_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-75_29_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with cross-sectional area and surrounding aponeurosis.
-13_5_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-2_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-44_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-79_27_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-99_6_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, uniform echogenicity and fascial boundaries."
-56_30_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with mild fatty infiltration and disrupted fiber pattern.
-52_1_Bmode.tif,Transverse view of the LM muscle showing tendon attachments and minimal fatty infiltration.
-25_1_Bmode.tif,Transverse view of the LM muscle showing muscle-tendon junctions and adjacent connective tissue.
-54_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, fascicle orientation and adjacent vertebral structures."
-82_5_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-29_32_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, reduced muscle thickness due to atrophy."
-30_25_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-7_2_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-14_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-34_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with uniform echogenicity and fascial boundaries.
-59_33_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-86_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-99_22_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-85_3_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-84_3_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, tendon attachments and minimal fatty infiltration."
-15_19_Bmode.tif,Transverse view of the LM muscle showing high-frequency details of muscle fascicles.
-27_1_Bmode.tif,Transverse view of the LM muscle showing high-frequency details of muscle fascicles.
-77_1_Bmode.tif,Transverse view of the LM muscle showing uniform echogenicity and fascial boundaries.
-35_4_Bmode.tif,Transverse view of the LM muscle showing manual segmentation overlay for deep learning.
-44_5_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with visible fascicles and hypoechoic muscle tissue.
-4_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, fascicle orientation and adjacent vertebral structures."
-29_36_Bmode.tif,Transverse view of the LM muscle showing muscle-tendon junctions and adjacent connective tissue.
-52_32_Bmode.tif,Transverse view of the LM muscle showing high-frequency details of muscle fascicles.
-52_30_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with fascicle orientation and adjacent vertebral structures.
-2_4_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-109_33_Bmode.tif,Transverse view of the LM muscle showing muscle-tendon junctions and adjacent connective tissue.
-9_31_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, mild fatty infiltration and disrupted fiber pattern."
-82_38_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-54_27_Bmode.tif,Transverse view of the LM muscle showing high-frequency details of muscle fascicles.
-61_32_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, manual segmentation overlay for deep learning."
-4_29_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-60_29_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with high-frequency details of muscle fascicles.
-21_6_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle-tendon junctions and adjacent connective tissue."
-12_4_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, optimized depth settings for clear LM visualization."
-55_1_Bmode.tif,Transverse view of the LM muscle showing tendon attachments and minimal fatty infiltration.
-103_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with cross-sectional area and surrounding aponeurosis.
-42_28_Bmode.tif,Transverse view of the LM muscle showing cross-sectional area and surrounding aponeurosis.
-49_24_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, fascicle orientation and adjacent vertebral structures."
-2_37_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with cross-sectional area and surrounding aponeurosis.
-6_32_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, tendon attachments and minimal fatty infiltration."
-72_5_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-20_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with optimized depth settings for clear LM visualization.
-97_26_Bmode.tif,Transverse view of the LM muscle showing muscle striations and echogenic septa.
-108_1_Bmode.tif,Transverse view of the LM muscle showing parallel muscle fibers and hyperechoic perimysium.
-89_21_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-75_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-35_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with tendon attachments and minimal fatty infiltration.
-93_4_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, muscle striations and echogenic septa."
-50_1_Bmode.tif,Transverse view of the LM muscle showing optimized depth settings for clear LM visualization.
-25_39_Bmode.tif,Transverse view of the LM muscle showing mild fatty infiltration and disrupted fiber pattern.
-81_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-89_4_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-44_29_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-72_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-29_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, fascicle orientation and adjacent vertebral structures."
-90_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, high-frequency details of muscle fascicles."
-45_28_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, cross-sectional area and surrounding aponeurosis."
-35_34_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, tendon attachments and minimal fatty infiltration."
-50_17_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with well-defined borders and homogeneous muscle texture.
-11_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with tendon attachments and minimal fatty infiltration.
-49_4_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, visible fascicles and hypoechoic muscle tissue."
-106_29_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-85_22_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with muscle-tendon junctions and adjacent connective tissue.
-46_1_Bmode.tif,"Cross-sectional ultrasound of the LM muscle, parallel muscle fibers and hyperechoic perimysium."
-92_1_Bmode.tif,Transverse ultrasound scan of the lumbar multifidus with uniform echogenicity and fascial boundaries.
+left lower back muscle,182,161,206,226,luminous_64_29_bmode.tif,820,614,luminous
+right lower back muscle,328,138,224,217,luminous_83_1_bmode.tif,820,614,luminous
+left lower back muscle,157,139,232,225,luminous_38_5_bmode.tif,820,614,luminous
+right lower back muscle,350,143,182,210,luminous_49_22_bmode.tif,820,614,luminous
+left lower back muscle,169,188,202,227,luminous_63_29_bmode.tif,820,614,luminous
+left lower back muscle,206,149,248,155,luminous_21_6_bmode.tif,820,614,luminous
+left lower back muscle,177,136,206,184,luminous_14_3_bmode.tif,820,614,luminous
+right lower back muscle,314,128,214,185,luminous_40_20_bmode.tif,820,614,luminous
+left lower back muscle,296,147,223,156,luminous_25_1_bmode.tif,820,614,luminous
+right lower back muscle,323,157,246,193,luminous_1_1_bmode.tif,820,614,luminous
+right lower back muscle,350,152,166,162,luminous_88_1_bmode.tif,820,614,luminous
+left lower back muscle,174,158,209,203,luminous_23_30_bmode.tif,820,614,luminous
+left lower back muscle,318,197,182,214,luminous_70_27_bmode.tif,820,614,luminous
+right lower back muscle,356,205,217,213,luminous_76_28_bmode.tif,820,614,luminous
+right lower back muscle,323,159,211,209,luminous_60_29_bmode.tif,820,614,luminous
+right lower back muscle,328,168,207,205,luminous_81_1_bmode.tif,820,614,luminous
+left lower back muscle,154,159,229,229,luminous_99_6_bmode.tif,820,614,luminous
+left lower back muscle,163,145,209,251,luminous_82_38_bmode.tif,820,614,luminous
+right lower back muscle,350,182,220,226,luminous_32_31_bmode.tif,820,614,luminous
+right lower back muscle,333,155,203,227,luminous_67_29_bmode.tif,820,614,luminous
+left lower back muscle,168,153,187,202,luminous_64_4_bmode.tif,820,614,luminous
+right lower back muscle,296,148,235,143,luminous_6_1_bmode.tif,820,614,luminous
+left lower back muscle,186,158,183,150,luminous_96_2_bmode.tif,820,614,luminous
+left lower back muscle,156,162,222,268,luminous_91_29_bmode.tif,820,614,luminous
+left lower back muscle,167,149,201,158,luminous_25_6_bmode.tif,820,614,luminous
+right lower back muscle,311,142,248,219,luminous_55_26_bmode.tif,820,614,luminous
+left lower back muscle,305,140,192,238,luminous_89_19_bmode.tif,820,614,luminous
+right lower back muscle,327,144,233,211,luminous_15_18_bmode.tif,820,614,luminous
+left lower back muscle,167,131,172,178,luminous_11_3_bmode.tif,820,614,luminous
+right lower back muscle,321,155,220,195,luminous_48_1_bmode.tif,820,614,luminous
+left lower back muscle,267,151,269,200,luminous_51_26_bmode.tif,820,614,luminous
+right lower back muscle,333,153,209,207,luminous_71_1_bmode.tif,820,614,luminous
+right lower back muscle,370,157,195,187,luminous_29_32_bmode.tif,820,614,luminous
+left lower back muscle,169,124,202,221,luminous_108_4_bmode.tif,820,614,luminous
+left lower back muscle,176,165,208,236,luminous_67_33_bmode.tif,820,614,luminous
+right lower back muscle,316,161,210,167,luminous_18_23_bmode.tif,820,614,luminous
+right lower back muscle,309,160,210,181,luminous_60_1_bmode.tif,820,614,luminous
+left lower back muscle,180,162,201,225,luminous_106_29_bmode.tif,820,614,luminous
+left lower back muscle,144,164,222,199,luminous_90_3_bmode.tif,820,614,luminous
+left lower back muscle,154,164,224,156,luminous_18_5_bmode.tif,820,614,luminous
+left lower back muscle,159,135,201,180,luminous_37_4_bmode.tif,820,614,luminous
+left lower back muscle,164,146,206,189,luminous_56_31_bmode.tif,820,614,luminous
+left lower back muscle,166,134,229,237,luminous_28_5_bmode.tif,820,614,luminous
+right lower back muscle,320,183,228,184,luminous_57_1_bmode.tif,820,614,luminous
+right lower back muscle,319,143,208,217,luminous_52_30_bmode.tif,820,614,luminous
+left lower back muscle,147,148,220,173,luminous_29_6_bmode.tif,820,614,luminous
+left lower back muscle,158,161,224,204,luminous_43_5_bmode.tif,820,614,luminous
+right lower back muscle,322,139,221,217,luminous_38_1_bmode.tif,820,614,luminous
+left lower back muscle,152,154,234,181,luminous_58_33_bmode.tif,820,614,luminous
+right lower back muscle,328,153,215,211,luminous_72_1_bmode.tif,820,614,luminous
+right lower back muscle,330,139,213,202,luminous_84_1_bmode.tif,820,614,luminous
+left lower back muscle,163,153,195,225,luminous_71_4_bmode.tif,820,614,luminous
+left lower back muscle,161,150,243,212,luminous_35_34_bmode.tif,820,614,luminous
+right lower back muscle,335,132,208,211,luminous_49_1_bmode.tif,820,614,luminous
+left lower back muscle,175,143,206,229,luminous_52_32_bmode.tif,820,614,luminous
+right lower back muscle,369,215,229,220,luminous_86_1_bmode.tif,820,614,luminous
+left lower back muscle,145,126,190,233,luminous_108_28_bmode.tif,820,614,luminous
+right lower back muscle,311,158,234,172,luminous_1_23_bmode.tif,820,614,luminous
+left lower back muscle,134,187,234,183,luminous_63_5_bmode.tif,820,614,luminous
+right lower back muscle,303,135,248,266,luminous_30_1_bmode.tif,820,614,luminous
+right lower back muscle,301,155,230,236,luminous_54_27_bmode.tif,820,614,luminous
+right lower back muscle,331,196,221,187,luminous_32_1_bmode.tif,820,614,luminous
+left lower back muscle,145,139,260,175,luminous_21_32_bmode.tif,820,614,luminous
+left lower back muscle,165,182,210,171,luminous_57_6_bmode.tif,820,614,luminous
+left lower back muscle,102,205,259,149,luminous_16_12_bmode.tif,820,614,luminous
+left lower back muscle,144,157,232,191,luminous_106_5_bmode.tif,820,614,luminous
+left lower back muscle,144,123,205,211,luminous_40_4_bmode.tif,820,614,luminous
+right lower back muscle,304,176,256,164,luminous_7_24_bmode.tif,820,614,luminous
+left lower back muscle,182,163,194,170,luminous_66_26_bmode.tif,820,614,luminous
+right lower back muscle,370,179,200,148,luminous_7_2_bmode.tif,820,614,luminous
+left lower back muscle,157,161,235,213,luminous_72_5_bmode.tif,820,614,luminous
+left lower back muscle,205,162,210,220,luminous_60_33_bmode.tif,820,614,luminous
+right lower back muscle,331,152,201,274,luminous_42_24_bmode.tif,820,614,luminous
+right lower back muscle,326,156,241,173,luminous_58_1_bmode.tif,820,614,luminous
+left lower back muscle,300,154,214,196,luminous_12_1_bmode.tif,820,614,luminous
+left lower back muscle,167,183,236,199,luminous_94_28_bmode.tif,820,614,luminous
+left lower back muscle,292,153,230,164,luminous_21_1_bmode.tif,820,614,luminous
+right lower back muscle,331,162,201,226,luminous_48_29_bmode.tif,820,614,luminous
+right lower back muscle,294,160,243,131,luminous_34_1_bmode.tif,820,614,luminous
+right lower back muscle,316,176,248,188,luminous_36_25_bmode.tif,820,614,luminous
+right lower back muscle,329,129,202,192,luminous_108_27_bmode.tif,820,614,luminous
+left lower back muscle,280,139,240,173,luminous_87_1_bmode.tif,820,614,luminous
+left lower back muscle,185,148,247,191,luminous_35_4_bmode.tif,820,614,luminous
+left lower back muscle,152,163,208,184,luminous_109_4_bmode.tif,820,614,luminous
+right lower back muscle,331,181,225,179,luminous_2_32_bmode.tif,820,614,luminous
+left lower back muscle,188,145,219,197,luminous_42_3_bmode.tif,820,614,luminous
+left lower back muscle,171,156,216,252,luminous_91_3_bmode.tif,820,614,luminous
+right lower back muscle,337,194,206,172,luminous_97_1_bmode.tif,820,614,luminous
+left lower back muscle,304,146,203,201,luminous_75_29_bmode.tif,820,614,luminous
+right lower back muscle,354,163,200,192,luminous_64_2_bmode.tif,820,614,luminous
+left lower back muscle,158,190,221,214,luminous_32_32_bmode.tif,820,614,luminous
+left lower back muscle,170,150,228,171,luminous_6_32_bmode.tif,820,614,luminous
+right lower back muscle,343,186,193,199,luminous_70_7_bmode.tif,820,614,luminous
+right lower back muscle,312,170,199,146,luminous_66_1_bmode.tif,820,614,luminous
+left lower back muscle,309,154,183,217,luminous_14_28_bmode.tif,820,614,luminous
+left lower back muscle,135,156,248,197,luminous_104_26_bmode.tif,820,614,luminous
+left lower back muscle,246,156,258,213,luminous_54_1_bmode.tif,820,614,luminous
+left lower back muscle,169,140,220,270,luminous_30_3_bmode.tif,820,614,luminous
+left lower back muscle,157,216,173,181,luminous_44_5_bmode.tif,820,614,luminous
+left lower back muscle,192,195,219,220,luminous_76_30_bmode.tif,820,614,luminous
+right lower back muscle,302,180,221,162,luminous_17_1_bmode.tif,820,614,luminous
+right lower back muscle,332,145,244,230,luminous_55_1_bmode.tif,820,614,luminous
+left lower back muscle,210,150,164,262,luminous_69_29_bmode.tif,820,614,luminous
+left lower back muscle,204,150,166,208,luminous_41_29_bmode.tif,820,614,luminous
+left lower back muscle,169,137,209,190,luminous_56_5_bmode.tif,820,614,luminous
+left lower back muscle,302,154,210,187,luminous_56_30_bmode.tif,820,614,luminous
+left lower back muscle,148,142,157,173,luminous_88_3_bmode.tif,820,614,luminous
+left lower back muscle,163,144,200,143,luminous_6_5_bmode.tif,820,614,luminous
+left lower back muscle,196,211,161,197,luminous_44_29_bmode.tif,820,614,luminous
+left lower back muscle,162,138,227,176,luminous_26_4_bmode.tif,820,614,luminous
+left lower back muscle,170,165,233,168,luminous_101_35_bmode.tif,820,614,luminous
+left lower back muscle,135,163,241,197,luminous_15_19_bmode.tif,820,614,luminous
+left lower back muscle,151,147,225,133,luminous_34_3_bmode.tif,820,614,luminous
+left lower back muscle,116,197,219,240,luminous_86_4_bmode.tif,820,614,luminous
+right lower back muscle,326,147,213,209,luminous_82_1_bmode.tif,820,614,luminous
+right lower back muscle,317,141,219,241,luminous_8_29_bmode.tif,820,614,luminous
+right lower back muscle,305,143,222,176,luminous_96_29_bmode.tif,820,614,luminous
+right lower back muscle,313,176,238,190,luminous_9_26_bmode.tif,820,614,luminous
+left lower back muscle,156,190,189,176,luminous_97_3_bmode.tif,820,614,luminous
+left lower back muscle,168,138,226,193,luminous_65_4_bmode.tif,820,614,luminous
+left lower back muscle,288,141,217,206,luminous_50_1_bmode.tif,820,614,luminous
+left lower back muscle,145,174,175,231,luminous_79_31_bmode.tif,820,614,luminous
+left lower back muscle,180,143,199,230,luminous_23_4_bmode.tif,820,614,luminous
+left lower back muscle,170,145,185,196,luminous_41_4_bmode.tif,820,614,luminous
+right lower back muscle,340,136,209,201,luminous_45_1_bmode.tif,820,614,luminous
+left lower back muscle,172,153,191,217,luminous_93_4_bmode.tif,820,614,luminous
+left lower back muscle,219,158,214,216,luminous_13_32_bmode.tif,820,614,luminous
+left lower back muscle,150,160,201,188,luminous_15_3_bmode.tif,820,614,luminous
+right lower back muscle,331,159,236,186,luminous_106_1_bmode.tif,820,614,luminous
+left lower back muscle,150,143,207,189,luminous_75_3_bmode.tif,820,614,luminous
+right lower back muscle,320,168,232,167,luminous_67_1_bmode.tif,820,614,luminous
+right lower back muscle,328,198,249,143,luminous_16_11_bmode.tif,820,614,luminous
+left lower back muscle,184,141,170,253,luminous_89_21_bmode.tif,820,614,luminous
+left lower back muscle,160,152,219,213,luminous_12_4_bmode.tif,820,614,luminous
+right lower back muscle,364,167,160,225,luminous_79_27_bmode.tif,820,614,luminous
+right lower back muscle,320,146,199,182,luminous_75_1_bmode.tif,820,614,luminous
+right lower back muscle,315,158,212,208,luminous_31_1_bmode.tif,820,614,luminous
+left lower back muscle,292,159,199,184,luminous_109_1_bmode.tif,820,614,luminous
+left lower back muscle,175,164,188,174,luminous_79_6_bmode.tif,820,614,luminous
+left lower back muscle,295,152,207,219,luminous_104_23_bmode.tif,820,614,luminous
+left lower back muscle,196,164,217,154,luminous_74_29_bmode.tif,820,614,luminous
+left lower back muscle,166,149,227,208,luminous_31_30_bmode.tif,820,614,luminous
+right lower back muscle,307,143,219,208,luminous_65_26_bmode.tif,820,614,luminous
+right lower back muscle,334,193,214,171,luminous_16_36_bmode.tif,820,614,luminous
+left lower back muscle,156,136,177,192,luminous_49_4_bmode.tif,820,614,luminous
+left lower back muscle,295,142,209,227,luminous_52_1_bmode.tif,820,614,luminous
+left lower back muscle,167,139,214,210,luminous_10_34_bmode.tif,820,614,luminous
+left lower back muscle,147,162,209,190,luminous_81_5_bmode.tif,820,614,luminous
+right lower back muscle,336,198,207,217,luminous_63_25_bmode.tif,820,614,luminous
+right lower back muscle,301,135,225,200,luminous_8_1_bmode.tif,820,614,luminous
+right lower back muscle,311,162,228,251,luminous_91_1_bmode.tif,820,614,luminous
+right lower back muscle,321,133,203,246,luminous_46_28_bmode.tif,820,614,luminous
+left lower back muscle,179,147,219,279,luminous_30_26_bmode.tif,820,614,luminous
+right lower back muscle,345,168,192,237,luminous_72_33_bmode.tif,820,614,luminous
+left lower back muscle,168,181,206,189,luminous_59_33_bmode.tif,820,614,luminous
+left lower back muscle,176,164,211,240,luminous_72_34_bmode.tif,820,614,luminous
+right lower back muscle,339,163,204,146,luminous_66_22_bmode.tif,820,614,luminous
+left lower back muscle,161,151,205,177,luminous_34_28_bmode.tif,820,614,luminous
+right lower back muscle,320,141,208,186,luminous_65_1_bmode.tif,820,614,luminous
+right lower back muscle,335,141,170,267,luminous_69_24_bmode.tif,820,614,luminous
+right lower back muscle,335,145,207,179,luminous_56_1_bmode.tif,820,614,luminous
+left lower back muscle,262,185,221,170,luminous_59_29_bmode.tif,820,614,luminous
+left lower back muscle,145,150,203,205,luminous_29_36_bmode.tif,820,614,luminous
+right lower back muscle,326,137,213,183,luminous_85_22_bmode.tif,820,614,luminous
+left lower back muscle,169,214,194,158,luminous_16_37_bmode.tif,820,614,luminous
+left lower back muscle,177,177,229,180,luminous_17_37_bmode.tif,820,614,luminous
+left lower back muscle,235,156,183,256,luminous_99_22_bmode.tif,820,614,luminous
+left lower back muscle,176,131,167,214,luminous_89_4_bmode.tif,820,614,luminous
+left lower back muscle,184,202,164,225,luminous_70_29_bmode.tif,820,614,luminous
+right lower back muscle,304,147,256,197,luminous_35_1_bmode.tif,820,614,luminous
+right lower back muscle,321,175,184,170,luminous_79_3_bmode.tif,820,614,luminous
+left lower back muscle,169,180,215,188,luminous_32_6_bmode.tif,820,614,luminous
+right lower back muscle,328,145,213,175,luminous_14_1_bmode.tif,820,614,luminous
+left lower back muscle,279,147,215,194,luminous_98_1_bmode.tif,820,614,luminous
+left lower back muscle,180,192,202,193,luminous_57_32_bmode.tif,820,614,luminous
+right lower back muscle,304,146,237,184,luminous_42_6_bmode.tif,820,614,luminous
+left lower back muscle,155,150,225,243,luminous_13_5_bmode.tif,820,614,luminous
+left lower back muscle,132,162,230,220,luminous_36_31_bmode.tif,820,614,luminous
+right lower back muscle,321,144,228,185,luminous_6_28_bmode.tif,820,614,luminous
+left lower back muscle,274,169,254,165,luminous_9_1_bmode.tif,820,614,luminous
+left lower back muscle,186,147,206,210,luminous_75_32_bmode.tif,820,614,luminous
+left lower back muscle,186,143,197,147,luminous_92_4_bmode.tif,820,614,luminous
+left lower back muscle,159,137,206,197,luminous_8_5_bmode.tif,820,614,luminous
+right lower back muscle,305,154,236,200,luminous_31_27_bmode.tif,820,614,luminous
+left lower back muscle,204,166,201,231,luminous_54_31_bmode.tif,820,614,luminous
+right lower back muscle,322,126,234,174,luminous_37_1_bmode.tif,820,614,luminous
+left lower back muscle,315,149,172,264,luminous_99_20_bmode.tif,820,614,luminous
+left lower back muscle,160,143,220,196,luminous_84_3_bmode.tif,820,614,luminous
+left lower back muscle,156,150,217,215,luminous_45_33_bmode.tif,820,614,luminous
+right lower back muscle,332,172,234,191,luminous_17_33_bmode.tif,820,614,luminous
+left lower back muscle,291,167,210,223,luminous_90_27_bmode.tif,820,614,luminous
+left lower back muscle,172,134,233,182,luminous_105_3_bmode.tif,820,614,luminous
+left lower back muscle,147,133,188,229,luminous_83_3_bmode.tif,820,614,luminous
+right lower back muscle,309,198,277,239,luminous_97_26_bmode.tif,820,614,luminous
+right lower back muscle,286,155,264,180,luminous_10_1_bmode.tif,820,614,luminous
+right lower back muscle,349,171,206,207,luminous_94_1_bmode.tif,820,614,luminous
+left lower back muscle,170,181,217,170,luminous_17_5_bmode.tif,820,614,luminous
+right lower back muscle,323,153,226,217,luminous_90_1_bmode.tif,820,614,luminous
+left lower back muscle,148,188,219,185,luminous_2_37_bmode.tif,820,614,luminous
+right lower back muscle,302,143,260,218,luminous_28_30_bmode.tif,820,614,luminous
+right lower back muscle,321,193,267,196,luminous_2_1_bmode.tif,820,614,luminous
+left lower back muscle,182,156,219,186,luminous_60_4_bmode.tif,820,614,luminous
+right lower back muscle,319,158,192,208,luminous_23_29_bmode.tif,820,614,luminous
+right lower back muscle,349,138,192,206,luminous_40_1_bmode.tif,820,614,luminous
+right lower back muscle,325,163,217,263,luminous_91_27_bmode.tif,820,614,luminous
+left lower back muscle,170,132,189,181,luminous_40_23_bmode.tif,820,614,luminous
+right lower back muscle,331,159,207,199,luminous_15_1_bmode.tif,820,614,luminous
+right lower back muscle,316,129,208,142,luminous_77_1_bmode.tif,820,614,luminous
+left lower back muscle,299,148,220,204,luminous_80_1_bmode.tif,820,614,luminous
+left lower back muscle,139,166,229,208,luminous_67_3_bmode.tif,820,614,luminous
+right lower back muscle,310,165,217,218,luminous_64_24_bmode.tif,820,614,luminous
+left lower back muscle,303,157,212,219,luminous_10_33_bmode.tif,820,614,luminous
+left lower back muscle,163,149,200,190,luminous_37_23_bmode.tif,820,614,luminous
+right lower back muscle,291,132,259,215,luminous_53_29_bmode.tif,820,614,luminous
+left lower back muscle,180,167,194,231,luminous_48_33_bmode.tif,820,614,luminous
+right lower back muscle,320,146,215,191,luminous_41_2_bmode.tif,820,614,luminous
+right lower back muscle,275,163,272,196,luminous_106_24_bmode.tif,820,614,luminous
+left lower back muscle,213,147,175,221,luminous_14_34_bmode.tif,820,614,luminous
+left lower back muscle,177,153,220,200,luminous_80_3_bmode.tif,820,614,luminous
+left lower back muscle,167,137,207,204,luminous_52_4_bmode.tif,820,614,luminous
+right lower back muscle,306,146,258,167,luminous_21_27_bmode.tif,820,614,luminous
+left lower back muscle,176,142,213,212,luminous_69_4_bmode.tif,820,614,luminous
+left lower back muscle,194,152,175,238,luminous_49_24_bmode.tif,820,614,luminous
+left lower back muscle,162,158,262,185,luminous_101_6_bmode.tif,820,614,luminous
+left lower back muscle,153,165,219,178,luminous_18_31_bmode.tif,820,614,luminous
+right lower back muscle,316,148,222,226,luminous_82_37_bmode.tif,820,614,luminous
+right lower back muscle,325,167,228,139,luminous_74_25_bmode.tif,820,614,luminous
+right lower back muscle,342,193,220,165,luminous_63_4_bmode.tif,820,614,luminous
+left lower back muscle,168,130,210,206,luminous_85_24_bmode.tif,820,614,luminous
+left lower back muscle,171,173,233,176,luminous_7_26_bmode.tif,820,614,luminous
+left lower back muscle,152,157,209,285,luminous_42_28_bmode.tif,820,614,luminous
+right lower back muscle,293,162,248,174,luminous_36_1_bmode.tif,820,614,luminous
+left lower back muscle,152,147,245,205,luminous_31_4_bmode.tif,820,614,luminous
+left lower back muscle,158,155,236,208,luminous_54_4_bmode.tif,820,614,luminous
+left lower back muscle,151,154,214,195,luminous_48_3_bmode.tif,820,614,luminous
+left lower back muscle,155,138,243,174,luminous_58_4_bmode.tif,820,614,luminous
+right lower back muscle,295,163,269,169,luminous_101_29_bmode.tif,820,614,luminous
+left lower back muscle,140,157,200,167,luminous_66_4_bmode.tif,820,614,luminous
+right lower back muscle,319,147,231,194,luminous_29_1_bmode.tif,820,614,luminous
+left lower back muscle,165,156,235,211,luminous_55_28_bmode.tif,820,614,luminous
+left lower back muscle,132,166,161,158,luminous_7_4_bmode.tif,820,614,luminous
+left lower back muscle,141,172,247,163,luminous_9_3_bmode.tif,820,614,luminous
+left lower back muscle,162,128,211,206,luminous_85_3_bmode.tif,820,614,luminous
+right lower back muscle,298,140,243,181,luminous_105_1_bmode.tif,820,614,luminous
+right lower back muscle,312,136,242,164,luminous_26_1_bmode.tif,820,614,luminous
+right lower back muscle,303,154,237,150,luminous_96_1_bmode.tif,820,614,luminous
+left lower back muscle,130,157,244,206,luminous_1_27_bmode.tif,820,614,luminous
+left lower back muscle,178,149,213,188,luminous_45_4_bmode.tif,820,614,luminous
+right lower back muscle,304,145,242,194,luminous_37_21_bmode.tif,820,614,luminous
+left lower back muscle,178,132,194,236,luminous_50_18_bmode.tif,820,614,luminous
+left lower back muscle,175,171,228,227,luminous_90_28_bmode.tif,820,614,luminous
+right lower back muscle,313,145,244,221,luminous_28_3_bmode.tif,820,614,luminous
+right lower back muscle,279,143,264,179,luminous_51_1_bmode.tif,820,614,luminous
+left lower back muscle,128,189,179,204,luminous_70_9_bmode.tif,820,614,luminous
+right lower back muscle,345,159,210,163,luminous_34_24_bmode.tif,820,614,luminous
+left lower back muscle,173,147,197,216,luminous_84_24_bmode.tif,820,614,luminous
+right lower back muscle,314,162,223,188,luminous_58_29_bmode.tif,820,614,luminous
+left lower back muscle,171,140,215,217,luminous_82_5_bmode.tif,820,614,luminous
+left lower back muscle,144,141,235,215,luminous_51_27_bmode.tif,820,614,luminous
+left lower back muscle,290,181,230,191,luminous_19_1_bmode.tif,820,614,luminous
+right lower back muscle,323,157,236,139,luminous_92_1_bmode.tif,820,614,luminous
+left lower back muscle,133,185,239,226,luminous_2_4_bmode.tif,820,614,luminous
+right lower back muscle,325,148,221,181,luminous_84_21_bmode.tif,820,614,luminous
+right lower back muscle,345,179,199,230,luminous_94_24_bmode.tif,820,614,luminous
+right lower back muscle,298,146,224,238,luminous_13_1_bmode.tif,820,614,luminous
+left lower back muscle,171,123,193,148,luminous_77_4_bmode.tif,820,614,luminous
+right lower back muscle,345,161,198,193,luminous_93_1_bmode.tif,820,614,luminous
+left lower back muscle,191,146,234,177,luminous_51_3_bmode.tif,820,614,luminous
+left lower back muscle,257,155,242,194,luminous_35_30_bmode.tif,820,614,luminous
+right lower back muscle,335,128,189,180,luminous_11_1_bmode.tif,820,614,luminous
+left lower back muscle,141,154,241,217,luminous_10_4_bmode.tif,820,614,luminous
+left lower back muscle,133,176,210,190,luminous_94_5_bmode.tif,820,614,luminous
+left lower back muscle,202,160,208,169,luminous_25_39_bmode.tif,820,614,luminous
+left lower back muscle,162,172,229,195,luminous_19_4_bmode.tif,820,614,luminous
+right lower back muscle,355,131,194,212,luminous_108_1_bmode.tif,820,614,luminous
+left lower back muscle,287,155,225,228,luminous_99_1_bmode.tif,820,614,luminous
+left lower back muscle,311,152,190,200,luminous_109_29_bmode.tif,820,614,luminous
+right lower back muscle,340,135,178,235,luminous_50_17_bmode.tif,820,614,luminous
+left lower back muscle,131,142,248,223,luminous_55_3_bmode.tif,820,614,luminous
+left lower back muscle,305,149,185,202,luminous_41_28_bmode.tif,820,614,luminous
+left lower back muscle,179,160,230,154,luminous_96_33_bmode.tif,820,614,luminous
+right lower back muscle,315,131,197,160,luminous_85_1_bmode.tif,820,614,luminous
+right lower back muscle,354,128,182,204,luminous_89_1_bmode.tif,820,614,luminous
+right lower back muscle,367,145,178,216,luminous_45_28_bmode.tif,820,614,luminous
+left lower back muscle,110,157,240,228,luminous_1_3_bmode.tif,820,614,luminous
+left lower back muscle,160,183,251,189,luminous_9_31_bmode.tif,820,614,luminous
+right lower back muscle,297,170,241,138,luminous_18_1_bmode.tif,820,614,luminous
+left lower back muscle,224,169,212,200,luminous_109_33_bmode.tif,820,614,luminous
+left lower back muscle,162,122,207,198,luminous_50_3_bmode.tif,820,614,luminous
+right lower back muscle,319,149,210,233,luminous_23_1_bmode.tif,820,614,luminous
+right lower back muscle,322,136,215,278,luminous_30_25_bmode.tif,820,614,luminous
+left lower back muscle,157,158,213,185,luminous_36_5_bmode.tif,820,614,luminous
+left lower back muscle,274,163,261,191,luminous_43_1_bmode.tif,820,614,luminous
+left lower back muscle,154,131,224,191,luminous_87_6_bmode.tif,820,614,luminous
+right lower back muscle,364,190,204,178,luminous_44_1_bmode.tif,820,614,luminous
+right lower back muscle,332,145,192,205,luminous_69_1_bmode.tif,820,614,luminous

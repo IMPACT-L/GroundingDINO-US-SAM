@@ -38,11 +38,11 @@ for mask_path in mask_paths:
         plt.imshow(mask, cmap='gray')
         plt.plot(contour[:, 0], contour[:, 1], color='lime')  # plot x vs y
         plt.scatter([x, x+w, x+w, x], [y, y, y+h, y+h], color=['red', 'green', 'blue', 'yellow'])
-        plt.title(file_name)
+        plt.title(f"{file_name},{'left' if x+w/2 < mask.shape[1]/2 else 'right'}")
         plt.show()
-
+        
         row =[
-            dataset,
+            f"{'left' if x+w/2 < mask.shape[1]/2 else 'right'} {'lower back muscle'}",
             x, y, w, h,
             mask_path.replace('masks','images').replace('Mask','Bmode'),
             mask.shape[1],

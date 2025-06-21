@@ -92,7 +92,7 @@ data_config, model_config, test_config = ConfigurationManager.load_config(config
 model = load_model(model_config,True)
 model.eval()
 #%%
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
+csvPath = 'multimodal-data/test.CSV'
 def getTextSample(dataset=None):
     textCSV = {}
     with open(csvPath, 'r', newline='') as csvfile:
@@ -126,8 +126,8 @@ def getTextSample(dataset=None):
 
 #Unseen luminous, tnscui, busbra
 
-box_threshold = 0.1
-text_threshold = 0.3
+box_threshold = 0.01
+text_threshold = 0.01
 threshold = 0.5
 
 # Define target size for all images
@@ -135,7 +135,7 @@ TARGET_HEIGHT = 256
 TARGET_WIDTH = 256
 label_fontsize = 20
 
-is_unseen = True
+is_unseen = False
 
 if is_unseen:
     dataTuple = [
@@ -145,7 +145,7 @@ if is_unseen:
     ]
 else:
     dataTuple = [
-        ('tg3k', 'tg3k_1322.jpg'),
+        ('tg3k', 'tg3k_1488.jpg'), #tg3k_1488, tg3k_1322
         ('aul', 'aul_40.jpg'),
         ('kidnyus', 'kidnyus_625_im-0223-0256_anon_capsule.png'),
         ('breast', 'breast_case057.png'),
@@ -153,8 +153,8 @@ else:
     ]
 
 # Create figure with adjusted subplot sizes
-fig, axes = plt.subplots(len(dataTuple), 6, figsize=(18, 3*len(dataTuple)+3),
-                         gridspec_kw={'width_ratios': [0.1, 1, 1, 1, 1, 1]})
+fig, axes = plt.subplots(len(dataTuple), 7, figsize=(18, 3*len(dataTuple)+3),
+                         gridspec_kw={'width_ratios': [0.1, 1, 1, 1, 1, 1, 1]})
 plt.subplots_adjust(wspace=0.05, hspace=0.1)  # Adjust spacing between subplots
 
 def resize_image(img, target_size=(TARGET_WIDTH, TARGET_HEIGHT)):
@@ -179,7 +179,8 @@ def resize_image(img, target_size=(TARGET_WIDTH, TARGET_HEIGHT)):
 
 for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
     textCSV = getTextSample(selectedDataset)
-    save_result_path = f'visualizations/SampleSegmentationResult/unseen/{selectedDataset}' if is_unseen else f'visualizations/SampleSegmentationResult/seen/{selectedDataset}'
+    save_result_path = f'visualizations/SampleSegmentationResult/unseen/{selectedDataset}'\
+        if is_unseen else f'visualizations/SampleSegmentationResult/seen/{selectedDataset}'
     os.makedirs(save_result_path, exist_ok=True)
 
     # ---- Load and process images ----
@@ -218,17 +219,19 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
 
     # Load MedClipSAM prediction
     if is_unseen:
-        sam_clip_path = f'/home/hamze/Documents/Grounding-Sam-Ultrasound/visualizations/GroundedSAM-US_unseen/MedCLIP-SAM/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        sam_clip_path = f'visualizations/GroundedSAM-US_unseen/MedCLIP-SAM/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
     else:
         sam_clip_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAM/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
     data = np.load(sam_clip_path)
     med_clip_sam = data['arr']
     med_clip_sam[med_clip_sam >= threshold] = 1
     med_clip_sam[med_clip_sam < threshold] = 0
-
+    if med_clip_sam.shape[:2] != image_source.shape[:2]:
+        med_clip_sam = cv2.resize(med_clip_sam.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
+    
     # Load MedClipSAMv2 prediction
     if is_unseen:
-        sam_clip_v2_path = f'/home/hamze/Documents/Grounding-Sam-Ultrasound/visualizations/GroundedSAM-US_unseen/MedCLIP-SAMv2/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        sam_clip_v2_path = f'visualizations/GroundedSAM-US_unseen/MedCLIP-SAMv2/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
     else:
         sam_clip_v2_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
 
@@ -239,34 +242,46 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
 
     # Load UniverSeg prediction
     if is_unseen:    
-        univer_Seg_path = f'/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        univer_Seg_path = f'multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
     else:
-        univer_Seg_path = f'/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        univer_Seg_path = f'multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
     
     data = np.load(univer_Seg_path)
     univer_seg_mask = data['arr']
-    if univer_seg_mask.shape[:2] != image_source.shape[:2]:
-        univer_seg_mask = cv2.resize(univer_seg_mask.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
     univer_seg_mask[univer_seg_mask >= threshold] = 1
     univer_seg_mask[univer_seg_mask < threshold] = 0
-
+    if univer_seg_mask.shape[:2] != image_source.shape[:2]:
+        univer_seg_mask = cv2.resize(univer_seg_mask.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
+    
+    # Load SAMUS prediction
+    if is_unseen:    
+        samus_path = f'visualizations/GroundedSAM-US_unseen/SAMUS/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+    else:
+        samus_path = f'visualizations/GroundedSAM-US_unseen/SAMUS/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+    
+    data = np.load(samus_path)
+    samus_mask = data['prediction']
+    samus_mask[samus_mask >= threshold] = 1
+    samus_mask[samus_mask < threshold] = 0
+    if samus_mask.shape[:2] != image_source.shape[:2]:
+        samus_mask = cv2.resize(samus_mask.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
+    
     # ---- Create all 6 visualization images ----
     visualization_images = []
     
     # 1. Original image (resized)
     visualization_images.append(resize_image(image_source))
-    
-    # 2. Ground Truth (resized)
-    gt_vis = image_source.copy()
-    gt_vis[:, :, 2][mask_source == 1] = 255
-    visualization_images.append(resize_image(gt_vis))
-    
-    # 3. Our method (resized)
-    ours_vis = image_source.copy()
-    ours_vis[:, :, 2][masks == 1] = 255
-    
-    visualization_images.append(resize_image(ours_vis))
-    
+
+    # 2. UniverSeg (resized)
+    univer_vis = image_source.copy()
+    univer_vis[:, :, 2][univer_seg_mask == 1] = 255
+    visualization_images.append(resize_image(univer_vis))
+
+    # 3. SAMUS (resized)
+    samus_vis = image_source.copy()
+    samus_vis[:, :, 2][samus_mask == 1] = 255
+    visualization_images.append(resize_image(samus_vis))
+
     # 4. MedClipSAM (resized)
     medclip_vis = image_source.copy()
     medclip_vis[:, :, 2][med_clip_sam == 1] = 255
@@ -276,28 +291,37 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
     medclipv2_vis = image_source.copy()
     medclipv2_vis[:, :, 2][med_clip_sam_v2 == 1] = 255
     visualization_images.append(resize_image(medclipv2_vis))
-    
-    # 6. UniverSeg (resized)
-    univer_vis = image_source.copy()
-    univer_vis[:, :, 2][univer_seg_mask == 1] = 255
-    visualization_images.append(resize_image(univer_vis))
+
+    # 6. Our method (resized)
+    ours_vis = image_source.copy()
+    ours_vis[:, :, 2][masks == 1] = 255
+    visualization_images.append(resize_image(ours_vis))
+
+    # 7. Ground Truth (resized)
+    gt_vis = image_source.copy()
+    gt_vis[:, :, 2][mask_source == 1] = 255
+    visualization_images.append(resize_image(gt_vis))
 
     # ---- Plotting ----
-    for col_idx in range(6):
+    for col_idx in range(len(visualization_images)):
         ax = axes[row_idx, col_idx]
         ax.imshow(visualization_images[col_idx])
         
-        if col_idx > 1:  # Skip original image
+        if col_idx > 0 and col_idx < 6:  # Skip original image
             # Get the appropriate prediction mask
             pred_mask = None
-            if col_idx == 2:  # Our method
-                pred_mask = masks
+            if col_idx == 1:  # UniverSeg
+                pred_mask = univer_seg_mask
+            elif col_idx == 2:  # SAMUS
+                pred_mask = samus_mask    
             elif col_idx == 3:  # MedClipSAM
                 pred_mask = med_clip_sam
             elif col_idx == 4:  # MedClipSAMv2
-                pred_mask = med_clip_sam_v2
-            elif col_idx == 5:  # UniverSeg
-                pred_mask = univer_seg_mask
+                pred_mask = med_clip_sam_v2            
+            elif col_idx == 5:  # Our method
+                pred_mask = masks
+
+            
             
             # Calculate metrics
             iou = sklearn_iou(mask_source, pred_mask)*100
@@ -316,7 +340,7 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
             
         
         if row_idx == 0:
-            titles = ["Original", "Ground Truth", "Ours", "MedClip-SAM", "MedClip-SAMv2", "UniverSeg"]
+            titles = ["Original", "UniverSeg", "SAMUS", "MedClip-SAM", "MedClip-SAMv2", "Ours", "Ground Truth"]
             ax.set_title(titles[col_idx], fontsize=label_fontsize, pad=10, fontweight='bold')
             
         ax.set_xticks([])
@@ -339,3 +363,6 @@ plt.savefig(f"visualizations/SampleSegmentationResult/{'un_seen' if is_unseen el
            dpi=300, bbox_inches='tight')
 plt.show()
 # %%
+# first columns: other images
+# second to last column: our method
+# last column: ground truth

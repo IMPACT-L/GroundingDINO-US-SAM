@@ -29,7 +29,7 @@ for organs in datasets:
                 if os.path.exists(dataset_path):
                     with open(f'{dataset_path}', 'r') as f:
                         contents = f.read().strip()  
-                        row+=f"\t*& {contents.split(':')[-1]}"
+                        row+=f"\t& {contents.split(':')[-1]}"
                 else:
                     print(method,'->',key,'Not Exists')
             print(row+'\\\\')

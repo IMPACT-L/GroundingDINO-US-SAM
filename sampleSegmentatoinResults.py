@@ -145,7 +145,7 @@ if is_unseen:
     ]
 else:
     dataTuple = [
-        ('tg3k', 'tg3k_1488.jpg'), #tg3k_1488, tg3k_1322
+        ('tg3k', 'tg3k_3546.jpg'), #tg3k_1488, tg3k_1322
         ('aul', 'aul_40.jpg'),
         ('kidnyus', 'kidnyus_625_im-0223-0256_anon_capsule.png'),
         ('breast', 'breast_case057.png'),
@@ -153,8 +153,13 @@ else:
     ]
 
 # Create figure with adjusted subplot sizes
-fig, axes = plt.subplots(len(dataTuple), 7, figsize=(18, 3*len(dataTuple)+3),
-                         gridspec_kw={'width_ratios': [0.1, 1, 1, 1, 1, 1, 1]})
+if is_unseen:
+    fig, axes = plt.subplots(len(dataTuple), 8, figsize=(21, 9),
+                         gridspec_kw={'width_ratios': [0.1, 1, 1, 1, 1, 1, 1, 1]})
+else:
+    fig, axes = plt.subplots(len(dataTuple), 8, figsize=(21, 15),
+                         gridspec_kw={'width_ratios': [0.1, 1, 1, 1, 1, 1, 1, 1]})
+
 plt.subplots_adjust(wspace=0.05, hspace=0.1)  # Adjust spacing between subplots
 
 def resize_image(img, target_size=(TARGET_WIDTH, TARGET_HEIGHT)):
@@ -228,7 +233,9 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
     med_clip_sam[med_clip_sam < threshold] = 0
     if med_clip_sam.shape[:2] != image_source.shape[:2]:
         med_clip_sam = cv2.resize(med_clip_sam.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
-    
+    med_clip_sam[med_clip_sam >= threshold] = 1
+    med_clip_sam[med_clip_sam < threshold] = 0
+
     # Load MedClipSAMv2 prediction
     if is_unseen:
         sam_clip_v2_path = f'visualizations/GroundedSAM-US_unseen/MedCLIP-SAMv2/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
@@ -241,10 +248,7 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
     med_clip_sam_v2[med_clip_sam_v2 < threshold] = 0
 
     # Load UniverSeg prediction
-    if is_unseen:    
-        univer_Seg_path = f'multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-    else:
-        univer_Seg_path = f'multimodal-data/GroundedSAM-US_UniverSeg/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+    univer_Seg_path = f'multimodal-data/UniverSeg/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
     
     data = np.load(univer_Seg_path)
     univer_seg_mask = data['arr']
@@ -252,12 +256,23 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
     univer_seg_mask[univer_seg_mask < threshold] = 0
     if univer_seg_mask.shape[:2] != image_source.shape[:2]:
         univer_seg_mask = cv2.resize(univer_seg_mask.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
+    univer_seg_mask[univer_seg_mask >= threshold] = 1
+    univer_seg_mask[univer_seg_mask < threshold] = 0
+
+    # Load BiomedParse prediction
+    biomed_parse_path = f'multimodal-data/BiomedParse/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
     
+    data = np.load(biomed_parse_path)
+    biomed_parse_mask = data['logits']
+    biomed_parse_mask[biomed_parse_mask >= threshold] = 1
+    biomed_parse_mask[biomed_parse_mask < threshold] = 0
+    if biomed_parse_mask.shape[:2] != image_source.shape[:2]:
+        biomed_parse_mask = cv2.resize(biomed_parse_mask.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
+    biomed_parse_mask[biomed_parse_mask >= threshold] = 1
+    biomed_parse_mask[biomed_parse_mask < threshold] = 0
+
     # Load SAMUS prediction
-    if is_unseen:    
-        samus_path = f'visualizations/GroundedSAM-US_unseen/SAMUS/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-    else:
-        samus_path = f'visualizations/GroundedSAM-US_unseen/SAMUS/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+    samus_path = f'multimodal-data/SAMUS/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
     
     data = np.load(samus_path)
     samus_mask = data['prediction']
@@ -265,7 +280,9 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
     samus_mask[samus_mask < threshold] = 0
     if samus_mask.shape[:2] != image_source.shape[:2]:
         samus_mask = cv2.resize(samus_mask.astype(np.uint8), (w, h), interpolation=cv2.INTER_NEAREST)
-    
+    samus_mask[samus_mask >= threshold] = 1
+    samus_mask[samus_mask < threshold] = 0
+
     # ---- Create all 6 visualization images ----
     visualization_images = []
     
@@ -277,27 +294,32 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
     univer_vis[:, :, 2][univer_seg_mask == 1] = 255
     visualization_images.append(resize_image(univer_vis))
 
-    # 3. SAMUS (resized)
+    # 3. BiomedParse (resized)
+    biomed_parse_vis = image_source.copy()
+    biomed_parse_vis[:, :, 2][biomed_parse_mask == 1] = 255
+    visualization_images.append(resize_image(biomed_parse_vis))
+
+    # 4. SAMUS (resized)
     samus_vis = image_source.copy()
     samus_vis[:, :, 2][samus_mask == 1] = 255
     visualization_images.append(resize_image(samus_vis))
 
-    # 4. MedClipSAM (resized)
+    # 5. MedClipSAM (resized)
     medclip_vis = image_source.copy()
     medclip_vis[:, :, 2][med_clip_sam == 1] = 255
     visualization_images.append(resize_image(medclip_vis))
     
-    # 5. MedClipSAMv2 (resized)
+    # 6. MedClipSAMv2 (resized)
     medclipv2_vis = image_source.copy()
     medclipv2_vis[:, :, 2][med_clip_sam_v2 == 1] = 255
     visualization_images.append(resize_image(medclipv2_vis))
 
-    # 6. Our method (resized)
+    # 7. Our method (resized)
     ours_vis = image_source.copy()
     ours_vis[:, :, 2][masks == 1] = 255
     visualization_images.append(resize_image(ours_vis))
 
-    # 7. Ground Truth (resized)
+    # 8. Ground Truth (resized)
     gt_vis = image_source.copy()
     gt_vis[:, :, 2][mask_source == 1] = 255
     visualization_images.append(resize_image(gt_vis))
@@ -307,18 +329,20 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
         ax = axes[row_idx, col_idx]
         ax.imshow(visualization_images[col_idx])
         
-        if col_idx > 0 and col_idx < 6:  # Skip original image
+        if col_idx > 0 and col_idx < 7:  # Skip original image
             # Get the appropriate prediction mask
             pred_mask = None
             if col_idx == 1:  # UniverSeg
                 pred_mask = univer_seg_mask
-            elif col_idx == 2:  # SAMUS
+            if col_idx == 2:  # BiomedParse
+                pred_mask = biomed_parse_mask
+            elif col_idx == 3:  # SAMUS
                 pred_mask = samus_mask    
-            elif col_idx == 3:  # MedClipSAM
+            elif col_idx == 4:  # MedClipSAM
                 pred_mask = med_clip_sam
-            elif col_idx == 4:  # MedClipSAMv2
+            elif col_idx == 5:  # MedClipSAMv2
                 pred_mask = med_clip_sam_v2            
-            elif col_idx == 5:  # Our method
+            elif col_idx == 6:  # Our method
                 pred_mask = masks
 
             
@@ -340,7 +364,7 @@ for row_idx, (selectedDataset, image_name) in enumerate(dataTuple):
             
         
         if row_idx == 0:
-            titles = ["Original", "UniverSeg", "SAMUS", "MedClip-SAM", "MedClip-SAMv2", "Ours", "Ground Truth"]
+            titles = ["Original", "UniverSeg", "BiomedParse", "SAMUS", "MedClip-SAM", "MedClip-SAMv2", "Ours", "Ground Truth"]
             ax.set_title(titles[col_idx], fontsize=label_fontsize, pad=10, fontweight='bold')
             
         ax.set_xticks([])

@@ -13,7 +13,7 @@ datasets = [{"Breast":{"breast":"BrEaST", "buid":"BUID", "busuc":"BUSUC", "busuc
             {"Prostate":{"muregpro":"MicroSeg","regpro":"RegPro"}},
             {"Kidney":{"kidnyus":"KidneyUS"}}
             ]
-            
+           
 for organs in datasets:
     # print(organs)
     for organ in organs:

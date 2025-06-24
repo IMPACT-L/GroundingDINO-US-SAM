@@ -64,6 +64,9 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
         nms_phrases_list.extend([unique_phrase] * len(keep_indices))
 
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
+
+csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
+
 def getTextSample(dataset=None):
     textCSV = {}
     with open(csvPath, 'r', newline='') as csvfile:
@@ -101,7 +104,6 @@ data_config, model_config, test_config = ConfigurationManager.load_config(config
 model = load_model(model_config,True)
 model.eval()
 #%%
-csvPath = 'multimodal-data/test.CSV'
 
 is_unseen = True
 

@@ -142,9 +142,29 @@ mask_path ='/home/hamze/Documents/Dataset/LUMINOUS_Database/masks/1_1_Mask.tif'
 image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busbra_bus_0017-s.png'
 mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busbra_bus_0017-s.png'
 
+image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_8_1_bmode.tif'
+mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_8_1_bmode.tif'
 
-text_prompt="right lower-back muscle ." #1
+
+image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_7_4_bmode.tif'
+mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_7_4_bmode.tif'
+
+# text_prompt="lower back muscle on the right side of the image" 
+# text_prompt="right lower back muscle in the right side of the image" 
+# text_prompt="multifidus muscle in the right side of the image" 
+# text_prompt="right multifidus muscle in the right side of the image" 
+# text_prompt="paraspinal muscle on the right side of the image"
+# text_prompt="right paraspinal muscle in the right side of the image"
+# text_prompt="right paraspinal muscle seen in the right side of the image"
+
+# text_prompt="right lower-back muscle ." #1
 # text_prompt="tumor. thyroid. carotid . benign . malignant . chair . person . dog ." #1
+
+# text_prompt="lower back muscle on the left side of the image"
+# text_prompt="lower back muscle seen on the left side of the image"
+# text_prompt="left lower back muscle in the left side of the image"
+text_prompt="left paraspinal muscle seen in the left side of the image"
+
 if terminal and args.path:
     image_path =  args.path
 
@@ -182,6 +202,7 @@ if len(boxes>0):
 
         xyxy = box_convert(boxes=boxes, in_fmt="cxcywh", out_fmt="xyxy").numpy()
         fig, ax = plt.subplots(1, 3, figsize=(12, 8))
+
         ax[0].set_title(f'Source Image')
         ax[0].axis('off')
         ax[0].imshow(image_source)
@@ -198,7 +219,7 @@ if len(boxes>0):
         ax[2].axis('off')
         overlay_mask = image_source.copy()
         # overlay_mask[:]=0
-        ax[2].set_title('Prediction')
+        
         for i , xyxy_ in enumerate(xyxy):
             box_np = np.array([[int(x) for x in xyxy_]]) 
 
@@ -214,7 +235,8 @@ if len(boxes>0):
 
             iou = sklearn_iou(masks,mask_source)*100
             dic = sklearn_dice(masks,mask_source)*100
-            if dic>=50:
+            ax[2].set_title(f'Pred IoU:{iou:.2f},DSC:{dic:.2f}')
+            if dic>=0:
                 overlay_mask[:,:,2][masks>0]=255
                 x1, y1, x2, y2 = box_np[0]
                 box_w = x2 - x1
@@ -223,6 +245,7 @@ if len(boxes>0):
                 rect = patches.Rectangle((x1, y1), box_w, box_h,
                                         linewidth=2, edgecolor='red', facecolor='none')
                 ax[2].add_patch(rect)
+
             
             print(f'{iou:.2f}, dice: {dic:.2f}, phrase:{phrases[i]}, score:{logits[i]:.2f}')
             detected = True

@@ -48,6 +48,7 @@ else:
                 "stu","s1","tn3k","tg3k","105us",
                 "aul","muregpro","regpro","kidnyus"]
 threshold = .5
+datasets = ["luminous"]
 
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)

@@ -65,7 +65,7 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
 
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
 
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
+csvPath = 'multimodal-data/test.CSV'
 
 def getTextSample(dataset=None):
     textCSV = {}
@@ -116,7 +116,7 @@ else:
 datasets = ["luminous"]
 show_plots = True
 margin = 0
-box_threshold= 0.05
+box_threshold= 0.1
 text_threshold=0.3
 iou_threshold=10
 threshold = .5

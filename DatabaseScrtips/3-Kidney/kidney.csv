@@ -1,0 +1,261 @@
+label_name,bbox_x,bbox_y,bbox_width,bbox_height,image_name,image_width,image_height,dataset
+kidney capsule,199,273,551,285,kidnyus_350_im-0039-0001_anon_capsule.png,1024,768,kidnyus
+kidney medulla,182,202,586,408,kidnyus_2_im-0383-0001_anon_medulla.png,1024,768,kidnyus
+kidney capsule,323,250,198,169,kidnyus_341_im-0058-0067_anon_capsule.png,960,720,kidnyus
+kidney capsule,327,290,227,166,kidnyus_142_im-0068-0078_anon_capsule.png,960,720,kidnyus
+kidney central echo complex,291,347,398,144,kidnyus_55_im-0311-0003_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,301,425,380,91,kidnyus_356_im-0572-0038_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,378,362,692,263,kidnyus_175_im-0922-1024_anon_central echo complex.png,1552,970,kidnyus
+kidney medulla,272,328,441,232,kidnyus_414_im-0026-0001_anon_medulla.png,1024,768,kidnyus
+kidney medulla,344,305,361,121,kidnyus_416_im-0467-0021_anon_medulla.png,1024,768,kidnyus
+kidney medulla,161,272,491,226,kidnyus_362_im-0017-0006_anon_medulla.png,1024,768,kidnyus
+kidney medulla,307,279,475,227,kidnyus_143_im-0391-0056_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,267,366,404,206,kidnyus_195_im-0236-0004_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,238,285,538,190,kidnyus_88_im-0263-0006_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,253,191,319,224,kidnyus_14_im-0699-0002_anon_central echo complex.png,960,720,kidnyus
+kidney capsule,285,265,403,298,kidnyus_493_im-0137-0005_anon_capsule.png,1024,768,kidnyus
+kidney medulla,266,222,433,220,kidnyus_46_im-0102-0045_anon_medulla.png,1024,768,kidnyus
+kidney capsule,185,217,636,331,kidnyus_93_im-0086-0049_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,368,279,133,66,kidnyus_503_im-0692-0036_anon_central echo complex.png,960,720,kidnyus
+kidney cortex,127,119,255,160,kidnyus_394_im-0074-0006_anon_cortex.png,640,480,kidnyus
+kidney medulla,313,152,528,198,kidnyus_72_im-0130-0014_anon_medulla.png,1024,768,kidnyus
+kidney capsule,424,401,337,213,kidnyus_208_im-0094-5376_anon_capsule.png,1552,970,kidnyus
+kidney central echo complex,468,391,99,72,kidnyus_402_im-0372-0052_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,350,259,350,121,kidnyus_558_im-0123-0005_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,195,234,542,305,kidnyus_153_im-0540-0002_anon_cortex.png,1024,768,kidnyus
+kidney medulla,287,280,332,186,kidnyus_618_im-0353-0008_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,331,395,212,244,kidnyus_127_im-0676-0025_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,259,385,496,238,kidnyus_401_im-0112-0078_anon_medulla.png,1024,768,kidnyus
+kidney cortex,329,240,293,182,kidnyus_605_im-0243-0034_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,236,262,304,246,kidnyus_555_im-0347-0008_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,260,264,322,115,kidnyus_159_im-0215-0035_anon_medulla.png,960,720,kidnyus
+kidney medulla,405,339,387,226,kidnyus_205_im-0138-0040_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,286,449,423,141,kidnyus_104_im-0112-0078_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,464,458,396,245,kidnyus_294_im-0048-15872_anon_cortex.png,1552,970,kidnyus
+kidney capsule,205,253,543,243,kidnyus_359_im-0092-0006_anon_capsule.png,960,720,kidnyus
+kidney central echo complex,246,250,199,155,kidnyus_56_im-0275-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,327,223,363,89,kidnyus_93_im-0086-0049_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,495,296,289,181,kidnyus_50_im-0648-0012_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,334,292,293,227,kidnyus_405_im-0146-0002_anon_medulla.png,1024,768,kidnyus
+kidney cortex,306,326,457,118,kidnyus_364_im-0080-0001_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,193,281,455,161,kidnyus_377_im-0271-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney capsule,429,331,324,240,kidnyus_312_im-0091-0063_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,515,572,412,126,kidnyus_384_im-0140-1792_anon_central echo complex.png,1552,970,kidnyus
+kidney capsule,185,202,674,369,kidnyus_92_im-0519-0001_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,406,408,186,102,kidnyus_89_im-0086-0018_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,303,262,465,332,kidnyus_158_im-0046-0019_anon_medulla.png,1024,768,kidnyus
+kidney cortex,248,244,379,72,kidnyus_362_im-0017-0006_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,273,341,435,84,kidnyus_409_im-0916-0050_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,319,392,221,200,kidnyus_201_im-0417-0035_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,281,371,413,168,kidnyus_409_im-0916-0050_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,409,287,159,241,kidnyus_547_im-0100-0036_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,326,223,426,145,kidnyus_540_im-0374-0065_anon_medulla.png,1024,768,kidnyus
+kidney medulla,399,387,234,188,kidnyus_121_im-0084-0022_anon_medulla.png,1024,768,kidnyus
+kidney cortex,596,501,373,184,kidnyus_573_im-0121-4864_anon_cortex.png,1552,970,kidnyus
+kidney medulla,378,362,692,263,kidnyus_175_im-0922-1024_anon_medulla.png,1552,970,kidnyus
+kidney medulla,361,385,253,87,kidnyus_416_im-0467-0021_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,545,378,317,152,kidnyus_234_im-0173-19200_anon_central echo complex.png,1552,970,kidnyus
+kidney capsule,223,195,518,429,kidnyus_197_im-0564-0002_anon_capsule.png,1024,768,kidnyus
+kidney capsule,273,293,470,330,kidnyus_455_im-0048-0045_anon_capsule.png,1024,768,kidnyus
+kidney medulla,198,159,203,54,kidnyus_564_im-0096-0002_anon_medulla.png,640,480,kidnyus
+kidney cortex,399,277,224,186,kidnyus_287_im-0507-0035_anon_cortex.png,1024,768,kidnyus
+kidney cortex,335,252,305,345,kidnyus_31_im-0399-0069_anon_cortex.png,1024,768,kidnyus
+kidney medulla,217,151,225,109,kidnyus_64_im-0009-0001_anon_medulla.png,640,480,kidnyus
+kidney central echo complex,374,368,292,217,kidnyus_188_im-0270-0037_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,303,279,383,114,kidnyus_55_im-0311-0003_anon_central echo complex.png,1024,768,kidnyus
+kidney capsule,319,280,305,210,kidnyus_70_im-0068-0048_anon_capsule.png,960,720,kidnyus
+kidney cortex,275,208,409,82,kidnyus_7_im-0622-0020_anon_cortex.png,1024,768,kidnyus
+kidney cortex,402,282,228,313,kidnyus_611_im-0029-0025_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,499,364,402,245,kidnyus_190_im-0185-0000_anon_central echo complex.png,1552,970,kidnyus
+kidney central echo complex,487,479,260,86,kidnyus_512_im-0802-0256_anon_central echo complex.png,1552,970,kidnyus
+kidney cortex,313,133,229,197,kidnyus_21_im-0046-0035_anon_cortex.png,640,480,kidnyus
+kidney central echo complex,444,407,157,111,kidnyus_294_im-0048-15872_anon_central echo complex.png,1552,970,kidnyus
+kidney medulla,336,291,306,97,kidnyus_59_im-0936-0014_anon_medulla.png,960,720,kidnyus
+kidney medulla,395,382,119,125,kidnyus_186_im-0064-0040_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,323,358,453,227,kidnyus_205_im-0138-0040_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,169,328,546,302,kidnyus_110_im-0026-0005_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,397,390,208,171,kidnyus_403_im-0149-0027_anon_central echo complex.png,1024,768,kidnyus
+kidney capsule,316,290,258,167,kidnyus_457_im-0068-0078_anon_capsule.png,960,720,kidnyus
+kidney medulla,303,295,471,287,kidnyus_388_im-0132-0012_anon_medulla.png,1024,768,kidnyus
+kidney medulla,640,479,316,127,kidnyus_335_im-0039-1792_anon_medulla.png,1552,970,kidnyus
+kidney central echo complex,295,533,368,123,kidnyus_356_im-0572-0038_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,334,364,431,253,kidnyus_273_im-0411-0058_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,221,173,169,157,kidnyus_165_im-0019-0001_anon_central echo complex.png,640,480,kidnyus
+kidney cortex,714,336,181,110,kidnyus_489_im-0243-0512_anon_cortex.png,1552,970,kidnyus
+kidney medulla,244,310,367,219,kidnyus_173_im-0585-0001_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,243,294,401,150,kidnyus_377_im-0271-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,271,325,246,97,kidnyus_477_im-0244-0029_anon_central echo complex.png,960,720,kidnyus
+kidney central echo complex,287,337,361,271,kidnyus_222_im-0127-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,330,293,219,161,kidnyus_142_im-0068-0078_anon_medulla.png,960,720,kidnyus
+kidney capsule,529,431,377,316,kidnyus_502_im-0804-0512_anon_capsule.png,1552,970,kidnyus
+kidney capsule,289,364,432,239,kidnyus_411_im-0727-0028_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,394,447,166,125,kidnyus_118_im-0230-0053_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,264,246,537,216,kidnyus_116_im-0407-0048_anon_medulla.png,1024,768,kidnyus
+kidney cortex,285,368,338,219,kidnyus_482_im-0155-0028_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,519,295,113,64,kidnyus_65_im-0554-0025_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,361,385,253,87,kidnyus_416_im-0467-0021_anon_cortex.png,1024,768,kidnyus
+kidney medulla,306,300,304,76,kidnyus_81_im-0925-0015_anon_medulla.png,1024,768,kidnyus
+kidney medulla,329,240,293,182,kidnyus_605_im-0243-0034_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,448,351,173,103,kidnyus_597_im-0126-0047_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,200,228,564,328,kidnyus_200_im-0186-0002_anon_central echo complex.png,1024,768,kidnyus
+kidney capsule,301,313,448,329,kidnyus_54_im-0039-0007_anon_capsule.png,1024,768,kidnyus
+kidney cortex,228,202,507,417,kidnyus_197_im-0564-0002_anon_cortex.png,1024,768,kidnyus
+kidney medulla,372,258,283,157,kidnyus_267_im-0405-0005_anon_medulla.png,1024,768,kidnyus
+kidney cortex,508,301,173,284,kidnyus_320_im-0408-2048_anon_cortex.png,1552,970,kidnyus
+kidney medulla,360,300,330,112,kidnyus_105_im-0418-0051_anon_medulla.png,1024,768,kidnyus
+kidney medulla,296,263,207,113,kidnyus_20_im-0861-0005_anon_medulla.png,960,720,kidnyus
+kidney cortex,373,235,191,156,kidnyus_419_im-0885-0031_anon_cortex.png,960,720,kidnyus
+kidney cortex,250,328,377,268,kidnyus_284_im-0021-0001_anon_cortex.png,1024,768,kidnyus
+kidney medulla,189,212,148,141,kidnyus_1_im-0001-0059_anon_medulla.png,640,480,kidnyus
+kidney medulla,187,348,502,232,kidnyus_481_im-0032-0008_anon_medulla.png,1024,768,kidnyus
+kidney cortex,701,290,216,80,kidnyus_489_im-0243-0512_anon_cortex.png,1552,970,kidnyus
+kidney cortex,309,366,421,163,kidnyus_140_im-0392-0022_anon_cortex.png,1024,768,kidnyus
+kidney cortex,550,521,404,209,kidnyus_335_im-0039-1792_anon_cortex.png,1552,970,kidnyus
+kidney cortex,321,297,169,123,kidnyus_585_im-0716-0050_anon_cortex.png,1024,768,kidnyus
+kidney capsule,261,362,238,175,kidnyus_614_im-0061-0036_anon_capsule.png,1024,768,kidnyus
+kidney medulla,546,321,102,70,kidnyus_580_im-0253-0039_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,525,492,285,237,kidnyus_256_im-0130-6912_anon_central echo complex.png,1552,970,kidnyus
+kidney central echo complex,185,235,243,77,kidnyus_101_im-0027-0028_anon_central echo complex.png,640,480,kidnyus
+kidney capsule,119,296,677,308,kidnyus_446_im-0028-0001_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,330,301,381,175,kidnyus_151_im-0023-0006_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,416,447,143,111,kidnyus_436_im-0015-0032_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,352,444,377,166,kidnyus_221_im-0148-0018_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,563,364,60,103,kidnyus_3_im-0359-0014_anon_medulla.png,960,720,kidnyus
+kidney central echo complex,418,403,428,233,kidnyus_405_im-0115-17408_anon_central echo complex.png,1552,970,kidnyus
+kidney medulla,319,305,334,157,kidnyus_138_im-0235-0045_anon_medulla.png,1024,768,kidnyus
+kidney cortex,305,295,319,214,kidnyus_386_im-0229-0013_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,220,288,516,222,kidnyus_248_im-0682-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,223,257,499,251,kidnyus_630_im-0254-0013_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,472,430,137,66,kidnyus_610_im-0787-0013_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,317,268,433,269,kidnyus_222_im-0127-0001_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,397,364,281,166,kidnyus_488_im-0299-0003_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,314,301,505,259,kidnyus_107_im-0250-0022_anon_medulla.png,1024,768,kidnyus
+kidney medulla,320,203,335,299,kidnyus_10_im-0415-0078_anon_medulla.png,1024,768,kidnyus
+kidney cortex,273,315,375,174,kidnyus_510_im-0185-0057_anon_cortex.png,1024,768,kidnyus
+kidney medulla,464,403,243,97,kidnyus_208_im-0094-5376_anon_medulla.png,1552,970,kidnyus
+kidney central echo complex,505,382,104,101,kidnyus_479_im-0920-1793_anon_central echo complex.png,1164,873,kidnyus
+kidney central echo complex,606,376,413,210,kidnyus_406_im-0401-1280_anon_central echo complex.png,1552,970,kidnyus
+kidney capsule,138,295,640,287,kidnyus_580_im-0253-0039_anon_capsule.png,1024,768,kidnyus
+kidney cortex,326,455,259,147,kidnyus_344_im-0436-0048_anon_cortex.png,1024,768,kidnyus
+kidney cortex,287,374,425,244,kidnyus_346_im-0114-0038_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,336,291,306,97,kidnyus_59_im-0936-0014_anon_central echo complex.png,960,720,kidnyus
+kidney central echo complex,193,484,112,67,kidnyus_580_im-0253-0039_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,438,463,191,99,kidnyus_374_im-0644-0025_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,309,366,421,163,kidnyus_140_im-0392-0022_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,255,321,445,184,kidnyus_134_im-0111-0012_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,286,449,423,141,kidnyus_104_im-0112-0078_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,243,285,397,143,kidnyus_43_im-0800-0003_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,229,216,319,147,kidnyus_86_im-0245-0003_anon_cortex.png,1024,768,kidnyus
+kidney cortex,414,273,179,119,kidnyus_424_im-0818-0052_anon_cortex.png,960,720,kidnyus
+kidney capsule,416,287,537,297,kidnyus_449_im-0051-2816_anon_capsule.png,1552,970,kidnyus
+kidney medulla,401,379,250,201,kidnyus_126_im-0068-0002_anon_medulla.png,1024,768,kidnyus
+kidney medulla,419,376,125,101,kidnyus_181_im-0126-0041_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,508,301,173,284,kidnyus_320_im-0408-2048_anon_central echo complex.png,1552,970,kidnyus
+kidney central echo complex,319,453,325,115,kidnyus_356_im-0572-0038_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,317,340,367,160,kidnyus_558_im-0123-0005_anon_cortex.png,1024,768,kidnyus
+kidney capsule,317,190,363,297,kidnyus_383_im-0317-0010_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,198,159,203,54,kidnyus_564_im-0096-0002_anon_central echo complex.png,640,480,kidnyus
+kidney cortex,333,283,509,110,kidnyus_220_im-0712-0068_anon_cortex.png,1024,768,kidnyus
+kidney cortex,322,377,621,346,kidnyus_489_im-0243-0512_anon_cortex.png,1552,970,kidnyus
+kidney cortex,406,329,265,96,kidnyus_527_im-0460-0016_anon_cortex.png,1024,768,kidnyus
+kidney capsule,299,283,444,289,kidnyus_204_im-0164-0044_anon_capsule.png,1024,768,kidnyus
+kidney capsule,447,423,529,323,kidnyus_625_im-0223-0256_anon_capsule.png,1552,970,kidnyus
+kidney capsule,235,229,542,407,kidnyus_222_im-0127-0001_anon_capsule.png,1024,768,kidnyus
+kidney medulla,522,451,170,128,kidnyus_128_im-0894-1024_anon_medulla.png,1552,970,kidnyus
+kidney central echo complex,488,519,376,136,kidnyus_400_im-0160-1024_anon_central echo complex.png,1552,970,kidnyus
+kidney cortex,369,408,155,136,kidnyus_354_im-0512-0038_anon_cortex.png,1024,768,kidnyus
+kidney capsule,469,585,390,188,kidnyus_435_im-0146-0256_anon_capsule.png,1552,970,kidnyus
+kidney cortex,244,310,367,219,kidnyus_173_im-0585-0001_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,298,216,301,295,kidnyus_275_im-0287-0016_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,369,368,375,189,kidnyus_537_im-0674-0034_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,244,310,367,219,kidnyus_173_im-0585-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,353,369,481,156,kidnyus_62_im-0488-0007-0002_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,521,416,411,141,kidnyus_223_im-0076-10240_anon_central echo complex.png,1552,970,kidnyus
+kidney capsule,331,207,335,321,kidnyus_357_im-0655-0038_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,353,279,330,164,kidnyus_277_im-0789-0052_anon_central echo complex.png,960,720,kidnyus
+kidney capsule,110,277,631,263,kidnyus_33_im-0309-0045_anon_capsule.png,1024,768,kidnyus
+kidney medulla,374,368,292,217,kidnyus_188_im-0270-0037_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,359,279,560,234,kidnyus_51_im-0419-1280_anon_central echo complex.png,1552,970,kidnyus
+kidney cortex,236,275,371,159,kidnyus_284_im-0021-0001_anon_cortex.png,1024,768,kidnyus
+kidney cortex,345,448,268,82,kidnyus_181_im-0126-0041_anon_cortex.png,1024,768,kidnyus
+kidney capsule,230,291,524,273,kidnyus_520_im-0082-0016_anon_capsule.png,1024,768,kidnyus
+kidney medulla,319,452,181,117,kidnyus_226_im-0209-0022_anon_medulla.png,1024,768,kidnyus
+kidney medulla,355,254,165,139,kidnyus_341_im-0058-0067_anon_medulla.png,960,720,kidnyus
+kidney central echo complex,373,441,254,145,kidnyus_402_im-0372-0052_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,483,350,207,81,kidnyus_141_im-0120-0035_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,391,234,327,235,kidnyus_203_im-0091-0037_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,316,331,217,91,kidnyus_483_im-0331-0012_anon_medulla.png,1024,768,kidnyus
+kidney cortex,381,347,607,304,kidnyus_146_im-0058-10752_anon_cortex.png,1552,970,kidnyus
+kidney cortex,290,346,303,146,kidnyus_596_im-0464-0012_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,419,297,179,104,kidnyus_70_im-0068-0048_anon_central echo complex.png,960,720,kidnyus
+kidney cortex,267,239,504,333,kidnyus_222_im-0127-0001_anon_cortex.png,1024,768,kidnyus
+kidney medulla,433,315,225,58,kidnyus_172_im-0311-0015_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,416,354,365,197,kidnyus_314_im-0122-0002_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,362,311,360,182,kidnyus_332_im-0385-0046_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,483,350,207,81,kidnyus_141_im-0120-0035_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,197,292,508,269,kidnyus_322_im-0241-0001_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,497,485,244,123,kidnyus_405_im-0115-17408_anon_central echo complex.png,1552,970,kidnyus
+kidney capsule,404,383,212,151,kidnyus_610_im-0787-0013_anon_capsule.png,1024,768,kidnyus
+kidney medulla,386,295,248,144,kidnyus_608_im-0882-0008_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,176,253,576,274,kidnyus_95_im-0269-0003_anon_central echo complex.png,1024,768,kidnyus
+kidney capsule,142,108,599,307,kidnyus_191_im-0466-0041_anon_capsule.png,960,720,kidnyus
+kidney central echo complex,338,353,276,126,kidnyus_76_im-0505-0010_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,240,199,457,228,kidnyus_243_im-0579-0002_anon_cortex.png,960,720,kidnyus
+kidney cortex,319,440,179,113,kidnyus_187_im-0070-0032_anon_cortex.png,1024,768,kidnyus
+kidney cortex,403,377,209,158,kidnyus_42_im-0544-0019_anon_cortex.png,1024,768,kidnyus
+kidney capsule,415,415,314,223,kidnyus_67_im-0345-0008_anon_capsule.png,1024,768,kidnyus
+kidney cortex,347,202,253,142,kidnyus_159_im-0215-0035_anon_cortex.png,960,720,kidnyus
+kidney medulla,465,253,322,305,kidnyus_547_im-0100-0036_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,537,335,286,212,kidnyus_320_im-0408-2048_anon_central echo complex.png,1552,970,kidnyus
+kidney medulla,368,299,317,422,kidnyus_603_im-0820-0004_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,273,389,360,176,kidnyus_248_im-0682-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,483,332,207,157,kidnyus_508_im-0778-0026_anon_medulla.png,1024,768,kidnyus
+kidney medulla,108,247,643,469,kidnyus_74_im-0525-0018_anon_medulla.png,1024,768,kidnyus
+kidney cortex,290,256,372,168,kidnyus_340_im-0944-0065_anon_cortex.png,1024,768,kidnyus
+kidney capsule,202,241,607,317,kidnyus_116_im-0407-0048_anon_capsule.png,1024,768,kidnyus
+kidney capsule,389,359,328,307,kidnyus_486_im-0743-0057_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,365,423,547,234,kidnyus_400_im-0160-1024_anon_central echo complex.png,1552,970,kidnyus
+kidney central echo complex,238,299,234,176,kidnyus_41_im-0439-0032_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,346,386,462,187,kidnyus_221_im-0148-0018_anon_cortex.png,1024,768,kidnyus
+kidney medulla,321,297,169,123,kidnyus_585_im-0716-0050_anon_medulla.png,1024,768,kidnyus
+kidney medulla,403,209,317,119,kidnyus_297_im-0308-0006_anon_medulla.png,1024,768,kidnyus
+kidney medulla,390,298,124,101,kidnyus_317_im-0169-0010_anon_medulla.png,960,720,kidnyus
+kidney cortex,344,251,365,208,kidnyus_91_im-0420-0050_anon_cortex.png,960,720,kidnyus
+kidney capsule,268,348,515,307,kidnyus_344_im-0436-0048_anon_capsule.png,1024,768,kidnyus
+kidney medulla,238,285,538,190,kidnyus_88_im-0263-0006_anon_medulla.png,1024,768,kidnyus
+kidney medulla,511,274,379,339,kidnyus_98_im-0071-0042_anon_medulla.png,1024,768,kidnyus
+kidney cortex,318,294,374,102,kidnyus_293_im-0101-0036_anon_cortex.png,960,720,kidnyus
+kidney central echo complex,393,237,208,121,kidnyus_176_im-0395-0010_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,306,333,503,281,kidnyus_136_im-0343-0009_anon_central echo complex.png,1024,768,kidnyus
+kidney central echo complex,350,474,308,129,kidnyus_233_im-0898-11008_anon_central echo complex.png,1164,873,kidnyus
+kidney capsule,298,344,433,233,kidnyus_295_im-0227-0054_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,346,422,302,158,kidnyus_377_im-0271-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,313,237,291,247,kidnyus_139_im-0323-0015_anon_cortex.png,1024,768,kidnyus
+kidney medulla,241,240,455,297,kidnyus_7_im-0622-0020_anon_medulla.png,1024,768,kidnyus
+kidney capsule,488,318,434,244,kidnyus_234_im-0173-19200_anon_capsule.png,1552,970,kidnyus
+kidney medulla,567,448,301,166,kidnyus_573_im-0121-4864_anon_medulla.png,1552,970,kidnyus
+kidney cortex,259,385,496,238,kidnyus_401_im-0112-0078_anon_cortex.png,1024,768,kidnyus
+kidney central echo complex,330,374,400,90,kidnyus_182_im-0095-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,335,276,471,271,kidnyus_369_im-0462-0004_anon_cortex.png,1024,768,kidnyus
+kidney cortex,341,397,312,123,kidnyus_498_im-0453-0017_anon_cortex.png,1024,768,kidnyus
+kidney medulla,321,325,387,164,kidnyus_162_im-0396-0039_anon_medulla.png,1024,768,kidnyus
+kidney cortex,403,386,266,162,kidnyus_527_im-0460-0016_anon_cortex.png,1024,768,kidnyus
+kidney capsule,301,380,513,283,kidnyus_26_im-0003-0016_anon_capsule.png,1024,768,kidnyus
+kidney capsule,418,238,371,222,kidnyus_584_im-0890-0040-0001_anon_capsule.png,1024,768,kidnyus
+kidney cortex,311,273,303,261,kidnyus_441_im-0050-0005_anon_cortex.png,1024,768,kidnyus
+kidney cortex,391,295,256,128,kidnyus_190_im-0185-0000_anon_cortex.png,1552,970,kidnyus
+kidney central echo complex,345,448,268,82,kidnyus_181_im-0126-0041_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,197,250,639,274,kidnyus_88_im-0263-0006_anon_cortex.png,1024,768,kidnyus
+kidney capsule,332,249,314,352,kidnyus_31_im-0399-0069_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,538,452,249,149,kidnyus_32_im-0464-14592_anon_central echo complex.png,1552,970,kidnyus
+kidney capsule,396,407,251,186,kidnyus_374_im-0644-0025_anon_capsule.png,1024,768,kidnyus
+kidney capsule,219,457,507,211,kidnyus_576_im-0216-0007_anon_capsule.png,1024,768,kidnyus
+kidney central echo complex,256,303,340,256,kidnyus_82_im-0440-0001_anon_central echo complex.png,1024,768,kidnyus
+kidney cortex,362,309,296,148,kidnyus_498_im-0453-0017_anon_cortex.png,1024,768,kidnyus
+kidney cortex,511,274,379,339,kidnyus_98_im-0071-0042_anon_cortex.png,1024,768,kidnyus
+kidney capsule,326,391,273,250,kidnyus_127_im-0676-0025_anon_capsule.png,1024,768,kidnyus
+kidney capsule,436,395,467,267,kidnyus_185_im-0270-0000_anon_capsule.png,1552,970,kidnyus
+kidney central echo complex,342,205,395,290,kidnyus_203_im-0091-0037_anon_central echo complex.png,1024,768,kidnyus
+kidney medulla,305,281,389,318,kidnyus_229_im-0003-0028_anon_medulla.png,1024,768,kidnyus
+kidney medulla,264,284,590,306,kidnyus_24_im-0267-0005-0002_anon_medulla.png,1024,768,kidnyus
+kidney central echo complex,291,269,446,126,kidnyus_105_im-0418-0051_anon_central echo complex.png,1024,768,kidnyus

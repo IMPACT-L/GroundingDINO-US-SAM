@@ -9,7 +9,8 @@ methods =  {'UniverSeg':'UniverSeg',
             'MedClipSamv2':'MedClip-SAMv2',
             'ours':'Ours'} # Abilation Compares
 
-datasets = [{"Breast":{"busbra":"BUSBRA"}},
+datasets = [
+            {"Breast":{"busbra":"BUSBRA"}},
             {"Thyroid":{"tnscui":"TNSCUI"}},
             {"Back Muscle":{"luminous":"Luminous"}}
             ]

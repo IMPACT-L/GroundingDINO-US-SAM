@@ -26,7 +26,7 @@ import csv
 from sklearn.metrics import jaccard_score, f1_score
 import argparse
 #%%
-desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/test_annotation.CSV'
+desDir = 'multimodal-data/USDATASET/test_annotation.CSV'
 
 def sklearn_iou(pred_mask, true_mask):
     return jaccard_score(true_mask.flatten(), pred_mask.flatten())
@@ -80,7 +80,7 @@ model = load_model(model_config,test_config.use_lora)
 model.eval()
 #%%
 terminal = False
-top_k=1
+top_k=3
 box_threshold=0.01
 text_threshold=0.02
 # python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
@@ -236,7 +236,7 @@ if len(boxes>0):
             iou = sklearn_iou(masks,mask_source)*100
             dic = sklearn_dice(masks,mask_source)*100
             ax[2].set_title(f'Pred IoU:{iou:.2f},DSC:{dic:.2f}')
-            if dic>=0:
+            if dic>80 or dic < 10:
                 overlay_mask[:,:,2][masks>0]=255
                 x1, y1, x2, y2 = box_np[0]
                 box_w = x2 - x1
@@ -244,7 +244,7 @@ if len(boxes>0):
             
                 rect = patches.Rectangle((x1, y1), box_w, box_h,
                                         linewidth=2, edgecolor='red', facecolor='none')
-                ax[2].add_patch(rect)
+                # ax[2].add_patch(rect)
 
             
             print(f'{iou:.2f}, dice: {dic:.2f}, phrase:{phrases[i]}, score:{logits[i]:.2f}')

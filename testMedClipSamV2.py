@@ -47,6 +47,7 @@ else:
     datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
                 "stu","s1","tn3k","tg3k","105us",
                 "aul","muregpro","regpro","kidnyus"]
+datasets = ["luminous"]
 
 threshold = .5
 

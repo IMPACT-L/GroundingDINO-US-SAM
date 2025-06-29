@@ -1,3 +1,37 @@
+# GroundingDINO-US-SAM
+
+**Paper Title:**  
+📄 *GroundingDINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models*
+
+---
+
+## 🧠 Abstract
+
+Accurate and generalizable object segmentation in ultrasound imaging remains a significant challenge due to anatomical variability, diverse imaging protocols, and limited annotated data. In this study, we propose a prompt-driven vision-language model (VLM) that integrates **Grounding DINO** with **SAM2** to enable object segmentation across multiple ultrasound organs.
+
+A total of 18 public ultrasound datasets—covering breast, thyroid, liver, prostate, kidney, and paraspinal muscle—were utilized. These datasets were split into 15 for fine-tuning and validation of Grounding DINO using **Low Rank Adaptation (LoRA)**, and 3 were held out entirely for testing to evaluate generalization to unseen distributions.
+
+Comprehensive experiments demonstrate that our method **outperforms** state-of-the-art segmentation baselines, including **UniverSeg**, **MedSAM**, **MedCLIP-SAM**, **BiomedParse**, and **SAMUS** on most seen datasets, while also maintaining strong performance on **unseen** datasets without further fine-tuning.
+
+These findings highlight the potential of VLMs in **scalable**, **robust**, and **automated** ultrasound image analysis, reducing reliance on large, organ-specific annotated datasets.
+
+> 🔓 *We will publish our code at* [`code.sonography.ai`](https://code.sonography.ai) *after acceptance.*
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------
 # Grounding SAM for Breast and Thyroid Ultrasound Image Segmentation
 
 Welcome to the official repository of our research on **Grounding-DINO + SAM2** for ultrasound (US) image segmentation. This project focuses on **fine-tuning GroundingDINO** for ultrasound object grounding and applying **SAM2 for segmentation mask generation**, with additional post-processing to enhance the quality of results.

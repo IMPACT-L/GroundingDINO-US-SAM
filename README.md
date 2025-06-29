@@ -1,5 +1,8 @@
 # GroundingDINO-US-SAM
 
+**[IMPACT Lab](https://users.encs.concordia.ca/~impact/)** 
+[[`Paper`](https://arxiv.org/abs/6579543)]
+
 **Paper Title:**  
 📄 *GroundingDINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models*
 

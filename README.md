@@ -1,12 +1,14 @@
 # GroundingDINO-US-SAM
 
 **[IMPACT Lab](https://users.encs.concordia.ca/~impact/)** 
+
 [[`Paper`](https://arxiv.org/abs/6579543)]
 
 **Paper Title:**  
 📄 *GroundingDINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models*
 
 ---
+## Overview
 
 ## 🧠 Abstract
 
@@ -22,9 +24,21 @@ These findings highlight the potential of VLMs in **scalable**, **robust**, and 
 
 ---
 
+### Framework
 
+<p float="left">
+  <img src="assets/model.png" width="100%" />
+</p>
 
+### Sample Segmentation Results on Seen Dataset
+<p float="left">
+  <img src="assets/seen.png" width="100%" />
+</p>
 
+### Sample Segmentation Results on Unseen Dataset
+<p float="left">
+  <img src="assets/un_seen.png" width="100%" />
+</p>
 
 
 

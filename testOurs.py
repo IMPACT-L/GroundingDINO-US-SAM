@@ -105,7 +105,7 @@ model = load_model(model_config,True)
 model.eval()
 #%%
 
-is_unseen = True
+is_unseen = False
 
 if is_unseen:
     datasets = ["busbra","tnscui","luminous"]
@@ -222,7 +222,10 @@ for selectedDataset in datasets:
     print(f"Number of not detected: {len(not_detected_list)}")
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
-
+    with open(f'{save_result_path}/ious.txt', 'w') as f:
+        f.write('\n'.join(map(str, ious)))
+    with open(f'{save_result_path}/dices.txt', 'w') as f:
+        f.write('\n'.join(map(str, dices)))
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
     print(not_detected_list)

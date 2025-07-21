@@ -101,14 +101,16 @@ model.eval()
 #%%
 # luminous, tnscui, busbra
 import csv
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
+csvPath = 'multimodal-data/test.CSV'
 
 # datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
 #             "stu","s1","tn3k","tg3k","105us",
 #             "aul","muregpro","regpro","kidnyus"]
 
-datasets = ["luminous"]
-
+# datasets = ["luminous"]
+datasets = ["busbra","tnscui","luminous", "breast", "buid", "busuc","busuclm","busb", "busi",
+                "stu","s1","tn3k","tg3k","105us",
+                "aul","muregpro","regpro","kidnyus"]
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)
     save_result_path = f'visualizations/sam2/{selectedDataset}'
@@ -218,7 +220,10 @@ for selectedDataset in datasets:
     print(f"Number of not detected: {len(not_detected_list)}")
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
-
+    with open(f'{save_result_path}/ious.txt', 'w') as f:
+        f.write('\n'.join(map(str, ious)))
+    with open(f'{save_result_path}/dices.txt', 'w') as f:
+        f.write('\n'.join(map(str, dices)))
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
     print(not_detected_list)

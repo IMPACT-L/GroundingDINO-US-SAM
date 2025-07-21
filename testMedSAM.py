@@ -215,6 +215,8 @@ else:
                 "stu","s1","tn3k","tg3k","105us",
                 "aul","muregpro","regpro","kidnyus"]
 
+datasets = ["kidnyus"]
+
 show_plots = True
 margin = 0
 box_threshold=0.05
@@ -311,7 +313,10 @@ for selectedDataset in datasets:
             not_detected_list.append(image_name)
     ious = np.array(ious)
     dices = np.array(dices)
-
+    with open(f'{save_result_path}/ious.txt', 'w') as f:
+        f.write('\n'.join(map(str, ious)))
+    with open(f'{save_result_path}/dices.txt', 'w') as f:
+        f.write('\n'.join(map(str, dices)))
     print(f"Number of not detected: {len(not_detected_list)}")
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")

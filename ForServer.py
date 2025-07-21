@@ -24,10 +24,7 @@ model_config.config_path = 'groundingdino/config/GroundingDINO_SwinT_OGC.py'
 model_config.lora_weigths = 'weights/20250608_1606/best_model.pth'
 model_config.weights_path = 'weights/groundingdino_swint_ogc.pth'
 
-top_k=3
-box_threshold=0.01
-text_threshold=0.02
-text_prompt="left paraspinal muscle seen in the left side of the image"
+
 
 #%%
 def preprocess_caption(caption: str) -> str:
@@ -69,21 +66,26 @@ sam2_predictor = SAM2ImagePredictor(sam2_model)
 model = load_model(model_config,True)
 model.eval()
 #%%
+top_k=3
+box_threshold=0.01
+text_threshold=0.95
+text_prompt="benign. malignant. tomure. muscle."
+#%%
 caption = preprocess_caption(caption=text_prompt)
 image_source, image = load_image(image_path)
 start_time = time.time()
 
 h, w, _ = image_source.shape
-boxes, logits, phrases = predict(model,
+boxes, _logits, phrases = predict(model,
         image,
         caption,
         box_threshold,
         text_threshold,
-        remove_combined= True)
+        remove_combined= False)
 
 if len(boxes>0):
 
-    boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, logits, phrases,box_threshold)
+    boxes, logits, phrases = apply_nms_per_phrase(image_source, boxes, _logits, phrases,box_threshold)
     _, top_indices = torch.topk(logits, top_k if boxes.shape[0]>=top_k else boxes.shape[0])
     boxes=boxes[top_indices]
     logits=logits[top_indices]
@@ -121,6 +123,7 @@ if len(boxes>0):
             x1, y1, x2, y2 = box_np[0]
             box_w = x2 - x1
             box_h = y2 - y1
+            print('phrase',phrases[i],'logit',logits[i])
         
             rect = patches.Rectangle((x1, y1), box_w, box_h,
                                         linewidth=2, edgecolor='red', facecolor='none')

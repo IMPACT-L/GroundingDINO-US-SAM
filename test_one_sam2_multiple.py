@@ -80,7 +80,7 @@ model = load_model(model_config,test_config.use_lora)
 model.eval()
 #%%
 terminal = False
-top_k=3
+top_k=1
 box_threshold=0.01
 text_threshold=0.02
 # python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
@@ -148,6 +148,9 @@ mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test
 
 image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_7_4_bmode.tif'
 mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_7_4_bmode.tif'
+
+image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
+mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
 
 # text_prompt="lower back muscle on the right side of the image" 
 # text_prompt="right lower back muscle in the right side of the image" 

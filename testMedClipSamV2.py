@@ -37,7 +37,7 @@ def getTextSample(dataset=None):
     return textCSV
 #%%
 test_path = f'multimodal-data/test_image'
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
+csvPath = 'multimodal-data/test.CSV'
 
 is_unseen = True
 
@@ -47,6 +47,9 @@ else:
     datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
                 "stu","s1","tn3k","tg3k","105us",
                 "aul","muregpro","regpro","kidnyus"]
+
+# datasets = ["breast"]
+
 datasets = ["luminous"]
 
 threshold = .5
@@ -74,10 +77,7 @@ for selectedDataset in datasets:
         mask_source[mask_source>=threshold]=1
         mask_source[mask_source<threshold]=0
 
-        if is_unseen:
-            sam_path = f'visualizations/GroundedSAM-US_unseen/MedCLIP-SAMv2/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-        else:
-            sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
+        sam_path = f'multimodal-data/MedCLIP-SAMv2/{selectedDataset}/{image_name}'.replace('tif','npz').replace('png','npz').replace('jpg','npz').replace('.bmp','.npz')
         
         if not os.path.exists(sam_path):
             print(sam_path)
@@ -125,6 +125,10 @@ for selectedDataset in datasets:
     dices = np.array(dices)
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
+    with open(f'{save_result_path}/ious.txt', 'w') as f:
+        f.write('\n'.join(map(str, ious)))
+    with open(f'{save_result_path}/dices.txt', 'w') as f:
+        f.write('\n'.join(map(str, dices)))
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
 

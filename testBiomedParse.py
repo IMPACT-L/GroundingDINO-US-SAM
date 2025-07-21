@@ -51,6 +51,8 @@ else:
                 "stu","s1","tn3k","tg3k","105us",
                 "aul","muregpro","regpro","kidnyus"]
 
+datasets = ["luminous"]
+
 threshold = .5
 
 for selectedDataset in datasets:
@@ -122,6 +124,10 @@ for selectedDataset in datasets:
     dices = np.array(dices)
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
+    with open(f'{save_result_path}/ious.txt', 'w') as f:
+        f.write('\n'.join(map(str, ious)))
+    with open(f'{save_result_path}/dices.txt', 'w') as f:
+        f.write('\n'.join(map(str, dices)))
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
 print('Finished')

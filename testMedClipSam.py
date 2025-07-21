@@ -47,8 +47,10 @@ else:
     datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
                 "stu","s1","tn3k","tg3k","105us",
                 "aul","muregpro","regpro","kidnyus"]
-threshold = .5
+
 datasets = ["luminous"]
+
+threshold = .5
 
 for selectedDataset in datasets:
     print("*"*20,selectedDataset,"*"*20)
@@ -72,10 +74,7 @@ for selectedDataset in datasets:
         mask_source[mask_source>=threshold]=1
         mask_source[mask_source<threshold]=0
 
-        if is_unseen:
-            mded_clip_sam_path = f'visualizations/GroundedSAM-US_unseen/MedCLIP-SAM/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-        else:
-            mded_clip_sam_path = f'multimodal-data/MedClipSamResults/MedCLIP-SAM/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
+        mded_clip_sam_path = f'multimodal-data/MedCLIP-SAM/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
 
         if not os.path.exists(mded_clip_sam_path):
             print(mded_clip_sam_path)
@@ -123,6 +122,10 @@ for selectedDataset in datasets:
     dices = np.array(dices)
     print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
     print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
+    with open(f'{save_result_path}/ious.txt', 'w') as f:
+        f.write('\n'.join(map(str, ious)))
+    with open(f'{save_result_path}/dices.txt', 'w') as f:
+        f.write('\n'.join(map(str, dices)))
     with open(f'{save_result_path}/result.txt', 'w') as f:
         f.write(f"Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
 

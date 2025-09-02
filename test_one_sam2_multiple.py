@@ -80,7 +80,7 @@ model = load_model(model_config,test_config.use_lora)
 model.eval()
 #%%
 terminal = False
-top_k=1
+top_k=3
 box_threshold=0.01
 text_threshold=0.02
 # python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
@@ -133,25 +133,33 @@ mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test
 image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busi_benign (83).png'
 mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busi_benign (83).png'
 
-image_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
-mask_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
+# image_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
+# mask_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
 
-image_path = '/home/hamze/Documents/Dataset/LUMINOUS_Database/images/1_1_Bmode.tif'
-mask_path ='/home/hamze/Documents/Dataset/LUMINOUS_Database/masks/1_1_Mask.tif'
+# image_path = '/home/hamze/Documents/Dataset/LUMINOUS_Database/images/1_1_Bmode.tif'
+# mask_path ='/home/hamze/Documents/Dataset/LUMINOUS_Database/masks/1_1_Mask.tif'
 # text_prompt="carotid . benign . malignant . chair . person . dog ." #1
-image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busbra_bus_0017-s.png'
-mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busbra_bus_0017-s.png'
+# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busbra_bus_0017-s.png'
+# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busbra_bus_0017-s.png'
 
-image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_8_1_bmode.tif'
-mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_8_1_bmode.tif'
+# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_8_1_bmode.tif'
+# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_8_1_bmode.tif'
+ 
+
+# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_7_4_bmode.tif'
+# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_7_4_bmode.tif'
+
+# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
+# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
 
 
-image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_7_4_bmode.tif'
-mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_7_4_bmode.tif'
+# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/105us_069.png'
+# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/105us_069.png'
 
-image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
-mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
-
+# image_path = 'multimodal-data/DicomTest/6-benign.png'
+# mask_path = 'multimodal-data/DicomTest/6-benign.png'
+# image_path = 'multimodal-data/DicomTest/7-malignant.png'
+# mask_path = 'multimodal-data/DicomTest/7-malignant.png'
 # text_prompt="lower back muscle on the right side of the image" 
 # text_prompt="right lower back muscle in the right side of the image" 
 # text_prompt="multifidus muscle in the right side of the image" 
@@ -165,9 +173,10 @@ mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/trai
 
 # text_prompt="lower back muscle on the left side of the image"
 # text_prompt="lower back muscle seen on the left side of the image"
-# text_prompt="left lower back muscle in the left side of the image"
+text_prompt="left lower back muscle in the left side of the image"
 text_prompt="left paraspinal muscle seen in the left side of the image"
-
+text_prompt="Segment all breast lesions".lower()
+text_prompt="Segment the gallbladder lumen, liver parenchyma, and focal hepatic lesion"
 if terminal and args.path:
     image_path =  args.path
 
@@ -247,7 +256,7 @@ if len(boxes>0):
             
                 rect = patches.Rectangle((x1, y1), box_w, box_h,
                                         linewidth=2, edgecolor='red', facecolor='none')
-                # ax[2].add_patch(rect)
+                ax[2].add_patch(rect)
 
             
             print(f'{iou:.2f}, dice: {dic:.2f}, phrase:{phrases[i]}, score:{logits[i]:.2f}')
@@ -260,4 +269,6 @@ else:
 end_time = time.time()
 # times.append(end_time - start_time)
 print(f"Execution time: {end_time - start_time:.4f} seconds")
+plt.imshow(overlay_mask, cmap='gray')
+plt.axis('off')
 # %%

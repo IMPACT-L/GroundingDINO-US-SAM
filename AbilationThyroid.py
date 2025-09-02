@@ -78,64 +78,43 @@ sam2_model.eval()
 config_path="configs/test_config.yaml"
 data_config, model_config, test_config = ConfigurationManager.load_config(config_path)
 model = load_model(model_config,True)
-model.eval()    
-#%%  
-# ill_conceived_1 = "find the nail on top right"
-# ill_conceived_1="Highlight the entire kidney and its blurry parts like the outer shell and any soft inner tissue."
-# ill_conceived_1="Highlight the blurry parts of the car on the top and right of the image"
-# ill_conceived_1="Highlight the central part of on the top and right of the image"
+model.eval()
+#%%      
 ill_conceived_1="Highlight the middle phalanges"
 
-kidney_phrases = {
-    "cortex": [
-        # "segment kidney cortex",
-        # "segment renal cortex",
-        # "outline kidney cortical tissue",
-        # "delineate cortex",
-        # "cortical region of the kidney",
+thyroid_phrases = {
+    "thyroid tumor": [
+        # "segment the thyroid parenchyma",
+        # "segment the glandular portion of the thyroid",
+        # "outline the thyroid tissue",
+        # "delineate parenchyma",
+        # "glandular area of the thyroid",
+
+    #     # "segment the car",
+        ill_conceived_1,
+    #     "segment zones of the uterus"
+
+    ],
+    "thyroid nodule": [
+        # "segment the thyroid nodules",
+        # "segment the focal lesions in the thyroid",
+        # "identify the thyroid lump",
+        # "outline nodules",
+        # "hypoechoic region in the thyroid",
 
         ill_conceived_1,
+        # "area of hypoechoic",
         # "segment zones of the uterus"
     ],
-    "capsule": [
-        # "segment kidney capsule",
-        # "segment renal capsule",
-        # "outline kidney capsule boundary",
-        # "identify capsule",
-        # "capsular layer of the kidney",
-
-        ill_conceived_1,
-        # "segment zones of the uterus"
-    ],
-    "medulla": [
-        # "segment kidney medulla",
-        # "segment renal medulla",
-        # "identify renal medullary area",
-        # "outline medulla",
-        # "medullary area of kidney",
-
-        ill_conceived_1,
-        # "segment zones of the uterus"
-    ],
-    "central echo complex": [
-        # "segment central echo complex of kidney",
-        # "segment renal central echo complex",
-        # "delineate central echoes of kidney",
-        # "outline central echoes",
-        # "renal central echoes",
-
-        ill_conceived_1,
-        # "segment zones of the uterus"
-    ]
 }
 csvPath = 'multimodal-data/test.CSV'
 
-def getTextSample(kidney_key):
+def getTextSample(thyroid_key):
     textCSV = {}
     with open(csvPath, 'r', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            if row['dataset'] == 'kidnyus' and kidney_key in row['label_name']:
+            if (row['dataset'] == 'tn3k' or row['dataset'] == 'tg3k') and thyroid_key in row['label_name']:
                 textCSV[str(row['image_name'])] =\
                         {
                         'bbox': [
@@ -158,22 +137,19 @@ box_threshold= 0.1
 text_threshold=0.3
 iou_threshold=10
 threshold = .5
-save_result_path = f'visualizations/ours/KidneyAbilation/'
+save_result_path = f'visualizations/ours/ThyroidAbilation/'
 os.makedirs(save_result_path, exist_ok=True)
-for key in kidney_phrases:
+for key in thyroid_phrases:
     rows = getTextSample(key)
-   
 
-
-    for kidney_indx,kidney_phrase in enumerate(kidney_phrases[key]):
-        print("*"*20,key,kidney_phrase,"*"*20)
-
+    for thyroid_indx,thyroid_phrase in enumerate(thyroid_phrases[key]):
+        print("*"*20,key,thyroid_phrase,"*"*20)
         ious = []
         dices = []
         not_detected_list = []
 
         for image_index,image_name in enumerate(rows):
-            caption = preprocess_caption(caption=kidney_phrase)
+            caption = preprocess_caption(caption=thyroid_phrase)
             image_path=os.path.join(data_config.val_dir,image_name)
             
             image_source, image = load_image(image_path)
@@ -248,31 +224,31 @@ for key in kidney_phrases:
                     ax[2].set_title(f'iou: {iou:.2f}, dice: {dic:.2f}')
                     # plt.text(x=x1, y=y1, s=phrases, color='red', fontsize=10)
                     ax[2].axis('off')
-                    plt.savefig(f"{save_result_path}/{kidney_indx+1}{image_name.replace('.bmp','.png')}") 
+                    plt.savefig(f"{save_result_path}/{thyroid_indx+1}{image_name.replace('.bmp','.png')}") 
                     # plt.show()
                     plt.close()
 
                 ious.append(iou)
                 dices.append(dic)
             else:
-                # print(f'[{image_name}{image_index}] NO BOX FOUNDED FOR ')  
+                print(f'[{image_name}{image_index}] NO BOX FOUNDED FOR ')  
                 not_detected_list.append(image_name)
                 ious.append(0)
                 dices.append(0)
         ious = np.array(ious)
         dices = np.array(dices)
 
-        print(f"Number of not detected: {len(not_detected_list)}")
+        # print(f"Number of not detected: {len(not_detected_list)}")
         print(f"Average IoU: {ious.mean():.2f}±{ious.std():.2f}")
         print(f"Average Dic: {dices.mean():.2f}±{dices.std():.2f}")
 
-        with open(f"{save_result_path}/{key}_{kidney_phrase.replace(' ','_')}_ious.txt", 'w') as f:
+        with open(f"{save_result_path}/{key}_{thyroid_phrase.replace(' ','_')}_ious.txt", 'w') as f:
             f.write('\n'.join(map(str, ious)))
-        with open(f"{save_result_path}/{key}_{kidney_phrase.replace(' ','_')}_dices.txt", 'w') as f:
+        with open(f"{save_result_path}/{key}_{thyroid_phrase.replace(' ','_')}_dices.txt", 'w') as f:
             f.write('\n'.join(map(str, dices)))
 
         with open(f'{save_result_path}/result.txt', 'a') as f:
-            f.write(f"{key}, {kidney_phrase} \n\t Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
+            f.write(f"{key}, {thyroid_phrase} \n\t Average Dice, IoU: {dices.mean():.2f}±{dices.std():.0f} & {ious.mean():.2f}±{ious.std():.0f}\n")
         print(not_detected_list)
 print('Finished')
 # %%

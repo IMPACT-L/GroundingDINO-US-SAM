@@ -51,26 +51,35 @@ While most baselines used the same training and test splits, **UniverSeg** requi
 
 ### Summary of Dataset Splits
 
-| Organ         | Dataset        | Total Images | Train | Val  | Test | Notes |
-|---------------|----------------|--------------|-------|------|------|-------|
-| Breast        | BrEaST         | 252          | 176   | 50   | 26   |       |
-|               | BUID           | 233          | 161   | 46   | 26   |       |
-|               | BUSUC          | 810          | 566   | 161  | 83   |       |
-|               | BUSUCML        | 264          | 183   | 52   | 29   |       |
-|               | BUSB           | 163          | 114   | 32   | 17   |       |
-|               | BUSI           | 657          | 456   | 132  | 69   |       |
-|               | STU            | 42           | 29    | 8    | 5    |       |
-|               | S1             | 202          | 140   | 40   | 22   |       |
-|               | **BUSBRA**     | **1875**     | ---   | ---  | 1875 | 🧪 *Unseen* |
-| Thyroid       | TN3K           | 3493         | 2442  | 703  | 348  |       |
-|               | TG3K           | 3565         | 2497  | 713  | 355  |       |
-|               | **TNSCUI**     | **637**      | ---   | ---  | 637  | 🧪 *Unseen* |
-| Liver         | 105US          | 105          | 73    | 21   | 11   |       |
-|               | AUL            | 533          | 351   | 120  | 62   |       |
-| Prostate      | MicroSeg       | 2283         | 1527  | 495  | 261  |       |
-|               | RegPro         | 4218         | 2952  | 843  | 423  |       |
-| Kidney        | kidneyUS       | 1963         | 1257  | 465  | 241  |       |
-| Back Muscle   | **Luminous**   | **296**      | ---   | ---  | 296  | 🧪 *Unseen* |
+## Public Ultrasound Datasets
+
+Public ultrasound datasets used in this study and their distribution across train, validation, and test sets.  
+🚫 **Datasets used exclusively for testing** (not seen during training or validation).  
+The only exception is the UniverSeg baseline, which requires a 16-image support set (16 manually segmented images from each unseen dataset were provided).
+
+| Organ       | Dataset   | Total | Train | Val | Test |
+|-------------|-----------|-------|-------|-----|------|
+| **Breast**  | BrEaST    | 252   | 176   | 50  | 26   |
+|             | BUID      | 233   | 161   | 46  | 26   |
+|             | BUSUC     | 810   | 566   | 161 | 83   |
+|             | BUSUCML   | 264   | 183   | 52  | 29   |
+|             | BUSB      | 163   | 114   | 32  | 17   |
+|             | BUSI      | 657   | 456   | 132 | 69   |
+|             | STU       | 42    | 29    | 8   | 5    |
+|             | S1        | 202   | 140   | 40  | 22   |
+| 🚫 **Breast** | **BUSBRA** | 1875  | —     | —   | 1875 |
+| **Thyroid** | TN3K      | 3493  | 2442  | 703 | 348  |
+|             | TG3K      | 3565  | 2497  | 713 | 355  |
+| 🚫 **Thyroid** | **TNSCUI** | 637   | —     | —   | 637  |
+| **Liver**   | 105US     | 105   | 73    | 21  | 11   |
+|             | AUL       | 533   | 351   | 120 | 62   |
+| **Prostate**| MicroSeg  | 2283  | 1527  | 495 | 261  |
+|             | RegPro    | 4218  | 2952  | 843 | 423  |
+| **Kidney**  | kidneyUS  | 1963  | 1257  | 465 | 241  |
+| 🚫 **Back Muscle** | **Luminous** | 296   | —     | —   | 296  |
+| **Total**   | —         | **18783** | **12924** | **3881** | **1978** |
+
+
 
 **🔢 Total:**  
 - 18 datasets  

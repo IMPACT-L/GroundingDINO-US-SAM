@@ -2,7 +2,10 @@
 
 **[IMPACT Lab](https://users.encs.concordia.ca/~impact/)** 
 
-[[`Paper`](https://arxiv.org/abs/6579543)]
+[[`Application-v1`](https://segmentus.sonography.ai)]
+[[`Paper TUFFC`](https://ieeexplore.ieee.org/document/11146904)]
+[[`Paper arXiv`](https://arxiv.org/abs/6579543)]
+
 
 **Paper Title:**  
 📄 *GroundingDINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models*
@@ -19,9 +22,6 @@ A total of 18 public ultrasound datasets—covering breast, thyroid, liver, pros
 Comprehensive experiments demonstrate that our method **outperforms** state-of-the-art segmentation baselines, including **UniverSeg**, **MedSAM**, **MedCLIP-SAM**, **BiomedParse**, and **SAMUS** on most seen datasets, while also maintaining strong performance on **unseen** datasets without further fine-tuning.
 
 These findings highlight the potential of VLMs in **scalable**, **robust**, and **automated** ultrasound image analysis, reducing reliance on large, organ-specific annotated datasets.
-
-> 🔓 *We will publish our code at* [`code.sonography.ai`](https://code.sonography.ai) *after acceptance.*
-
 ---
 
 ### Framework

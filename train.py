@@ -428,18 +428,6 @@ def train(config_path: str, save_dir: Optional[str] = None) -> None:
                 use_lora=training_config.use_lora
             )
 
-#%% 
-# def lower_file_names():
-#     folder_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/USDATASET/images'
-#     dires = ['train','val','test']
-#     for dir in dires:
-#         print(dir)
-#         folder_path_level = f'{folder_path}/{dir}'
-#         for filename in os.listdir(folder_path_level):
-#             lowercase_name = filename.lower()
-#             src = os.path.join(folder_path_level, filename)
-#             dst = os.path.join(folder_path_level, lowercase_name)
-#             os.rename(src, dst)
 #%%
 if __name__ == "__main__":
     # lower_file_names()

@@ -14,7 +14,7 @@ sys.path.append(os.path.abspath('..'))
 from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k'
+srcDir = '../Dataset/2-Thyroid-Dataset/tg3k'
 dataset = 'tg3k'
 #%%
 # folder_path = '../multimodal-data/USDATASET/images/val'

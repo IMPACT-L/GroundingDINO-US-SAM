@@ -194,7 +194,7 @@ def getTextSample(dataset=None):
     return textCSV
 #%%
 device = 'cuda'
-medsam_model = sam_model_registry["vit_b"](checkpoint="/home/hamze/Documents/MedSAM/work_dir/MedSAM/medsam_vit_b.pth")
+medsam_model = sam_model_registry["vit_b"](checkpoint="../MedSAM/work_dir/MedSAM/medsam_vit_b.pth")
 medsam_model = medsam_model.to(device)
 medsam_model.eval()
 #%%

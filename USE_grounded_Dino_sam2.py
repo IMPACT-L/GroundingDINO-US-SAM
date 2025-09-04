@@ -21,7 +21,7 @@ from transformers import AutoProcessor, AutoModelForZeroShotObjectDetection
 TEXT_PROMPT = 'exhaust window and tires and excude tumor benign malignant lesion'
 TEXT_PROMPT = TEXT_PROMPT.split()
 TEXT_PROMPT = '. '.join(TEXT_PROMPT) + '.' 
-# IMG_PATH = '/home/hamze/Documents/Dataset/BULI_Malignant/3 Malignant Image.bmp' 
+# IMG_PATH = '../Dataset/BULI_Malignant/3 Malignant Image.bmp' 
 # IMG_PATH =  'notebooks/images/truck.jpg'
 # SAM2_CHECKPOINT = './checkpoints/sam2.1_hiera_large.pt'
 # SAM2_MODEL_CONFIG = 'configs/sam2.1/sam2.1_hiera_l.yaml'
@@ -41,9 +41,9 @@ if torch.cuda.get_device_properties(0).major >= 8:
     torch.backends.cudnn.allow_tf32 = True
 #%% build grounding dino from huggingface
 
-# IMG_PATH = '/home/hamze/Documents/Dataset/BULI_Malignant/3 Malignant Image.bmp' #GOOD works
-# IMG_PATH ='/home/hamze/Documents/Dataset/BreastBUSI_Images/benign/benign (1).png'
-IMG_PATH ='/home/hamze/Documents/Dataset/BULI_Malignant/4 Malignant Image.bmp'
+# IMG_PATH = '../Dataset/BULI_Malignant/3 Malignant Image.bmp' #GOOD works
+# IMG_PATH ='../Dataset/BreastBUSI_Images/benign/benign (1).png'
+IMG_PATH ='../Dataset/BULI_Malignant/4 Malignant Image.bmp'
 model_id = 'IDEA-Research/grounding-dino-tiny'
 # model_id = 'IDEA-Research/grounding-dino-base'
 processor = AutoProcessor.from_pretrained(model_id)
@@ -73,7 +73,7 @@ else:
 
 
 #%% build SAM2 image predictor
-SAM2_CHECKPOINT = '/home/hamze/Documents/Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
+SAM2_CHECKPOINT = '../Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
 SAM2_MODEL_CONFIG = 'configs/sam2.1/sam2.1_hiera_l.yaml'
 sam2_checkpoint = SAM2_CHECKPOINT
 model_cfg = SAM2_MODEL_CONFIG

@@ -34,7 +34,7 @@ features = [
 ]
 
 #%% Generate 341 unique prompts
-names = [name.split('/')[-1] for name in glob.glob('/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/*')]
+names = [name.split('/')[-1] for name in glob.glob('../Dataset/LUMINOUS_Database/B-mode/*')]
 #%%
 prompts = []
 for image_name in names:    

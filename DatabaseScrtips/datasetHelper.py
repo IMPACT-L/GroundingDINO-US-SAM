@@ -1,5 +1,5 @@
 import csv
-csvPath = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
+csvPath = '../Grounding-Sam-Ultrasound/multimodal-data/test.CSV'
 selectedDataset = None
 selectedDataset =  'busuclm' #'tnscui'#'stu' #'breast' #'tn3k'#'tg3k'#'tnscui'
 def getTextSample(dataset=None):

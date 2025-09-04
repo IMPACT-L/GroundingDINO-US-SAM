@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath('..'))
 from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/1-BreastDataset/BrEaST-Lesions_USG-images_and_masks-Dec-15-2023'
+srcDir = '../Dataset/1-BreastDataset/BrEaST-Lesions_USG-images_and_masks-Dec-15-2023'
 dataset = 'breast'
 #%%
 rows = []

@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath('..'))
 from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/LUMINOUS_Database'
+srcDir = '../Dataset/LUMINOUS_Database'
 dataset = 'luminous'
 #%%
 rows=[]

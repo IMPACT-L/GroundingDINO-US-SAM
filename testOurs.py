@@ -90,7 +90,7 @@ def getTextSample(dataset=None):
                     }
     return textCSV
 #%% build SAM2 image predictor
-SAM2_CHECKPOINT = '/home/hamze/Documents/Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
+SAM2_CHECKPOINT = '../Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
 SAM2_MODEL_CONFIG = 'configs/sam2.1/sam2.1_hiera_l.yaml'
 sam2_checkpoint = SAM2_CHECKPOINT
 model_cfg = SAM2_MODEL_CONFIG

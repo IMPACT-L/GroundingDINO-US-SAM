@@ -14,10 +14,10 @@ sys.path.append(os.path.abspath('..'))
 from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tn3k'
+srcDir = '../Dataset/2-Thyroid-Dataset/tn3k'
 dataset = 'tn3k'
 #%%
-# folder_path = '/home/hamze/Documents/Dataset/2-Dataset/tn3k/test-image'
+# folder_path = '../Dataset/2-Dataset/tn3k/test-image'
 # for filename in os.listdir(folder_path):
 #     new_name = str(int(filename.replace('.jpg', ' '))+3000)+'.jpg'
 #     src = os.path.join(folder_path, filename)

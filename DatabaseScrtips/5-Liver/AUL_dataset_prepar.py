@@ -17,7 +17,7 @@ sys.path.append(os.path.abspath('..'))
 from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/5-Liver/AUL'
+srcDir = '../Dataset/5-Liver/AUL'
 dataset = 'aul'
 #%%
 def getData(in_type,show_plot=False):

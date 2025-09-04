@@ -2,7 +2,7 @@ import csv
 import shutil
 import os
 
-desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data'
+desDir = '../Grounding-Sam-Ultrasound/multimodal-data'
 csvFileName = ''
 def create_dataset(data_list, output_type):
     init()

@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath('..'))
 from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/1-BreastDataset/S1/TrainingDataSet'
+srcDir = '../Dataset/1-BreastDataset/S1/TrainingDataSet'
 dataset = 's1'
 #%%
 mask_paths = glob.glob(f'{srcDir}/General-1-channel-Labels/*')

@@ -9,7 +9,7 @@ import random
 import glob
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/CCAUI'
+srcDir = '../Dataset/CCAUI'
 desDir = '../multimodal-data/USDATASET'
 #%%
 os.makedirs(f'{desDir}/images/train', exist_ok=True)

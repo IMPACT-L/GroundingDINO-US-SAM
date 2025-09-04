@@ -14,7 +14,7 @@ sys.path.append(os.path.abspath('..'))
 from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/4-Prostate/MicroSeg'
+srcDir = '../Dataset/4-Prostate/MicroSeg'
 dataset = 'muregpro'
 #%%
 # def getData(in_type):

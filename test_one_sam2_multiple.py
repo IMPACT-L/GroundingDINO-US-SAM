@@ -66,7 +66,7 @@ def apply_nms_per_phrase(image_source, boxes, logits, phrases, threshold=0.3):
 
     return torch.stack(nms_boxes_list), torch.stack(nms_logits_list), nms_phrases_list
 #%% build SAM2 image predictor
-SAM2_CHECKPOINT = '/home/hamze/Documents/Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
+SAM2_CHECKPOINT = '../Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
 SAM2_MODEL_CONFIG = 'configs/sam2.1/sam2.1_hiera_l.yaml'
 sam2_checkpoint = SAM2_CHECKPOINT
 model_cfg = SAM2_MODEL_CONFIG
@@ -83,11 +83,11 @@ terminal = False
 top_k=3
 box_threshold=0.01
 text_threshold=0.02
-# python test_one.py -p /home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
+# python test_one.py -p ../Dataset/LUMINOUS_Database/B-mode/54_27_Bmode.tif -t "lumbar_multifidus. text." -k 1 -tt 0.1 -bt .01
 
 if terminal:
     parser = argparse.ArgumentParser("Grounding DINO example", add_help=True)
-    parser.add_argument("--path", "-p", type=str, required=False, help="path to iamge",default='/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif')
+    parser.add_argument("--path", "-p", type=str, required=False, help="path to iamge",default='../Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif')
     parser.add_argument("--text_prompt", "-t", type=str, required=False, help="text prompt",default='lumbar multifidus. benign cyst. benign. malignant. pants. text.')
     parser.add_argument("--top_k", "-k", type=int, required=False, help="top_k",default=3)
     parser.add_argument("--text_threshold", "-tt", type=float, required=False, help="text threshold",default=0.01)
@@ -104,57 +104,57 @@ if terminal and args.text_threshold:
 if terminal and args.top_k:
     top_k= args.top_k
 # image_path = 'multimodal-data/Breast/images/train/000002.png'
-# image_path = '/home/hamze/Documents/Dataset/CCAUI/Image/202201121748100022VAS_slice_1069.png'
-# mask_path = '//home/hamze/Documents/Dataset/CCAUI/Mask/202201121748100022VAS_slice_1069.png'
+# image_path = '../Dataset/CCAUI/Image/202201121748100022VAS_slice_1069.png'
+# mask_path = '/../Dataset/CCAUI/Mask/202201121748100022VAS_slice_1069.png'
 
-# image_path = '/home/hamze/Documents/Dataset/1-BreastDataset/BreastBUSI_Images/malignant/malignant (140).png'
-# mask_path = '/home/hamze/Documents/Dataset/1-BreastDataset/BreastBUSI_Images/malignant/malignant (140)_mask.png'
+# image_path = '../Dataset/1-BreastDataset/BreastBUSI_Images/malignant/malignant (140).png'
+# mask_path = '../Dataset/1-BreastDataset/BreastBUSI_Images/malignant/malignant (140)_mask.png'
 
-# image_path = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k/thyroid-image/0805.jpg'
-# mask_path = '/home/hamze/Documents/Dataset/2-Thyroid-Dataset/tg3k/thyroid-mask/0805.jpg'
+# image_path = '../Dataset/2-Thyroid-Dataset/tg3k/thyroid-image/0805.jpg'
+# mask_path = '../Dataset/2-Thyroid-Dataset/tg3k/thyroid-mask/0805.jpg'
 
 # image_path = 'sample_tests/two_dogs.png'
 # mask_path = 'sample_tests/two_dogs.png'
-# image_path = '/home/hamze/Documents/Dataset/BUSBRA/Images/bus_0064-s.png'
-# image_path = '/home/hamze/Documents/Dataset/BUS-UCLM Breast ultrasound lesion segmentation dataset/images/ALWI_000.png'
-#** image_path = '/home/hamze/Documents/Dataset/fetal head circumference/training_set/001_HC.png'
-#** image_path = '/home/hamze/Documents/Dataset/BrEaST-Lesions_USG-images_and_masks-Dec-15-2023/BrEaST-Lesions_USG-images_and_masks/case001.png'
-# image_path = '/home/hamze/Documents/Dataset/kidneyUS_images_14_june_2022/kidneyUS_images_14_june_2022/1_IM-0001-0059_anon.png'
-# image_path = '/home/hamze/Documents/Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif'
-# image_path = '/home/hamze/Documents/Dataset/Thyroid Dataset/DDTI dataset/DDTI/1_or_data/image/3.PNG'
-# image_path = '/home/hamze/Documents/Dataset/Thyroid Dataset/tg3k/thyroid-image/0000.jpg'
+# image_path = '../Dataset/BUSBRA/Images/bus_0064-s.png'
+# image_path = '../Dataset/BUS-UCLM Breast ultrasound lesion segmentation dataset/images/ALWI_000.png'
+#** image_path = '../Dataset/fetal head circumference/training_set/001_HC.png'
+#** image_path = '../Dataset/BrEaST-Lesions_USG-images_and_masks-Dec-15-2023/BrEaST-Lesions_USG-images_and_masks/case001.png'
+# image_path = '../Dataset/kidneyUS_images_14_june_2022/kidneyUS_images_14_june_2022/1_IM-0001-0059_anon.png'
+# image_path = '../Dataset/LUMINOUS_Database/B-mode/54_1_Bmode.tif'
+# image_path = '../Dataset/Thyroid Dataset/DDTI dataset/DDTI/1_or_data/image/3.PNG'
+# image_path = '../Dataset/Thyroid Dataset/tg3k/thyroid-image/0000.jpg'
 # text_prompt="thyroid. lumbar multifidus. benign cyst. benign. malignant. pants. text." #1
 # text_prompt="find malignant on the center of the image." #1
 # text_prompt= "chair . person . dog ."
 
-image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busi_benign (34).png'
-mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busi_benign (34).png'
+image_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_image/busi_benign (34).png'
+mask_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_mask/busi_benign (34).png'
 
-image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busi_benign (83).png'
-mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busi_benign (83).png'
+image_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_image/busi_benign (83).png'
+mask_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_mask/busi_benign (83).png'
 
 # image_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
 # mask_path = '/home/hamze/Downloads/algorithms-16-00521-g001.png'
 
-# image_path = '/home/hamze/Documents/Dataset/LUMINOUS_Database/images/1_1_Bmode.tif'
-# mask_path ='/home/hamze/Documents/Dataset/LUMINOUS_Database/masks/1_1_Mask.tif'
+# image_path = '../Dataset/LUMINOUS_Database/images/1_1_Bmode.tif'
+# mask_path ='../Dataset/LUMINOUS_Database/masks/1_1_Mask.tif'
 # text_prompt="carotid . benign . malignant . chair . person . dog ." #1
-# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/busbra_bus_0017-s.png'
-# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/busbra_bus_0017-s.png'
+# image_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_image/busbra_bus_0017-s.png'
+# mask_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_mask/busbra_bus_0017-s.png'
 
-# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_8_1_bmode.tif'
-# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_8_1_bmode.tif'
+# image_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_8_1_bmode.tif'
+# mask_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_8_1_bmode.tif'
  
 
-# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_7_4_bmode.tif'
-# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_7_4_bmode.tif'
+# image_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_7_4_bmode.tif'
+# mask_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_mask/luminous_7_4_bmode.tif'
 
-# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
-# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
+# image_path = '../Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
+# mask_path = '../Grounding-Sam-Ultrasound/multimodal-data/train/105us_026.png'
 
 
-# image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/105us_069.png'
-# mask_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_mask/105us_069.png'
+# image_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_image/105us_069.png'
+# mask_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_mask/105us_069.png'
 
 # image_path = 'multimodal-data/DicomTest/6-benign.png'
 # mask_path = 'multimodal-data/DicomTest/6-benign.png'

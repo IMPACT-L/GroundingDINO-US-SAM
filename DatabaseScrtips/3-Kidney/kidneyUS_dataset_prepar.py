@@ -14,7 +14,7 @@ sys.path.append(os.path.abspath('..'))
 from dataSaver import create_dataset
 random.seed(42)
 #%%
-srcDir = '/home/hamze/Documents/Dataset/3-Kidny/kidneyUS'
+srcDir = '../Dataset/3-Kidny/kidneyUS'
 dataset = 'kidnyus'
 #%%
 # Capsule = 0, Central Echo Complex = 1, Medulla = 2, Cortex = 3

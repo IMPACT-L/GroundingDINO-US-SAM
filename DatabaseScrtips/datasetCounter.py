@@ -2,7 +2,7 @@
 # import csv
 # from collections import Counter
 # #%%
-# desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data'
+# desDir = '../Grounding-Sam-Ultrasound/multimodal-data'
 
 # dataset_counts = Counter()
 
@@ -25,7 +25,7 @@
 # import os
 
 # #%%
-# desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data'
+# desDir = '../Grounding-Sam-Ultrasound/multimodal-data'
 # splits = ['train', 'val', 'test']
 # overall_counts = Counter()
 
@@ -62,7 +62,7 @@ datasets = ['breast','buid', 'busuc','busuclm','busb',
             'busi','stu','s1','tn3k','tg3k',
             '105us','aul','muregpro','regpro','kidnyus']
 # datasets = ['busbra', 'tnscui', 'luminous' ]
-desDir = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data'
+desDir = '../Grounding-Sam-Ultrasound/multimodal-data'
 output_types = ['train', 'val', 'test_mask']
 dataset_counts = {'train':0, 'val':0, 'test_mask':0}
 print('Dataset', 'Total',output_types)

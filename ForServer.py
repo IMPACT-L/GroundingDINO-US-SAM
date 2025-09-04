@@ -14,10 +14,10 @@ import matplotlib.patches as patches
 from types import SimpleNamespace
 import time
 #%% Input Parameters
-SAM2_CHECKPOINT = '/home/hamze/Documents/Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
+SAM2_CHECKPOINT = '../Grounded-SAM-2/checkpoints/sam2.1_hiera_large.pt'
 SAM2_MODEL_CONFIG = 'configs/sam2.1/sam2.1_hiera_l.yaml'
 DEVICE = 'cpu' #'cuda'
-image_path = '/home/hamze/Documents/Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_7_4_bmode.tif'
+image_path = '../Grounding-Sam-Ultrasound/multimodal-data/test_image/luminous_7_4_bmode.tif'
 
 model_config = SimpleNamespace()
 model_config.config_path = 'groundingdino/config/GroundingDINO_SwinT_OGC.py'

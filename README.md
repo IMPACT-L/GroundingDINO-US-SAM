@@ -49,8 +49,6 @@ This study utilized **18 public ultrasound datasets** spanning a wide range of a
 
 While most baselines used the same training and test splits, **UniverSeg** required a small **16-image support set** even for unseen datasets. Therefore, we provided 16 annotated images from each unseen dataset to ensure fair comparison.
 
-### Summary of Dataset Splits
-
 ## Public Ultrasound Datasets
 
 Public ultrasound datasets used in this study and their distribution across train, validation, and test sets.  

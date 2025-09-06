@@ -4,14 +4,14 @@
 
 [Hamze Rasaee](https://scholar.google.com/citations?user=s_8vHW4AAAAJ&hl=en), [Taha Koleilat](https://tahakoleilat.github.io/), [Khashayar Rafat Zand](https://www.linkedin.com/in/drkhashy/?originalSubdomain=ca), [Hassan Rivaz](https://users.encs.concordia.ca/~hrivaz/)
 
+**Try the online demo:** [segmentus.sonography.ai](https://segmentus.sonography.ai)
 
 [![Applicaction](https://img.shields.io/badge/Application-Web_V1-orange.svg)](https://segmentus.sonography.ai)
 [![Paper TUFFC](https://img.shields.io/badge/TUFFC-Paper-blue.svg)](https://ieeexplore.ieee.org/document/11146904)
-[![Paper arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://ieeexplore.ieee.org/document/11146904)
+[![Paper arXiv](https://img.shields.io/badge/arXiv-2406.12345-B31B1B.svg)](https://arxiv.org/abs/2406.12345)
 
 **Paper Title:**  
 📄 *GroundingDINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models*
-
 ---
 ## Overview
 
@@ -56,10 +56,9 @@ multimodal-data
 |── val.CSV
 |── test.CSV
 ├── train
-│   ├── train_images                  
-│
-├── val          
-│   ├── val_images             
+│   ├── train_images
+├── val
+│   ├── val_images
 └──       
 ```
 
@@ -120,38 +119,38 @@ Create an environment with all required packages with the following command :
 ```bashscript
 conda env create -f gdinousam.yml
 conda activate gdinousam
-pip install -r reqirements.txt
+pip install -r requirements.txt
 pip install -e .
 ```
 
 ## How to run
 
-## Train:
-
-1. Prepare your dataset with images and related pompt.
-2. Run the train.py for training. **See `configs/train_config.yaml` for detailed training configurations.**
-
-  ```
-  python train.py
-  ```
+### Train:
+1. Prepare your dataset with images and related prompts, following the structure and CSV format described above.
+2. **Review and modify** the parameters in `configs/train_config.yaml` (e.g., paths, hyperparameters) to match your setup.
+3. Run the training script:
+```bash
+   python train.py
+```
 
 ## Test:
 Visualize results of training on test images. **See `configs/test_config.yaml` for detailed testing configurations.**
 
-```
+``` bash
 python test.py
 ```
 
-### Other Tests [BiomedParse, MedClipSam, MedClipSamV2, MedSam, SamUS, Sam2, `Ours`]
+### Other Tests [BiomedParse, MedClipSam, MedClipSamV2, MedSam, SamUS, Sam2, `GroundingDINOUSAM (Ours)`]
 
-```
+``` bash
 python testBiomedParse.py
 python testMedClipSam.py
 python testMedClipSamV2.py
 python testMedSam.py
 python testSAMUS.py
 python testSam2.py
-python testOurs.py
+
+python testGroundingDINOUSAM.py
 
 ```
 

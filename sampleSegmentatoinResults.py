@@ -386,7 +386,3 @@ plt.tight_layout()
 plt.savefig(f"visualizations/SampleSegmentationResult/{'un_seen' if is_unseen else 'seen'}.png", 
            dpi=300, bbox_inches='tight')
 plt.show()
-# %%
-# first columns: other images
-# second to last column: our method
-# last column: ground truth

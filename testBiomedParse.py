@@ -44,8 +44,7 @@ csvPath = 'multimodal-data/test.CSV'
 is_unseen = True
 
 if is_unseen:
-    # datasets = ["busbra","tnscui","luminous"]
-    datasets = ["tnscui","luminous"]
+    datasets = ["busbra","tnscui","luminous"]
 else:
     datasets = ["breast", "buid", "busuc","busuclm","busb", "busi",
                 "stu","s1","tn3k","tg3k","105us",

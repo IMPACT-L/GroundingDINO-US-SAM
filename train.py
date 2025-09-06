@@ -55,7 +55,7 @@ def setup_data_loaders(config: DataConfig) -> tuple[DataLoader, DataLoader]:
     
     val_loader = DataLoader(
         val_dataset,
-        batch_size=1,  # Keep batch size 1 for validation
+        batch_size=1, 
         shuffle=False,
         num_workers=1,
         collate_fn=lambda x: tuple(zip(*x))
@@ -96,24 +96,17 @@ class GroundingDINOTrainer:
             self.optimizer = torch.optim.AdamW(
                 lora_params,
                 lr=learning_rate,
-                #weight_decay=1e-4  # Removed for overfitting
             )
         else:
             self.optimizer = torch.optim.AdamW(
                 model.parameters(),
                 lr=learning_rate,
-                weight_decay=1e-4  # Removed for overfitting
+                weight_decay=1e-4
             )
         
         # Initialize scheduler with warmup
         if lr_scheduler=="onecycle":
             total_steps = num_steps_per_epoch * num_epochs
-            #warmup_steps = num_steps_per_epoch * warmup_epochs  
-            #self.scheduler = get_cosine_schedule_with_warmup(
-            #    self.optimizer,
-            #    num_warmup_steps=warmup_steps,
-            #    num_training_steps=total_steps
-            #)
             # One Cycle LR with warmup
             self.scheduler = OneCycleLR(
                 self.optimizer,

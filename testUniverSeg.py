@@ -65,9 +65,7 @@ for selectedDataset in datasets:
     ious_after = []
     
     for image_index,image_name in enumerate(textCSV):
-        # if is_unseen:
-        #     universeg_path = f'multimodal-data/UniverSeg/{selectedDataset}_unseen/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
-        # else:
+
         universeg_path = f'multimodal-data/UniverSeg/{selectedDataset}/{image_name}'.replace('png','npz').replace('jpg','npz').replace('.bmp','.npz').replace('.tif','.npz')
         if not os.path.exists(universeg_path):
             continue

@@ -2,8 +2,7 @@
 
 **[IMPACT Lab](https://users.encs.concordia.ca/~impact/)** 
 
-[Hamze Rasaee](https://scholar.google.com/citations?user=s_8vHW4AAAAJ&hl=en), [Taha Koleilat](https://tahakoleilat.github.io/), , [Khashayar Rafat Zand](https://www.linkedin.com/in/drkhashy/?originalSubdomain=ca), [Hassan Rivaz](https://users.encs.concordia.ca/~hrivaz/)
-
+[Hamze Rasaee](https://scholar.google.com/citations?user=s_8vHW4AAAAJ&hl=en), [Taha Koleilat](https://tahakoleilat.github.io/), [Khashayar Rafat Zand](https://www.linkedin.com/in/drkhashy/?originalSubdomain=ca), [Hassan Rivaz](https://users.encs.concordia.ca/~hrivaz/)
 
 
 [![Applicaction](https://img.shields.io/badge/Application-Web_V1-orange.svg)](https://segmentus.sonography.ai)
@@ -49,6 +48,31 @@ This study utilized **18 public ultrasound datasets** spanning a wide range of a
 
 While most baselines used the same training and test splits, **UniverSeg** required a small **16-image support set** even for unseen datasets. Therefore, we provided 16 annotated images from each unseen dataset to ensure fair comparison.
 
+- Create a directory for your data that you want to work with in the main working directory like the following:
+
+```shell
+multimodal-data
+|── train.CSV
+|── val.CSV
+|── test.CSV
+├── train
+│   ├── train_images                  
+│
+├── val          
+│   ├── val_images             
+└──       
+```
+
+- Create CSV file for training and validation with format below
+  - Promt (label_name)
+  - Bounding Box (bbox_x,bbox_y,bbox_width,bbox_height)
+  - Image (image_name,image_width,image_height)
+  - Dataset Type(dataset)
+``` csv
+label_name,bbox_x,bbox_y,bbox_width,bbox_height,image_name,image_width,image_height,dataset
+benign,100,80,241,109,breast_case146.png,433,469,breast
+```
+
 ## Public Ultrasound Datasets
 
 Public ultrasound datasets used in this study and their distribution across train, validation, and test sets.  
@@ -83,17 +107,62 @@ The only exception is the UniverSeg baseline, which requires a 16-image support 
 - 18 datasets  
 - **18,783** images  
 - **12,924** train / **3,881** val / **1,978** test
-
 ---
 
+## Prerequisites & Installation
+Install GPU driver then test:
+```
+nvidia-smi
+```
+
+Install anaconda following the [anaconda installation documentation](https://docs.anaconda.com/anaconda/install/).
+Create an environment with all required packages with the following command :
+```bashscript
+conda env create -f gdinousam.yml
+conda activate gdinousam
+pip install -r reqirements.txt
+pip install -e .
+```
+
+## How to run
+
+## Train:
+
+1. Prepare your dataset with images and related pompt.
+2. Run the train.py for training. **See `configs/train_config.yaml` for detailed training configurations.**
+
+  ```
+  python train.py
+  ```
+
+## Test:
+Visualize results of training on test images. **See `configs/test_config.yaml` for detailed testing configurations.**
+
+```
+python test.py
+```
+
+### Other Tests [BiomedParse, MedClipSam, MedClipSamV2, MedSam, SamUS, Sam2, `Ours`]
+
+```
+python testBiomedParse.py
+python testMedClipSam.py
+python testMedClipSamV2.py
+python testMedSam.py
+python testSAMUS.py
+python testSam2.py
+python testOurs.py
+
+```
 
 ## Acknowledgements
 
-Special thanks to [grounding_dino](https://github.com/IDEA-Research/GroundingDINO), [segment-anything](https://github.com/facebookresearch/segment-anything) for making their valuable code publicly available.
+Special thanks to [grounding_dino](https://github.com/IDEA-Research/GroundingDINO), [segment-anything](https://github.com/facebookresearch/segment-anything) and [Grounding DINO Fine-tuning](https://github.com/Asad-Ismail/Grounding-Dino-FineTuning) for making their valuable code publicly available.
+
 
 ## Citation
 
-If you use this, please consider citing:
+If you use `GroundingDINO-US-SAM`, please consider citing:
 
     @article{11146904,
     author={Rasaee, Hamza and Koleilat, Taha and Rivaz, Hassan},

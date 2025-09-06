@@ -32,6 +32,11 @@ Accurate and generalizable object segmentation in ultrasound imaging remains a s
   <img src="assets/un_seen.png" width="100%" />
 </p>
 
+### Sample Segmentation Multi Results
+<p float="left">
+  <img src="assets/multi-target.png" width="100%" />
+</p>
+
 ## 🗂 Datasets
 
 This study utilized **18 public ultrasound datasets** spanning a wide range of anatomical targets: **breast, thyroid, liver, prostate, kidney**, and **paraspinal muscle**. These were divided into:

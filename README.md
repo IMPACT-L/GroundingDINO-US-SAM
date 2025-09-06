@@ -2,10 +2,12 @@
 
 **[IMPACT Lab](https://users.encs.concordia.ca/~impact/)** 
 
-[![applicaction](https://img.shields.io/badge/Application-Web-orange.svg)](https://segmentus.sonography.ai)
+[Hamze Rasaee](https://scholar.google.com/citations?user=s_8vHW4AAAAJ&hl=en), [Taha Koleilat](https://tahakoleilat.github.io/), , [Khashayar Rafat Zand](https://www.linkedin.com/in/drkhashy/?originalSubdomain=ca), [Hassan Rivaz](https://users.encs.concordia.ca/~hrivaz/)
 
+
+
+[![Applicaction](https://img.shields.io/badge/Application-Web_V1-orange.svg)](https://segmentus.sonography.ai)
 [![Paper TUFFC](https://img.shields.io/badge/TUFFC-Paper-blue.svg)](https://ieeexplore.ieee.org/document/11146904)
-
 [![Paper arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://ieeexplore.ieee.org/document/11146904)
 
 **Paper Title:**  
@@ -85,3 +87,21 @@ The only exception is the UniverSeg baseline, which requires a 16-image support 
 ---
 
 
+## Acknowledgements
+
+Special thanks to [grounding_dino](https://github.com/IDEA-Research/GroundingDINO), [segment-anything](https://github.com/facebookresearch/segment-anything) for making their valuable code publicly available.
+
+## Citation
+
+If you use this, please consider citing:
+
+  @ARTICLE{11146904,
+    author={Rasaee, Hamza and Koleilat, Taha and Rivaz, Hassan},
+    journal={IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control}, 
+    title={Grounding DINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models}, 
+    year={2025},
+    volume={},
+    number={},
+    pages={1-1},
+    keywords={Ultrasonic imaging;Image segmentation;Breast;Grounding;Training;Imaging;Adaptation models;Acoustics;Thyroid;Liver;Ultrasound image segmentation;Prompt-driven segmentation;Vision-language models;Grounding DINO;Segment anything model SAM2},
+    doi={10.1109/TUFFC.2025.3605285}}

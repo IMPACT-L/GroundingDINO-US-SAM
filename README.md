@@ -2,10 +2,11 @@
 
 **[IMPACT Lab](https://users.encs.concordia.ca/~impact/)** 
 
-[[`Application-v1`](https://segmentus.sonography.ai)]
-[[`Paper TUFFC`](https://ieeexplore.ieee.org/document/11146904)]
-[[`Paper arXiv`](https://arxiv.org/abs/6579543)]
+[![applicaction](https://img.shields.io/badge/Application-Web-orange.svg)](https://segmentus.sonography.ai)
 
+[![Paper TUFFC](https://img.shields.io/badge/TUFFC-Paper-blue.svg)](https://ieeexplore.ieee.org/document/11146904)
+
+[![Paper arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://ieeexplore.ieee.org/document/11146904)
 
 **Paper Title:**  
 📄 *GroundingDINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models*
@@ -34,7 +35,7 @@ Accurate and generalizable object segmentation in ultrasound imaging remains a s
 
 ### Sample Segmentation Multi Results
 <p float="left">
-  <img src="assets/multi-target.png" width="100%" />
+  <img src="assets/multi-target.png" width="50%" />
 </p>
 
 ## 🗂 Datasets

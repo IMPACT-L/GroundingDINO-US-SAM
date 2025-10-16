@@ -8,10 +8,10 @@
 
 [![Applicaction](https://img.shields.io/badge/Application-Web_V1-orange.svg)](https://segmentus.sonography.ai)
 [![Paper TUFFC](https://img.shields.io/badge/TUFFC-Paper-blue.svg)](https://ieeexplore.ieee.org/document/11146904)
-[![Paper arXiv](https://img.shields.io/badge/arXiv-2406.12345-B31B1B.svg)](https://arxiv.org/abs/2406.12345)
+[![Paper arXiv](https://img.shields.io/badge/arXiv-2406.12345-B31B1B.svg)](https://arxiv.org/abs/2506.23903)
 
 **Paper Title:**  
-📄 *GroundingDINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models*
+📄 *Grounding DINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models*
 ---
 ## Overview
 

@@ -170,6 +170,6 @@ If you use `GroundingDINO-US-SAM`, please consider citing:
       year={2025},
       volume={72},
       number={10},
-     pages={1414-1425},
-     keywords={Ultrasonic imaging;Image segmentation;Breast;Grounding ;Training;Imaging;Adaptation models;Acoustics;Thyroid;Liver;Grounding DINO;prompt-driven segmentation;segment anything model (SAM) SAM2;ultrasound image segmentation;vision–language models (VLMs)},
+      pages={1414-1425},
+      keywords={Ultrasonic imaging;Image segmentation;Breast;Grounding ;Training;Imaging;Adaptation models;Acoustics;Thyroid;Liver;Grounding DINO;prompt-driven segmentation;segment anything model (SAM) SAM2;ultrasound image segmentation;vision–language models (VLMs)},
       doi={10.1109/TUFFC.2025.3605285}}

@@ -163,22 +163,13 @@ Special thanks to [grounding_dino](https://github.com/IDEA-Research/GroundingDIN
 
 If you use `GroundingDINO-US-SAM`, please consider citing:
 
-  @ARTICLE{11146904,
-  
-    author={Rasaee, Hamza and Koleilat, Taha and Rivaz, Hassan},
-    
-    journal={IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control}, 
-    
-    title={Grounding DINO-US-SAM: Text-Prompted Multiorgan Segmentation in Ultrasound With LoRA-Tuned Vision–Language Models}, 
-    
-    year={2025},
-    
-    volume={72},
-    
-    number={10},
-    
-    pages={1414-1425},
-    
-    keywords={Ultrasonic imaging;Image segmentation;Breast;Grounding;Training;Imaging;Adaptation models;Acoustics;Thyroid;Liver;Grounding DINO;prompt-driven segmentation;segment anything model (SAM) SAM2;ultrasound image segmentation;vision–language models (VLMs)},
-    
-    doi={10.1109/TUFFC.2025.3605285}}
+    @ARTICLE{11146904,
+      author={Rasaee, Hamza and Koleilat, Taha and Rivaz, Hassan},
+      journal={IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control}, 
+      title={Grounding DINO-US-SAM: Text-Prompted Multiorgan Segmentation in Ultrasound With LoRA-Tuned Vision–Language Models}, 
+      year={2025},
+      volume={72},
+      number={10},
+     pages={1414-1425},
+     keywords={Ultrasonic imaging;Image segmentation;Breast;Grounding ;Training;Imaging;Adaptation models;Acoustics;Thyroid;Liver;Grounding DINO;prompt-driven segmentation;segment anything model (SAM) SAM2;ultrasound image segmentation;vision–language models (VLMs)},
+      doi={10.1109/TUFFC.2025.3605285}}

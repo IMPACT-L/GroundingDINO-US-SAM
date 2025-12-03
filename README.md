@@ -4,10 +4,10 @@
 
 [Hamze Rasaee](https://scholar.google.com/citations?user=s_8vHW4AAAAJ&hl=en), [Taha Koleilat](https://tahakoleilat.github.io/), [Khashayar Rafat Zand](https://www.linkedin.com/in/drkhashy/?originalSubdomain=ca), [Hassan Rivaz](https://users.encs.concordia.ca/~hrivaz/)
 
-<!--
+
 **Try the online demo:** [segmentus.sonography.ai](https://segmentus.sonography.ai)
 
-[![Applicaction](https://img.shields.io/badge/Application-Web_V1-orange.svg)](https://segmentus.sonography.ai) -->
+[![Applicaction](https://img.shields.io/badge/Application-Web_V1-orange.svg)](https://segmentus.sonography.ai) 
 [![Paper TUFFC](https://img.shields.io/badge/TUFFC-Paper-blue.svg)](https://ieeexplore.ieee.org/document/11146904)
 [![Paper arXiv](https://img.shields.io/badge/arXiv-2406.12345-B31B1B.svg)](https://arxiv.org/abs/2506.23903)
 

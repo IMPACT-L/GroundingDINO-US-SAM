@@ -170,5 +170,5 @@ If you use `GroundingDINO-US-SAM`, please consider citing:
       journal={IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control},
       year={2025},
       publisher={IEEE}
-  }
+      }
 

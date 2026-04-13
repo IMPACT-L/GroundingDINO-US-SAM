@@ -165,10 +165,10 @@ Special thanks to [grounding_dino](https://github.com/IDEA-Research/GroundingDIN
 If you use `GroundingDINO-US-SAM`, please consider citing:
 
   @article{rasaee2025grounding,
-    title={Grounding DINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision--Language Models},
-    author={Rasaee, Hamza and Koleilat, Taha and Rivaz, Hassan},
-    journal={IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control},
-    year={2025},
-    publisher={IEEE}
+      title={Grounding DINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision--Language Models},
+      author={Rasaee, Hamza and Koleilat, Taha and Rivaz, Hassan},
+      journal={IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control},
+      year={2025},
+      publisher={IEEE}
   }
 

@@ -9,8 +9,7 @@
 [![Applicaction](https://img.shields.io/badge/Application-Web_V1-orange.svg)](http://159.203.11.52:8080/) (https://segmentus.sonography.ai) -->
 [![Paper TUFFC](https://img.shields.io/badge/TUFFC-Paper-blue.svg)](https://ieeexplore.ieee.org/document/11146904)
 [![Paper arXiv](https://img.shields.io/badge/arXiv-2406.12345-B31B1B.svg)](https://arxiv.org/abs/2506.23903)
-
-[![Huggingface LoRA]([https://img.shields.io/badge/arXiv-2406.12345-B31B1B.svg)](https://arxiv.org/abs/2506.23903](https://huggingface.co/hmrasa/grounding.dino.sam.4.us.v1/tree/main))
+[![Hugging Face LoRA](https://img.shields.io/badge/HuggingFace-LoRA-yellow.svg)](https://huggingface.co/hmrasa/grounding.dino.sam.4.us.v1/tree/main)
 
 **Paper Title:**  
 📄 *Grounding DINO-US-SAM: Text-Prompted Multi-Organ Segmentation in Ultrasound with LoRA-Tuned Vision–Language Models*
